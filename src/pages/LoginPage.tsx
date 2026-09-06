@@ -123,11 +123,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-main)] theme-text-primary flex items-center justify-center p-3 sm:p-6 font-sans">
-      <div className="w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl border border-[var(--border-color)] bg-[var(--bg-card)] grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
-        
-        {/* ================= LEFT SIDE: Company Overview & Description ================= */}
-        <div className="lg:col-span-7 bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] p-6 sm:p-8 lg:p-12 flex flex-col justify-between relative overflow-hidden text-white border-b lg:border-b-0 lg:border-r border-[var(--border-color)]">
+    <div className="min-h-screen w-full bg-[var(--bg-main)] theme-text-primary flex flex-col lg:grid lg:grid-cols-12 font-sans overflow-x-hidden">
+      {/* ================= LEFT SIDE: Company Overview & Description ================= */}
+      <div className="lg:col-span-7 bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] p-6 sm:p-10 lg:p-14 flex flex-col justify-between relative overflow-hidden text-white border-b lg:border-b-0 lg:border-r border-[var(--border-color)] min-h-[500px] lg:min-h-screen">
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
 
@@ -211,7 +209,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </div>
 
         {/* ================= RIGHT SIDE: Auth Form (Sign In / Sign Up) ================= */}
-        <div className="lg:col-span-5 p-6 sm:p-8 lg:p-12 flex flex-col justify-between bg-[var(--bg-card)]">
+        <div className="lg:col-span-5 p-6 sm:p-10 lg:p-14 flex flex-col justify-between bg-[var(--bg-card)] min-h-[500px] lg:min-h-screen border-t lg:border-t-0 lg:border-l border-[var(--border-color)]">
           <div className="space-y-5 my-auto">
             
             {/* Mode Switcher Tabs */}
@@ -396,8 +394,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             )}
           </div>
         </div>
-
-      </div>
     </div>
   );
 };

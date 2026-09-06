@@ -32,9 +32,11 @@ export const MarketDetailPage: React.FC<MarketDetailPageProps> = ({ workspace })
         <div className="flex items-center space-x-3">
           <button
             onClick={() => navigate('/markets')}
-            className="p-2 bg-[#131722] hover:bg-[#1e222d] text-slate-300 rounded border border-[#2a2e39] transition"
+            className="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-lg shadow-md transition flex items-center space-x-1.5 cursor-pointer shrink-0"
+            title="Back to Markets"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={16} />
+            <span>Back</span>
           </button>
           <div>
             <div className="flex items-center space-x-3">

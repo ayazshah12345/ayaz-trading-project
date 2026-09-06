@@ -37,7 +37,8 @@ export const BacktestDetailView: React.FC<BacktestDetailViewProps> = ({
             title="Back to All Campaigns"
           >
             <ArrowLeft size={16} />
-            <span>Back to Campaigns</span>
+            <span className="hidden sm:inline">Back to Campaigns</span>
+            <span className="sm:hidden">Back</span>
           </button>
           <div>
             <div className="flex items-center space-x-2">

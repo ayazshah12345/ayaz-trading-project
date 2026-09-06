@@ -29,7 +29,6 @@ export const CalendarPage: React.FC<CalendarPageProps> = ({ workspace }) => {
       <CalendarGrid
         trades={workspace.trades}
         journals={workspace.journals}
-        mockRecords={workspace.calendarRecords}
         onSelectDate={setSelectedDayRecord}
       />
 

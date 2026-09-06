@@ -5,7 +5,6 @@ import { ChevronLeft, ChevronRight, BookOpen, Calendar as CalendarIcon, RotateCc
 interface CalendarGridProps {
   trades: TradeRecord[];
   journals: DailyJournalEntry[];
-  mockRecords?: CalendarDayRecord[];
   onSelectDate: (record: CalendarDayRecord) => void;
 }
 
@@ -17,7 +16,6 @@ const MONTH_NAMES = [
 export const CalendarGrid: React.FC<CalendarGridProps> = ({
   trades = [],
   journals = [],
-  mockRecords = [],
   onSelectDate,
 }) => {
   const todayDate = new Date();
@@ -63,9 +61,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     // Real user journal on this date
     const dayJournal = journals.find(j => j.date === dateStr);
 
-    // Fallback mock record if present
-    const mockRec = mockRecords.find(r => r.date === dateStr);
-
     if (dayTrades.length > 0 || dayJournal) {
       const pnl = dayTrades.reduce((acc, t) => acc + (t.pnl || 0), 0);
       const winCount = dayTrades.filter(t => t.result === 'WIN').length;
@@ -83,10 +78,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
         hasJournal: Boolean(dayJournal),
         notes,
       };
-    }
-
-    if (mockRec) {
-      return mockRec;
     }
 
     return {

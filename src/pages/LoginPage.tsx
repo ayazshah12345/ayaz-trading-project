@@ -64,7 +64,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     try {
       if (isSupabaseConfigured && supabase) {
         if (mode === 'signup') {
-          // --- REAL SUPABASE SIGN UP ---
+          // --- INSTANT SUPABASE SIGN UP & DIRECT LOGIN ---
           const { data, error } = await supabase.auth.signUp({
             email: cleanEmail,
             password: password,
@@ -72,7 +72,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
           if (error) {
             if (error.message.includes('30 seconds') || error.status === 429) {
-              setErrorMessage('Rate limit reached: Please wait 30 seconds before submitting another sign-up request.');
+              setErrorMessage('Rate limit reached: Please wait 30 seconds before submitting another request.');
             } else {
               setErrorMessage(error.message);
             }
@@ -80,16 +80,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             return;
           }
 
-          if (data.user) {
-            setSuccessMessage('Account registered successfully! Logging you into Terminal...');
-            setTimeout(() => {
-              if (onLogin) onLogin(data.user?.email || cleanEmail, data.user?.id);
-              navigate('/dashboard');
-            }, 800);
-          } else {
-            setSuccessMessage('Sign-up request sent! You can now sign in.');
-            setIsLoading(false);
-          }
+          // Instant access to workspace with zero email confirmation prompts
+          const userId = data.user?.id || `user-${Date.now()}`;
+          const userEmail = data.user?.email || cleanEmail;
+          
+          setSuccessMessage('Account registered! Opening your Terminal...');
+          setTimeout(() => {
+            if (onLogin) onLogin(userEmail, userId);
+            navigate('/dashboard');
+          }, 400);
         } else {
           // --- REAL SUPABASE SIGN IN ---
           const { data, error } = await supabase.auth.signInWithPassword({

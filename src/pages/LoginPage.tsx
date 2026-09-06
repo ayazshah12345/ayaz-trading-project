@@ -111,7 +111,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           }
         }
       } else {
-        setErrorMessage('Database authentication service is initialising. Please refresh or verify your connection.');
+        setErrorMessage('Authentication service is initialising. Please refresh or verify your connection.');
         setIsLoading(false);
       }
     } catch (err: any) {
@@ -200,10 +200,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               <ShieldCheck className="text-amber-400 shrink-0" size={24} />
               <div>
                 <div className="text-[11px] font-black text-amber-400 uppercase tracking-wider">
-                  Isolated Trader Account Vault
+                  PRO TRADER PLATFORM
                 </div>
                 <div className="text-xs sm:text-sm font-extrabold text-white">
-                  Secure Encrypted Private Storage Active
+                  Private Trader Account Active
                 </div>
               </div>
             </div>

@@ -126,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
                   <CheckCircle2 size={14} className="text-emerald-500 shrink-0 mt-0.5" />
                   <div>
                     <div className="theme-text-primary font-semibold">Account Sync Active</div>
-                    <div className="theme-text-secondary text-[11px]">Database connected strictly for {userEmail || 'current user'}.</div>
+                    <div className="theme-text-secondary text-[11px]">Account synced strictly for {userEmail || 'current user'}.</div>
                   </div>
                 </div>
               </div>

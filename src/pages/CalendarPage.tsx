@@ -27,17 +27,20 @@ export const CalendarPage: React.FC<CalendarPageProps> = ({ workspace }) => {
 
       {/* Calendar Grid */}
       <CalendarGrid
-        records={workspace.calendarRecords}
+        trades={workspace.trades}
+        journals={workspace.journals}
+        mockRecords={workspace.calendarRecords}
         onSelectDate={setSelectedDayRecord}
       />
 
       {/* Day Inspector Modal */}
       <DayDetailModal
         record={selectedDayRecord}
+        trades={workspace.trades}
+        journals={workspace.journals}
         isOpen={!!selectedDayRecord}
         onClose={() => setSelectedDayRecord(null)}
       />
     </div>
   );
 };
-

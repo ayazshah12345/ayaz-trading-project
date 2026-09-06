@@ -26,13 +26,12 @@ import type {
   UserSettings
 } from '../types';
 
-
 import { supabaseDatabaseService } from '../services/supabaseDatabaseService';
-import { isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 export function useTradingWorkspace() {
   const [markets, setMarkets] = useState<MarketAsset[]>(mockMarkets);
-  const [trades, setTrades] = useState<TradeRecord[]>(mockTrades);
+  const [trades, setTrades] = useState<TradeRecord[]>([]);
   const [journals, setJournals] = useState<DailyJournalEntry[]>(mockDailyJournals);
   const [journal, setJournal] = useState<DailyJournalEntry>(mockDailyJournal);
   const [initialCapital, setInitialCapitalState] = useState<number>(100.0);
@@ -42,28 +41,69 @@ export function useTradingWorkspace() {
   const [userSettings, setUserSettings] = useState<UserSettings>(mockUserSettings);
   const [accountSummary] = useState(mockAccountPerformance);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
-  // Load database data from Supabase on startup if configured
+  // Check Supabase Auth session on load
   useEffect(() => {
-    if (isSupabaseConfigured) {
-      supabaseDatabaseService.fetchTrades().then(fetchedTrades => {
-        if (fetchedTrades && fetchedTrades.length > 0) {
-          setTrades(fetchedTrades);
+    if (isSupabaseConfigured && supabase) {
+      supabase.auth.getUser().then(({ data }) => {
+        if (data?.user) {
+          setIsAuthenticated(true);
+          setUserId(data.user.id);
+          setUserEmail(data.user.email || '');
         }
       });
-      supabaseDatabaseService.fetchInitialCapital().then(cap => {
-        if (cap !== null && cap > 0) {
-          setInitialCapitalState(cap);
+
+      const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (session?.user) {
+          setIsAuthenticated(true);
+          setUserId(session.user.id);
+          setUserEmail(session.user.email || '');
+        } else {
+          setIsAuthenticated(false);
+          setUserId(null);
+          setUserEmail(null);
+          setTrades([]);
         }
       });
+
+      return () => {
+        authListener?.subscription.unsubscribe();
+      };
     }
   }, []);
 
+  // Fetch isolated user data whenever userId changes
+  useEffect(() => {
+    if (userId) {
+      if (isSupabaseConfigured) {
+        supabaseDatabaseService.fetchTrades(userId).then(fetchedTrades => {
+          if (fetchedTrades !== null) {
+            setTrades(fetchedTrades);
+          } else {
+            // Fallback for new accounts
+            setTrades([]);
+          }
+        });
+        supabaseDatabaseService.fetchInitialCapital(userId).then(cap => {
+          if (cap !== null && cap > 0) {
+            setInitialCapitalState(cap);
+          }
+        });
+      }
+    } else {
+      // Demo fallback if not authenticated
+      setTrades(mockTrades);
+    }
+  }, [userId]);
+
   const setInitialCapital = (amount: number) => {
     setInitialCapitalState(amount);
-    if (isSupabaseConfigured) {
-      supabaseDatabaseService.updateInitialCapital(amount);
+    if (isSupabaseConfigured && userId) {
+      supabaseDatabaseService.updateInitialCapital(amount, userId, userEmail || undefined);
     }
   };
 
@@ -80,12 +120,20 @@ export function useTradingWorkspace() {
     setIsDarkMode(prev => !prev);
   };
 
-  const login = (email: string) => {
+  const login = (email: string, uId?: string) => {
     setIsAuthenticated(true);
+    setUserEmail(email);
+    if (uId) setUserId(uId);
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    setUserId(null);
+    setUserEmail(null);
+    setTrades([]);
+    if (isSupabaseConfigured && supabase) {
+      supabase.auth.signOut();
+    }
   };
 
   // Poll live market tickers periodically (Metals + Crypto + Forex APIs)
@@ -128,7 +176,7 @@ export function useTradingWorkspace() {
     };
 
     updateLivePrices();
-    const interval = setInterval(updateLivePrices, 8000); // Poll every 8s
+    const interval = setInterval(updateLivePrices, 8000);
 
     return () => {
       isMounted = false;
@@ -143,15 +191,15 @@ export function useTradingWorkspace() {
   };
 
   const addTrade = (newTrade: Omit<TradeRecord, 'id'>) => {
-    const generatedId = `TRD-${1090 + trades.length + 1}`;
+    const generatedId = `TRD-${Date.now().toString().slice(-6)}`;
     const trade: TradeRecord = {
       ...newTrade,
       id: generatedId,
     };
     setTrades(prev => [trade, ...prev]);
 
-    if (isSupabaseConfigured) {
-      supabaseDatabaseService.insertTrade(trade);
+    if (isSupabaseConfigured && userId) {
+      supabaseDatabaseService.insertTrade(trade, userId);
     }
 
     const newActivity: ActivityTimelineItem = {
@@ -169,15 +217,15 @@ export function useTradingWorkspace() {
 
   const deleteTrade = (tradeId: string) => {
     setTrades(prev => prev.filter(t => t.id !== tradeId));
-    if (isSupabaseConfigured) {
-      supabaseDatabaseService.deleteTrade(tradeId);
+    if (isSupabaseConfigured && userId) {
+      supabaseDatabaseService.deleteTrade(tradeId, userId);
     }
   };
 
   const deleteAllTrades = () => {
     setTrades([]);
-    if (isSupabaseConfigured) {
-      supabaseDatabaseService.deleteAllTrades();
+    if (isSupabaseConfigured && userId) {
+      supabaseDatabaseService.deleteAllTrades(userId);
     }
   };
 
@@ -307,6 +355,8 @@ export function useTradingWorkspace() {
     accountSummary,
     isDarkMode,
     isAuthenticated,
+    userId,
+    userEmail,
     login,
     logout,
     toggleDarkMode,
@@ -321,4 +371,3 @@ export function useTradingWorkspace() {
     updateSettings,
   };
 }
-

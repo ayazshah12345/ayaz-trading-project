@@ -2,12 +2,13 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import type { TradeRecord, BacktestCampaign, DailyJournalEntry } from '../types';
 
 export const supabaseDatabaseService = {
-  // --- Trade Journal CRUD ---
-  async fetchTrades(): Promise<TradeRecord[] | null> {
-    if (!isSupabaseConfigured || !supabase) return null;
+  // --- Trade Journal CRUD (User Scoped) ---
+  async fetchTrades(userId: string): Promise<TradeRecord[] | null> {
+    if (!isSupabaseConfigured || !supabase || !userId) return null;
     const { data, error } = await supabase
       .from('trades')
       .select('*')
+      .eq('user_id', userId)
       .order('date', { ascending: false });
 
     if (error) {
@@ -38,10 +39,11 @@ export const supabaseDatabaseService = {
     }));
   },
 
-  async insertTrade(trade: TradeRecord): Promise<boolean> {
-    if (!isSupabaseConfigured || !supabase) return false;
+  async insertTrade(trade: TradeRecord, userId: string): Promise<boolean> {
+    if (!isSupabaseConfigured || !supabase || !userId) return false;
     const { error } = await supabase.from('trades').insert([{
       id: trade.id,
+      user_id: userId,
       date: trade.date,
       time: trade.time,
       asset: trade.asset,
@@ -69,9 +71,13 @@ export const supabaseDatabaseService = {
     return true;
   },
 
-  async deleteTrade(tradeId: string): Promise<boolean> {
-    if (!isSupabaseConfigured || !supabase) return false;
-    const { error } = await supabase.from('trades').delete().eq('id', tradeId);
+  async deleteTrade(tradeId: string, userId: string): Promise<boolean> {
+    if (!isSupabaseConfigured || !supabase || !userId) return false;
+    const { error } = await supabase
+      .from('trades')
+      .delete()
+      .eq('id', tradeId)
+      .eq('user_id', userId);
     if (error) {
       console.warn('Supabase deleteTrade error:', error.message);
       return false;
@@ -79,9 +85,12 @@ export const supabaseDatabaseService = {
     return true;
   },
 
-  async deleteAllTrades(): Promise<boolean> {
-    if (!isSupabaseConfigured || !supabase) return false;
-    const { error } = await supabase.from('trades').delete().neq('id', '0');
+  async deleteAllTrades(userId: string): Promise<boolean> {
+    if (!isSupabaseConfigured || !supabase || !userId) return false;
+    const { error } = await supabase
+      .from('trades')
+      .delete()
+      .eq('user_id', userId);
     if (error) {
       console.warn('Supabase deleteAllTrades error:', error.message);
       return false;
@@ -89,26 +98,25 @@ export const supabaseDatabaseService = {
     return true;
   },
 
-  // --- Starting Capital & Profile Persistence ---
-  async fetchInitialCapital(): Promise<number | null> {
-    if (!isSupabaseConfigured || !supabase) return null;
+  // --- Starting Capital & Profile Persistence (User Scoped) ---
+  async fetchInitialCapital(userId: string): Promise<number | null> {
+    if (!isSupabaseConfigured || !supabase || !userId) return null;
     const { data, error } = await supabase
       .from('profiles')
       .select('initial_capital')
-      .single();
+      .eq('id', userId)
+      .maybeSingle();
 
     if (error || !data) return null;
     return Number(data.initial_capital);
   },
 
-  async updateInitialCapital(amount: number): Promise<boolean> {
-    if (!isSupabaseConfigured || !supabase) return false;
-    const { data: userData } = await supabase.auth.getUser();
-    if (!userData?.user) return false;
+  async updateInitialCapital(amount: number, userId: string, email?: string): Promise<boolean> {
+    if (!isSupabaseConfigured || !supabase || !userId) return false;
 
     const { error } = await supabase.from('profiles').upsert({
-      id: userData.user.id,
-      email: userData.user.email,
+      id: userId,
+      email: email || '',
       initial_capital: amount,
       updated_at: new Date().toISOString(),
     });

@@ -33,10 +33,11 @@ export const BacktestDetailView: React.FC<BacktestDetailViewProps> = ({
         <div className="flex items-center space-x-3">
           <button
             onClick={onBack}
-            className="p-2 bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] theme-text-secondary rounded-lg border border-[var(--border-color)] transition shadow-xs"
+            className="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-lg shadow-md transition flex items-center space-x-1.5 cursor-pointer shrink-0"
             title="Back to All Campaigns"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={16} />
+            <span>Back to Campaigns</span>
           </button>
           <div>
             <div className="flex items-center space-x-2">

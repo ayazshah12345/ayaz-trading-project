@@ -13,7 +13,8 @@ import {
   BarChart2,
   Award,
   AlertCircle,
-  CheckCircle2
+  CheckCircle2,
+  LineChart
 } from 'lucide-react';
 import logoImg from '../assets/logo.jpg';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
@@ -80,7 +81,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             return;
           }
 
-          // Instant access to workspace with zero email confirmation prompts
           const userId = data.user?.id || `user-${Date.now()}`;
           const userEmail = data.user?.email || cleanEmail;
           
@@ -123,80 +123,80 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-main)] theme-text-primary flex items-center justify-center p-4 sm:p-6 font-sans">
-      <div className="w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl border border-[var(--border-color)] bg-[var(--bg-card)] grid grid-cols-1 lg:grid-cols-12 min-h-[680px]">
+    <div className="min-h-screen bg-[var(--bg-main)] theme-text-primary flex items-center justify-center p-3 sm:p-6 font-sans">
+      <div className="w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl border border-[var(--border-color)] bg-[var(--bg-card)] grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
         
-        {/* ================= LEFT SIDE: Trading & Company Info ================= */}
-        <div className="lg:col-span-7 bg-gradient-to-br from-[#070b14] via-[#0f172a] to-[#1e1b4b] p-8 lg:p-12 flex flex-col justify-between relative overflow-hidden text-white border-b lg:border-b-0 lg:border-r border-[var(--border-color)]">
+        {/* ================= LEFT SIDE: Company Overview & Description ================= */}
+        <div className="lg:col-span-7 bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] p-6 sm:p-8 lg:p-12 flex flex-col justify-between relative overflow-hidden text-white border-b lg:border-b-0 lg:border-r border-[var(--border-color)]">
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
 
-          {/* Top Logo & Header */}
-          <div className="relative z-10 space-y-6">
+          {/* Top Logo & Branding Header */}
+          <div className="relative z-10 space-y-5">
             <div className="flex items-center space-x-3">
               <img
                 src={logoImg}
                 alt="Ayaz Markets Logo"
-                className="w-12 h-12 rounded-xl border border-amber-500/40 shadow-lg object-cover"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl border border-amber-500/40 shadow-lg object-cover"
               />
               <div>
-                <h1 className="text-xl font-black tracking-tight text-white uppercase font-sans">
+                <h1 className="text-lg sm:text-xl font-black tracking-tight text-white uppercase font-sans">
                   Ayaz Markets Analysis
                 </h1>
-                <p className="text-xs text-amber-400 font-extrabold tracking-wider uppercase font-mono-numeric">
-                  Institutional FX & Crypto Trading Terminal
+                <p className="text-[11px] text-amber-400 font-extrabold tracking-wider uppercase font-mono-numeric">
+                  Live Charting, Market Analysis & Trade Records
                 </p>
               </div>
             </div>
 
             <div className="space-y-3 pt-2">
-              <h2 className="text-2xl sm:text-3xl font-black leading-tight tracking-tight text-white">
-                Master the Financial Markets with Isolated Account Security
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black leading-tight tracking-tight text-white">
+                View Live Charts, Analyze Markets & Save Trade Journal & Backtesting Records
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
-                Ayaz Markets Analysis provides individual trader accounts with strict end-to-end data isolation. Your trades, strategies, backtest labs, and journals stay 100% private to your user credentials.
+              <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+                Ayaz Markets Analysis is a professional trading platform built to view live TradingView charts, conduct real-time market analysis, and securely save your trade journal and backtesting records under your private account.
               </p>
             </div>
           </div>
 
-          {/* Middle Features Grid */}
-          <div className="relative z-10 my-8 space-y-4">
+          {/* Middle Core Platform Features Grid */}
+          <div className="relative z-10 my-6 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-1.5 backdrop-blur-xs">
-                <BookMarked className="text-amber-400" size={20} />
-                <h3 className="text-xs font-extrabold text-white">Private Trade Journal</h3>
-                <p className="text-[11px] text-slate-400 leading-snug">
-                  User-isolated P&L stats, equity curve calculation, and R-multiple tracking.
+                <BarChart2 className="text-amber-400" size={20} />
+                <h3 className="text-xs font-extrabold text-white">Live Charting</h3>
+                <p className="text-[11px] text-slate-300 leading-snug">
+                  View full screen TradingView charts for Gold, Forex & Crypto.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-1.5 backdrop-blur-xs">
+                <BookMarked className="text-emerald-400" size={20} />
+                <h3 className="text-xs font-extrabold text-white">Trade Journal</h3>
+                <p className="text-[11px] text-slate-300 leading-snug">
+                  Save trade entries, calculate equity, P&L stats, and risk multiple.
                 </p>
               </div>
 
               <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-1.5 backdrop-blur-xs">
                 <FlaskConical className="text-indigo-400" size={20} />
-                <h3 className="text-xs font-extrabold text-white">Backtesting Lab</h3>
-                <p className="text-[11px] text-slate-400 leading-snug">
-                  Historical campaign testing, win-rate metrics, and custom strategy testing.
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-1.5 backdrop-blur-xs">
-                <BarChart2 className="text-emerald-400" size={20} />
-                <h3 className="text-xs font-extrabold text-white">Live Charting</h3>
-                <p className="text-[11px] text-slate-400 leading-snug">
-                  Full screen TradingView live charts, metals, crypto & forex feeds.
+                <h3 className="text-xs font-extrabold text-white">Backtesting Records</h3>
+                <p className="text-[11px] text-slate-300 leading-snug">
+                  Test and save strategy campaigns, win rates, and R-returns.
                 </p>
               </div>
             </div>
 
             {/* Security Banner */}
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-mono-numeric">
+            <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-mono-numeric">
               <div className="flex items-center space-x-3">
-                <Award className="text-amber-400 shrink-0" size={24} />
+                <Award className="text-amber-400 shrink-0" size={22} />
                 <div>
-                  <div className="text-xs font-black text-amber-400 uppercase tracking-wider">
-                    PostgreSQL Row Level Security (RLS)
+                  <div className="text-[11px] font-black text-amber-400 uppercase tracking-wider">
+                    Isolated Trader Accounts
                   </div>
-                  <div className="text-sm font-extrabold text-white">
-                    Strict Multi-Tenant Account Privacy Active
+                  <div className="text-xs sm:text-sm font-extrabold text-white">
+                    Private Supabase PostgreSQL Storage Active
                   </div>
                 </div>
               </div>
@@ -204,22 +204,22 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           </div>
 
           {/* Bottom Copyright */}
-          <div className="relative z-10 text-[11px] text-slate-400 font-medium flex items-center justify-between border-t border-slate-800 pt-4">
+          <div className="relative z-10 text-[11px] text-slate-400 font-medium flex items-center justify-between border-t border-slate-800/80 pt-3">
             <span>© {new Date().getFullYear()} Ayaz Markets Analysis. All rights reserved.</span>
-            <span className="text-amber-400 font-mono-numeric font-bold">v1.0.0 Secure</span>
+            <span className="text-amber-400 font-mono-numeric font-bold">v1.0.0 Terminal</span>
           </div>
         </div>
 
         {/* ================= RIGHT SIDE: Auth Form (Sign In / Sign Up) ================= */}
-        <div className="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-between bg-[var(--bg-card)]">
-          <div className="space-y-6 my-auto">
+        <div className="lg:col-span-5 p-6 sm:p-8 lg:p-12 flex flex-col justify-between bg-[var(--bg-card)]">
+          <div className="space-y-5 my-auto">
             
             {/* Mode Switcher Tabs */}
             <div className="flex p-1 bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-xl">
               <button
                 type="button"
                 onClick={() => { setMode('signin'); setErrorMessage(null); setSuccessMessage(null); }}
-                className={`flex-1 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center space-x-2 transition ${
+                className={`flex-1 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center space-x-2 transition cursor-pointer ${
                   mode === 'signin'
                     ? 'bg-amber-500 text-slate-950 shadow-md'
                     : 'theme-text-secondary hover:theme-text-primary'
@@ -232,7 +232,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               <button
                 type="button"
                 onClick={() => { setMode('signup'); setErrorMessage(null); setSuccessMessage(null); }}
-                className={`flex-1 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center space-x-2 transition ${
+                className={`flex-1 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center justify-center space-x-2 transition cursor-pointer ${
                   mode === 'signup'
                     ? 'bg-amber-500 text-slate-950 shadow-md'
                     : 'theme-text-secondary hover:theme-text-primary'
@@ -245,19 +245,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
             {/* Header Text */}
             <div>
-              <h2 className="text-2xl font-black theme-text-primary tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-black theme-text-primary tracking-tight">
                 {mode === 'signin' ? 'Sign In to Terminal' : 'Create Trader Account'}
               </h2>
               <p className="text-xs theme-text-secondary mt-1 font-medium">
                 {mode === 'signin'
-                  ? 'Enter your registered email and password to access your isolated workspace.'
-                  : 'Register first to create your personal isolated trading account.'}
+                  ? 'Enter your email and password to view charts and save records.'
+                  : 'Register first to create your private trading workspace.'}
               </p>
             </div>
 
             {/* Error Message Alert */}
             {errorMessage && (
-              <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
+              <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
                 <AlertCircle size={16} className="shrink-0 mt-0.5" />
                 <span>{errorMessage}</span>
               </div>
@@ -265,7 +265,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
             {/* Success Message Alert */}
             {successMessage && (
-              <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
+              <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
                 <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
                 <span>{successMessage}</span>
               </div>
@@ -279,7 +279,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   Email Address
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none theme-text-secondary">
                     <Mail size={16} />
                   </div>
                   <input
@@ -287,7 +287,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg pl-10 pr-3 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-xs"
+                    className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg pl-10 pr-3 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-xs shadow-xs"
                     required
                   />
                 </div>
@@ -299,7 +299,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none theme-text-secondary">
                     <Lock size={16} />
                   </div>
                   <input
@@ -307,13 +307,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder={mode === 'signup' ? 'Create password (min 6 characters)' : 'Enter your password'}
-                    className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg pl-10 pr-10 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-xs"
+                    className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg pl-10 pr-10 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-xs shadow-xs"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-amber-500"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center theme-text-secondary hover:text-amber-500 cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -327,7 +327,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     Confirm Password
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none theme-text-secondary">
                       <Lock size={16} />
                     </div>
                     <input
@@ -335,7 +335,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                       value={confirmPassword}
                       onChange={e => setConfirmPassword(e.target.value)}
                       placeholder="Re-enter password to confirm"
-                      className={`w-full bg-[var(--bg-subpanel)] border rounded-lg pl-10 pr-10 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none transition text-xs ${
+                      className={`w-full bg-[var(--bg-subpanel)] border rounded-lg pl-10 pr-10 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none transition text-xs shadow-xs ${
                         confirmPassword && confirmPassword !== password
                           ? 'border-rose-500 focus:border-rose-500'
                           : 'border-[var(--border-color)] focus:border-amber-500'
@@ -370,7 +370,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           </div>
 
           {/* Footer toggle */}
-          <div className="pt-6 border-t border-[var(--border-color)] text-center text-xs theme-text-secondary font-medium">
+          <div className="pt-5 border-t border-[var(--border-color)] text-center text-xs theme-text-secondary font-medium">
             {mode === 'signin' ? (
               <>
                 Don't have a trader account?{' '}

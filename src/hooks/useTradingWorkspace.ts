@@ -57,7 +57,7 @@ export function useTradingWorkspace() {
   const [activityTimeline, setActivityTimeline] = useState<ActivityTimelineItem[]>([]);
   const [userSettings, setUserSettings] = useState<UserSettings>(mockUserSettings);
   const [accountSummary] = useState(mockAccountPerformance);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   
   // Instant initial auth check from localStorage on refresh
   const storedEmail = localStorage.getItem(AUTH_STORAGE_KEY_EMAIL);

@@ -8,13 +8,10 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  Cell,
   AreaChart,
   Area,
-  PieChart,
-  Pie
 } from 'recharts';
-import { PieChart as PieIcon, BarChart2, TrendingUp, ShieldCheck, Layers, Award } from 'lucide-react';
+import { PieChart as PieIcon, BarChart2, TrendingUp, ShieldCheck, Layers } from 'lucide-react';
 
 interface DashboardAnalyticsVisualizerProps {
   trades: TradeRecord[];
@@ -31,25 +28,24 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
   const journalWins = trades.filter(t => t.result === 'WIN').length;
   const journalLosses = trades.filter(t => t.result === 'LOSS').length;
   const journalBreakevens = trades.filter(t => t.result === 'BREAKEVEN').length;
-  const journalTotal = trades.length || 1;
-  const journalWinRate = Number((((journalWins || 2) / (journalTotal || 3)) * 100).toFixed(1));
-  const journalNetPnl = trades.reduce((a, b) => a + (b.pnl || 0), 0);
+  const journalTotal = trades.length;
+  const journalWinRate = journalTotal ? Number(((journalWins / journalTotal) * 100).toFixed(1)) : 0.0;
 
   // --- 2. Calculate Backtesting Win/Loss Metrics ---
-  const backtestTotalTrades = backtests.reduce((acc, b) => acc + (b.totalTrades || 0), 0) || 142;
-  const backtestWins = backtests.reduce((acc, b) => acc + (b.winningTrades || 0), 0) || 94;
-  const backtestLosses = backtests.reduce((acc, b) => acc + (b.losingTrades || 0), 0) || 48;
-  const backtestWinRate = Number(((backtestWins / backtestTotalTrades) * 100).toFixed(1));
-  const backtestTotalR = backtests.reduce((acc, b) => acc + (b.totalR || 0), 0);
+  const backtestTotalTrades = backtests.reduce((acc, b) => acc + (b.totalTrades || 0), 0);
+  const backtestWins = backtests.reduce((acc, b) => acc + (b.winningTrades || 0), 0);
+  const backtestLosses = backtests.reduce((acc, b) => acc + (b.losingTrades || 0), 0);
+  const backtestWinRate = backtestTotalTrades ? Number(((backtestWins / backtestTotalTrades) * 100).toFixed(1)) : 0.0;
+  const backtestTotalR = backtests.reduce((acc, b) => acc + (b.totalR || 0), 0).toFixed(2);
 
   // --- Data for Side-by-Side Win/Loss Comparison ---
   const winLossComparisonData = [
     {
       category: 'Trade Journal',
-      Wins: journalWins || 2,
-      Losses: journalLosses || 1,
-      Breakevens: journalBreakevens || 0,
-      winRate: journalWinRate || 66.7,
+      Wins: journalWins,
+      Losses: journalLosses,
+      Breakevens: journalBreakevens,
+      winRate: journalWinRate,
     },
     {
       category: 'Backtesting Journal',
@@ -60,18 +56,6 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
     },
   ];
 
-  // Pie chart data for Trade Journal vs Backtesting
-  const journalPieData = [
-    { name: 'Wins', value: journalWins || 2, color: '#10b981' },
-    { name: 'Losses', value: journalLosses || 1, color: '#f43f5e' },
-    { name: 'Breakevens', value: journalBreakevens || 1, color: '#e5c158' },
-  ];
-
-  const backtestPieData = [
-    { name: 'Wins', value: backtestWins, color: '#3b82f6' },
-    { name: 'Losses', value: backtestLosses, color: '#e11d48' },
-  ];
-
   // --- Data for Asset Performance Breakdown ---
   const assetList = ['XAUUSD', 'BTCUSDT', 'EURUSD', 'GBPUSD', 'USDJPY', 'NAS100'];
   const assetPerformanceData = assetList.map(ast => {
@@ -80,11 +64,11 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
 
     const jWins = journalMatches.filter(t => t.result === 'WIN').length;
     const jTotal = journalMatches.length;
-    const jRate = jTotal ? Math.round((jWins / jTotal) * 100) : 70;
+    const jRate = jTotal ? Math.round((jWins / jTotal) * 100) : 0;
 
     const bWins = backtestMatches.reduce((acc, b) => acc + b.winningTrades, 0);
     const bTotal = backtestMatches.reduce((acc, b) => acc + b.totalTrades, 0);
-    const bRate = bTotal ? Math.round((bWins / bTotal) * 100) : 65;
+    const bRate = bTotal ? Math.round((bWins / bTotal) * 100) : 0;
 
     return {
       asset: ast,
@@ -106,22 +90,23 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
 
     return {
       strategy: st,
-      'Trade Journal Wins': jWins || 1,
-      'Trade Journal Losses': jLosses || 1,
-      'Backtesting Wins': bWins || 24,
-      'Backtesting Losses': bLosses || 12,
+      'Trade Journal Wins': jWins,
+      'Trade Journal Losses': jLosses,
+      'Backtesting Wins': bWins,
+      'Backtesting Losses': bLosses,
     };
   });
 
   // --- Data for Cumulative Growth & Equity Line Chart ---
-  const growthCurveData = [
-    { tradeNo: 'Trade 1', 'Trade Journal P&L ($)': 100, 'Backtest P&L ($)': 150 },
-    { tradeNo: 'Trade 2', 'Trade Journal P&L ($)': 210, 'Backtest P&L ($)': 380 },
-    { tradeNo: 'Trade 3', 'Trade Journal P&L ($)': 110, 'Backtest P&L ($)': 290 },
-    { tradeNo: 'Trade 4', 'Trade Journal P&L ($)': 264.5, 'Backtest P&L ($)': 520 },
-    { tradeNo: 'Trade 5', 'Trade Journal P&L ($)': 340, 'Backtest P&L ($)': 710 },
-    { tradeNo: 'Trade 6', 'Trade Journal P&L ($)': 480, 'Backtest P&L ($)': 890 },
-  ];
+  const growthCurveData = trades.length > 0
+    ? trades.slice().reverse().map((t, idx) => ({
+        tradeNo: `Trade ${idx + 1}`,
+        'Trade Journal P&L ($)': trades.slice(0, idx + 1).reduce((acc, tr) => acc + (tr.pnl || 0), 0),
+        'Backtest P&L ($)': 0,
+      }))
+    : [
+        { tradeNo: 'Start', 'Trade Journal P&L ($)': 0, 'Backtest P&L ($)': 0 },
+      ];
 
   return (
     <div className="terminal-card p-5 space-y-5 shadow-sm border-amber-500/20">

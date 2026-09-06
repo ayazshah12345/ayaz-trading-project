@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Clock, Menu, Calendar as CalendarIcon, CheckCircle2, Sun, Moon, LogOut } from 'lucide-react';
+import { Search, Bell, Clock, Menu, Calendar as CalendarIcon, CheckCircle2, Sun, Moon, LogOut, User } from 'lucide-react';
 import type { UserSettings } from '../../types';
 
 interface HeaderProps {
@@ -9,6 +9,7 @@ interface HeaderProps {
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
   onLogout?: () => void;
+  userEmail?: string | null;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,9 +19,13 @@ export const Header: React.FC<HeaderProps> = ({
   isDarkMode,
   onToggleDarkMode,
   onLogout,
+  userEmail,
 }) => {
   const [currentDateTime, setCurrentDateTime] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
+
+  const displayName = userEmail ? userEmail.split('@')[0] : 'Trader';
+  const initialLetter = displayName.charAt(0).toUpperCase();
 
   useEffect(() => {
     const updateTime = () => {
@@ -114,23 +119,14 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="text-xs font-semibold theme-text-primary uppercase tracking-wider">
                   Terminal Notifications
                 </span>
-                <span className="text-[10px] text-blue-500 font-mono-numeric font-bold">3 Unread</span>
+                <span className="text-[10px] text-blue-500 font-mono-numeric font-bold">Live Sync Active</span>
               </div>
               <div className="space-y-2.5 text-xs">
                 <div className="p-2 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] flex items-start space-x-2">
                   <CheckCircle2 size={14} className="text-emerald-500 shrink-0 mt-0.5" />
                   <div>
-                    <div className="theme-text-primary font-semibold">XAUUSD Target Hit</div>
-                    <div className="theme-text-secondary text-[11px]">Trade #TRD-1092 closed with +1.98R profit.</div>
-                    <div className="text-[10px] theme-text-muted mt-1 font-mono-numeric">10 mins ago</div>
-                  </div>
-                </div>
-                <div className="p-2 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] flex items-start space-x-2">
-                  <CalendarIcon size={14} className="text-blue-500 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="theme-text-primary font-semibold">Daily Journal Reminder</div>
-                    <div className="theme-text-secondary text-[11px]">Don't forget to complete your trading journal for today.</div>
-                    <div className="text-[10px] theme-text-muted mt-1 font-mono-numeric">2 hours ago</div>
+                    <div className="theme-text-primary font-semibold">Account Sync Active</div>
+                    <div className="theme-text-secondary text-[11px]">Database connected strictly for {userEmail || 'current user'}.</div>
                   </div>
                 </div>
               </div>
@@ -138,21 +134,19 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {/* Profile Avatar & Logout */}
+        {/* Dynamic User Profile Initials Badge & Logout */}
         <div className="flex items-center space-x-2 pl-2 border-l border-[var(--border-color)]">
-          <img
-            src={userSettings.profile.avatar}
-            alt={userSettings.profile.name}
-            className="w-8 h-8 rounded-full object-cover border border-amber-500/40"
-          />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-md border border-amber-500/40">
+            {initialLetter}
+          </div>
           <div className="hidden xl:block text-left">
-            <div className="text-xs font-bold theme-text-primary truncate">{userSettings.profile.name}</div>
-            <div className="text-[10px] theme-text-secondary font-mono-numeric font-semibold">Master Trader</div>
+            <div className="text-xs font-bold theme-text-primary truncate max-w-[140px]">{userEmail || displayName}</div>
+            <div className="text-[10px] text-amber-500 font-mono-numeric font-semibold">Trader Account</div>
           </div>
           {onLogout && (
             <button
               onClick={onLogout}
-              className="p-1.5 theme-text-secondary hover:text-rose-500 hover:bg-rose-500/10 rounded transition ml-1"
+              className="p-1.5 theme-text-secondary hover:text-rose-500 hover:bg-rose-500/10 rounded transition ml-1 cursor-pointer"
               title="Sign Out"
             >
               <LogOut size={16} />

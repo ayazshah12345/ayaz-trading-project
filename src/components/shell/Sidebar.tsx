@@ -15,20 +15,24 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import type { UserSettings } from '../../types';
-
 import logoImg from '../../assets/logo.jpg';
 
 interface SidebarProps {
   collapsed: boolean;
   onToggleCollapse: () => void;
   userSettings: UserSettings;
+  userEmail?: string | null;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   collapsed,
   onToggleCollapse,
   userSettings,
+  userEmail,
 }) => {
+  const displayName = userEmail ? userEmail.split('@')[0] : 'Trader';
+  const initialLetter = displayName.charAt(0).toUpperCase();
+
   const navItems = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
     { label: 'Markets', icon: BarChart2, path: '/markets' },
@@ -82,7 +86,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-
         {/* Navigation Links */}
         <nav className="p-2 space-y-1 mt-2">
           {navItems.map(item => {
@@ -128,18 +131,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
             collapsed ? 'justify-center' : 'space-x-3'
           } p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] shadow-xs`}
         >
-          <img
-            src={userSettings.profile.avatar}
-            alt={userSettings.profile.name}
-            className="w-7 h-7 rounded-full object-cover border border-blue-500/40 shrink-0"
-          />
+          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs shrink-0 shadow-sm">
+            {initialLetter}
+          </div>
           {!collapsed && (
             <div className="overflow-hidden flex-1">
               <div className="text-xs font-bold theme-text-primary truncate">
-                {userSettings.profile.name}
+                {userEmail || displayName}
               </div>
               <div className="text-[10px] theme-text-secondary truncate font-mono-numeric font-medium">
-                {userSettings.profile.role}
+                Active Trader
               </div>
             </div>
           )}
@@ -148,4 +149,3 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </aside>
   );
 };
-

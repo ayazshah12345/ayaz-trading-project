@@ -22,6 +22,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, workspaceState
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed(!collapsed)}
         userSettings={workspaceState.userSettings}
+        userEmail={workspaceState.userEmail}
       />
 
       {/* Main Right Content Container */}
@@ -38,6 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, workspaceState
           isDarkMode={workspaceState.isDarkMode}
           onToggleDarkMode={workspaceState.toggleDarkMode}
           onLogout={workspaceState.logout}
+          userEmail={workspaceState.userEmail}
         />
 
         {/* Page Main Content Area */}

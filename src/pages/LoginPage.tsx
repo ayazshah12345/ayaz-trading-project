@@ -18,6 +18,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import logoImg from '../assets/logo.jpg';
+import founderImg from '../assets/founder.png';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 interface LoginPageProps {
@@ -149,9 +150,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               </div>
             </div>
 
-            {/* Founder Badge */}
-            <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 text-xs font-black shadow-lg">
-              <Crown size={14} className="text-amber-400 shrink-0" />
+            {/* Founder Badge with Photo */}
+            <div className="flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-indigo-950/60 border border-amber-500/40 text-amber-300 text-xs font-black shadow-xl backdrop-blur-md">
+              <img
+                src={founderImg}
+                alt="Syed Ayaz Shah - Founder"
+                className="w-8 h-8 rounded-full border-2 border-amber-400 object-cover shrink-0 shadow-md"
+              />
+              <Crown size={15} className="text-amber-400 shrink-0" />
               <span className="tracking-wide">Founder: Syed Ayaz Shah</span>
             </div>
           </div>
@@ -212,7 +218,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
         {/* Bottom Copyright & Founder Credit */}
         <div className="relative z-10 text-[11px] text-slate-400 font-medium flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/80 pt-4">
-          <span>© {new Date().getFullYear()} Trading Aura. All rights reserved. • Founded by Syed Ayaz Shah</span>
+          <div className="flex items-center space-x-2">
+            <img
+              src={founderImg}
+              alt="Syed Ayaz Shah"
+              className="w-5 h-5 rounded-full border border-amber-400/80 object-cover shrink-0"
+            />
+            <span>© {new Date().getFullYear()} Trading Aura. All rights reserved. • Founded by Syed Ayaz Shah</span>
+          </div>
           <span className="text-amber-400 font-mono-numeric font-bold">v1.0.0 Terminal</span>
         </div>
       </div>

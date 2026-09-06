@@ -2,12 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   mockMarkets,
   mockAccountPerformance,
-  mockTrades,
-  mockDailyJournals,
-  mockDailyJournal,
-  mockBacktestCampaigns,
   mockCalendarRecords,
-  mockActivityTimeline,
   mockUserSettings
 } from '../data/mockData';
 import {
@@ -32,12 +27,31 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 export function useTradingWorkspace() {
   const [markets, setMarkets] = useState<MarketAsset[]>(mockMarkets);
   const [trades, setTrades] = useState<TradeRecord[]>([]);
-  const [journals, setJournals] = useState<DailyJournalEntry[]>(mockDailyJournals);
-  const [journal, setJournal] = useState<DailyJournalEntry>(mockDailyJournal);
+  const [journals, setJournals] = useState<DailyJournalEntry[]>([]);
+  const [journal, setJournal] = useState<DailyJournalEntry>({
+    id: `JRN-${Date.now()}`,
+    date: new Date().toISOString().split('T')[0],
+    asset: 'XAUUSD',
+    bias: 'Bullish',
+    htfAnalysis: '',
+    marketStructure: '',
+    liquidity: '',
+    keyLevels: '',
+    sessionExpectations: '',
+    tradingPlan: '',
+    whatIExpected: '',
+    whatActuallyHappened: '',
+    mistakes: '',
+    lessonsLearned: '',
+    moodRating: 5,
+    disciplineRating: 5,
+    screenshots: [],
+    updatedAt: new Date().toISOString(),
+  });
   const [initialCapital, setInitialCapitalState] = useState<number>(100.0);
-  const [backtests, setBacktests] = useState<BacktestCampaign[]>(mockBacktestCampaigns);
+  const [backtests, setBacktests] = useState<BacktestCampaign[]>([]);
   const [calendarRecords] = useState<CalendarDayRecord[]>(mockCalendarRecords);
-  const [activityTimeline, setActivityTimeline] = useState<ActivityTimelineItem[]>(mockActivityTimeline);
+  const [activityTimeline, setActivityTimeline] = useState<ActivityTimelineItem[]>([]);
   const [userSettings, setUserSettings] = useState<UserSettings>(mockUserSettings);
   const [accountSummary] = useState(mockAccountPerformance);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -67,6 +81,9 @@ export function useTradingWorkspace() {
           setUserId(null);
           setUserEmail(null);
           setTrades([]);
+          setJournals([]);
+          setBacktests([]);
+          setActivityTimeline([]);
         }
       });
 
@@ -78,25 +95,29 @@ export function useTradingWorkspace() {
 
   // Fetch isolated user data whenever userId changes
   useEffect(() => {
-    if (userId) {
-      if (isSupabaseConfigured) {
-        supabaseDatabaseService.fetchTrades(userId).then(fetchedTrades => {
-          if (fetchedTrades !== null) {
-            setTrades(fetchedTrades);
-          } else {
-            // Fallback for new accounts
-            setTrades([]);
-          }
-        });
-        supabaseDatabaseService.fetchInitialCapital(userId).then(cap => {
-          if (cap !== null && cap > 0) {
-            setInitialCapitalState(cap);
-          }
-        });
-      }
+    if (userId && isSupabaseConfigured) {
+      supabaseDatabaseService.fetchTrades(userId).then(fetchedTrades => {
+        setTrades(fetchedTrades || []);
+      });
+      supabaseDatabaseService.fetchJournals(userId).then(fetchedJournals => {
+        setJournals(fetchedJournals || []);
+      });
+      supabaseDatabaseService.fetchBacktests(userId).then(fetchedBacktests => {
+        setBacktests(fetchedBacktests || []);
+      });
+      supabaseDatabaseService.fetchInitialCapital(userId).then(cap => {
+        if (cap !== null && cap > 0) {
+          setInitialCapitalState(cap);
+        } else {
+          setInitialCapitalState(100.0);
+        }
+      });
     } else {
-      // Demo fallback if not authenticated
-      setTrades(mockTrades);
+      // Clear data if no user is authenticated
+      setTrades([]);
+      setJournals([]);
+      setBacktests([]);
+      setActivityTimeline([]);
     }
   }, [userId]);
 
@@ -131,6 +152,10 @@ export function useTradingWorkspace() {
     setUserId(null);
     setUserEmail(null);
     setTrades([]);
+    setJournals([]);
+    setBacktests([]);
+    setActivityTimeline([]);
+    setInitialCapitalState(100.0);
     if (isSupabaseConfigured && supabase) {
       supabase.auth.signOut();
     }
@@ -239,6 +264,10 @@ export function useTradingWorkspace() {
       return [updatedEntry, ...prev];
     });
 
+    if (isSupabaseConfigured && userId) {
+      supabaseDatabaseService.saveJournal(updatedEntry, userId);
+    }
+
     const newActivity: ActivityTimelineItem = {
       id: `ACT-${Date.now()}`,
       date: updatedEntry.date,
@@ -265,6 +294,10 @@ export function useTradingWorkspace() {
       createdDate: today,
     };
     setBacktests(prev => [campaign, ...prev]);
+
+    if (isSupabaseConfigured && userId) {
+      supabaseDatabaseService.insertBacktest(campaign, userId);
+    }
 
     const newActivity: ActivityTimelineItem = {
       id: `ACT-${Date.now()}`,

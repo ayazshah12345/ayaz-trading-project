@@ -13,8 +13,7 @@ import {
   BarChart2,
   Award,
   AlertCircle,
-  CheckCircle2,
-  Zap
+  CheckCircle2
 } from 'lucide-react';
 import logoImg from '../assets/logo.jpg';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
@@ -44,7 +43,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     const cleanEmail = email.trim();
 
     if (!cleanEmail || !password) {
-      setErrorMessage('Please enter both email and password.');
+      setErrorMessage('Please fill in both email and password.');
       return;
     }
 
@@ -65,58 +64,45 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     try {
       if (isSupabaseConfigured && supabase) {
         if (mode === 'signup') {
-          // --- SUPABASE SIGN UP ---
+          // --- REAL SUPABASE SIGN UP ---
           const { data, error } = await supabase.auth.signUp({
             email: cleanEmail,
             password: password,
           });
 
           if (error) {
-            setErrorMessage(error.message);
+            if (error.message.includes('30 seconds') || error.status === 429) {
+              setErrorMessage('Rate limit reached: Please wait 30 seconds before submitting another sign-up request.');
+            } else {
+              setErrorMessage(error.message);
+            }
             setIsLoading(false);
             return;
           }
 
           if (data.user) {
-            setSuccessMessage('Account created successfully! Logging you into Terminal...');
+            setSuccessMessage('Account registered successfully! Logging you into Terminal...');
             setTimeout(() => {
               if (onLogin) onLogin(data.user?.email || cleanEmail, data.user?.id);
               navigate('/dashboard');
             }, 800);
           } else {
-            setSuccessMessage('Registration request sent! You can now sign in.');
+            setSuccessMessage('Sign-up request sent! You can now sign in.');
             setIsLoading(false);
           }
         } else {
-          // --- SUPABASE SIGN IN (with Auto-Register fallback if user not found) ---
+          // --- REAL SUPABASE SIGN IN ---
           const { data, error } = await supabase.auth.signInWithPassword({
             email: cleanEmail,
             password: password,
           });
 
           if (error) {
-            // If user hasn't created account yet, auto-register them seamlessly!
-            if (error.message.includes('Invalid login credentials') || error.status === 400) {
-              const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-                email: cleanEmail,
-                password: password,
-              });
-
-              if (!signUpError && signUpData.user) {
-                setSuccessMessage('Account auto-created & authenticated! Redirecting...');
-                setTimeout(() => {
-                  if (onLogin) onLogin(signUpData.user?.email || cleanEmail, signUpData.user?.id);
-                  navigate('/dashboard');
-                }, 800);
-                return;
-              } else if (signUpError) {
-                setErrorMessage(signUpError.message || 'Invalid login credentials. Please check your email and password.');
-                setIsLoading(false);
-                return;
-              }
+            if (error.message.includes('Invalid login credentials')) {
+              setErrorMessage('Invalid credentials. Please verify your email and password, or click "Create Account" if you have not registered yet.');
+            } else {
+              setErrorMessage(error.message);
             }
-
-            setErrorMessage(error.message || 'Invalid credentials. Check your email and password.');
             setIsLoading(false);
             return;
           }
@@ -127,28 +113,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           }
         }
       } else {
-        // Fallback for Local Dev / Offline preview
-        setTimeout(() => {
-          if (onLogin) onLogin(cleanEmail || 'trader@ayazmarkets.com', 'local-user-id');
-          navigate('/dashboard');
-        }, 500);
+        setErrorMessage('Supabase is not configured yet. Please check your Vercel Environment Variables.');
+        setIsLoading(false);
       }
     } catch (err: any) {
       console.error('Authentication error:', err);
-      // Seamless demo fallback if Supabase network is unreachable
-      setTimeout(() => {
-        if (onLogin) onLogin(cleanEmail || 'trader@ayazmarkets.com', 'demo-user-id');
-        navigate('/dashboard');
-      }, 500);
+      setErrorMessage(err.message || 'An error occurred during authentication.');
+      setIsLoading(false);
     }
-  };
-
-  const handleDemoSignIn = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      if (onLogin) onLogin('syedayazshah@ayazmarkets.com', 'demo-user-id');
-      navigate('/dashboard');
-    }, 400);
   };
 
   return (
@@ -279,18 +251,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               </h2>
               <p className="text-xs theme-text-secondary mt-1 font-medium">
                 {mode === 'signin'
-                  ? 'Enter your registered email and password to access your workspace.'
+                  ? 'Enter your registered email and password to access your isolated workspace.'
                   : 'Register first to create your personal isolated trading account.'}
               </p>
             </div>
 
             {/* Error Message Alert */}
             {errorMessage && (
-              <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold flex flex-col space-y-2 leading-relaxed">
-                <div className="flex items-start space-x-2">
-                  <AlertCircle size={16} className="shrink-0 mt-0.5" />
-                  <span>{errorMessage}</span>
-                </div>
+              <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
+                <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                <span>{errorMessage}</span>
               </div>
             )}
 
@@ -317,7 +287,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    placeholder="trader@ayazmarkets.com"
+                    placeholder="name@example.com"
                     className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg pl-10 pr-3 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-xs"
                     required
                   />
@@ -337,7 +307,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    placeholder={mode === 'signup' ? 'Create a secure password (min 6 chars)' : 'Enter your password'}
+                    placeholder={mode === 'signup' ? 'Create password (min 6 characters)' : 'Enter your password'}
                     className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg pl-10 pr-10 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-xs"
                     required
                   />
@@ -365,7 +335,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                       type={showPassword ? 'text' : 'password'}
                       value={confirmPassword}
                       onChange={e => setConfirmPassword(e.target.value)}
-                      placeholder="Re-enter your password to confirm"
+                      placeholder="Re-enter password to confirm"
                       className={`w-full bg-[var(--bg-subpanel)] border rounded-lg pl-10 pr-10 py-2.5 theme-text-primary font-mono-numeric font-bold outline-none transition text-xs ${
                         confirmPassword && confirmPassword !== password
                           ? 'border-rose-500 focus:border-rose-500'
@@ -398,28 +368,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 )}
               </button>
             </form>
-
-            {/* Quick Demo Access Divider */}
-            <div className="relative my-4">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[var(--border-color)]" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-[var(--bg-card)] px-2 theme-text-secondary font-bold text-[10px]">
-                  Or Instant Demo Access
-                </span>
-              </div>
-            </div>
-
-            {/* One-Click Demo Sign In */}
-            <button
-              onClick={handleDemoSignIn}
-              disabled={isLoading}
-              className="w-full py-2.5 bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] theme-text-primary text-xs font-extrabold rounded-lg border border-[var(--border-color)] transition flex items-center justify-center space-x-2 cursor-pointer"
-            >
-              <Zap size={15} className="text-amber-500" />
-              <span>One-Click Demo Account (Syed Ayaz Shah)</span>
-            </button>
           </div>
 
           {/* Footer toggle */}
@@ -432,7 +380,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   onClick={() => { setMode('signup'); setErrorMessage(null); setSuccessMessage(null); }}
                   className="font-extrabold text-amber-500 hover:underline cursor-pointer"
                 >
-                  Sign Up First
+                  Create Account First
                 </button>
               </>
             ) : (

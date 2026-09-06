@@ -11,6 +11,10 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ workspace }) => {
   const [settings, setSettings] = useState<UserSettings>(workspace.userSettings);
   const [savedNotice, setSavedNotice] = useState(false);
 
+  const userEmail = workspace.userEmail;
+  const displayName = userEmail ? userEmail.split('@')[0] : (settings.profile.name || 'Trader');
+  const initialLetter = displayName.charAt(0).toUpperCase();
+
   const handleSave = () => {
     workspace.updateSettings(settings);
     setSavedNotice(true);
@@ -33,7 +37,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ workspace }) => {
 
         <button
           onClick={handleSave}
-          className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-extrabold rounded-lg shadow-md transition"
+          className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-extrabold rounded-lg shadow-md transition cursor-pointer"
         >
           <Save size={15} />
           <span>Save Preferences</span>
@@ -203,15 +207,13 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ workspace }) => {
           </h3>
 
           <div className="flex items-center space-x-4">
-            <img
-              src={settings.profile.avatar}
-              alt={settings.profile.name}
-              className="w-12 h-12 rounded-full object-cover border border-blue-500"
-            />
+            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-lg shadow-md border border-amber-500/40">
+              {initialLetter}
+            </div>
             <div>
-              <div className="font-bold text-slate-100 text-sm font-sans">{settings.profile.name}</div>
-              <div className="text-slate-400 text-xs font-mono-numeric">{settings.profile.email}</div>
-              <div className="text-[10px] text-blue-400 font-semibold font-mono-numeric">{settings.profile.role}</div>
+              <div className="font-bold text-slate-100 text-sm font-sans">{userEmail || displayName}</div>
+              <div className="text-slate-400 text-xs font-mono-numeric">{userEmail || 'trader@terminal'}</div>
+              <div className="text-[10px] text-amber-400 font-semibold font-mono-numeric">Active Trader</div>
             </div>
           </div>
         </div>

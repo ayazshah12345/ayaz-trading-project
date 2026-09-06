@@ -606,10 +606,10 @@ export const mockUserSettings: UserSettings = {
     defaultStrategy: 'Liquidity Sweep',
   },
   profile: {
-    name: 'Syed Ayaz Shah',
-    email: 'trader@workspace.terminal',
-    avatar: '/profile.jpg',
-    role: 'Prop Trader / Analyst',
+    name: 'Trader Account',
+    email: 'trader@terminal',
+    avatar: '',
+    role: 'Active Trader',
   },
 };
 

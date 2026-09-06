@@ -150,15 +150,25 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               </div>
             </div>
 
-            {/* Founder Badge with Photo */}
-            <div className="flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-indigo-950/60 border border-amber-500/40 text-amber-300 text-xs font-black shadow-xl backdrop-blur-md">
+            {/* Founder Passport Photo Showcase Card */}
+            <div className="flex items-center space-x-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-slate-900/80 to-indigo-950/90 border border-amber-500/40 shadow-2xl backdrop-blur-md">
               <img
                 src={founderImg}
-                alt="Syed Ayaz Shah - Founder"
-                className="w-8 h-8 rounded-full border-2 border-amber-400 object-cover shrink-0 shadow-md"
+                alt="SYED AYAZ SHAH S - Founder of Trading Aura"
+                className="w-20 h-24 sm:w-24 sm:h-28 rounded-xl border-2 border-amber-400 object-cover shrink-0 shadow-2xl"
               />
-              <Crown size={15} className="text-amber-400 shrink-0" />
-              <span className="tracking-wide">Founder: Syed Ayaz Shah</span>
+              <div className="space-y-1">
+                <div className="flex items-center space-x-1.5 text-amber-400 text-[11px] font-black uppercase tracking-wider">
+                  <Crown size={15} className="shrink-0" />
+                  <span>Founder of Trading Aura</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight font-sans">
+                  SYED AYAZ SHAH S
+                </h3>
+                <p className="text-xs text-slate-300 font-mono-numeric font-semibold">
+                  Lead Market Analyst & Platform Architect
+                </p>
+              </div>
             </div>
           </div>
 
@@ -224,7 +234,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               alt="Syed Ayaz Shah"
               className="w-5 h-5 rounded-full border border-amber-400/80 object-cover shrink-0"
             />
-            <span>© {new Date().getFullYear()} Trading Aura. All rights reserved. • Founded by Syed Ayaz Shah</span>
+            <span>© {new Date().getFullYear()} Trading Aura. All rights reserved. • Founded by SYED AYAZ SHAH S</span>
           </div>
           <span className="text-amber-400 font-mono-numeric font-bold">v1.0.0 Terminal</span>
         </div>

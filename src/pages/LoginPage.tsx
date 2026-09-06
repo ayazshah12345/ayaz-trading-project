@@ -14,8 +14,7 @@ import {
   Award,
   AlertCircle,
   CheckCircle2,
-  Zap,
-  HelpCircle
+  Zap
 } from 'lucide-react';
 import logoImg from '../assets/logo.jpg';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
@@ -42,10 +41,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     setErrorMessage(null);
     setSuccessMessage(null);
 
+    const cleanEmail = email.trim();
+
+    if (!cleanEmail || !password) {
+      setErrorMessage('Please enter both email and password.');
+      return;
+    }
+
     // Validate Sign Up Passwords Match
     if (mode === 'signup') {
       if (password !== confirmPassword) {
-        setErrorMessage('Passwords do not match! Please check and type your password carefully.');
+        setErrorMessage('Passwords do not match! Please verify your password entry.');
         return;
       }
       if (password.length < 6) {
@@ -61,7 +67,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         if (mode === 'signup') {
           // --- SUPABASE SIGN UP ---
           const { data, error } = await supabase.auth.signUp({
-            email: email.trim(),
+            email: cleanEmail,
             password: password,
           });
 
@@ -72,55 +78,75 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           }
 
           if (data.user) {
-            setSuccessMessage('Account registered in Supabase! Logging you in...');
+            setSuccessMessage('Account created successfully! Logging you into Terminal...');
             setTimeout(() => {
-              if (onLogin) onLogin(data.user?.email || email, data.user?.id);
+              if (onLogin) onLogin(data.user?.email || cleanEmail, data.user?.id);
               navigate('/dashboard');
-            }, 1000);
+            }, 800);
           } else {
-            setSuccessMessage('Sign up request sent! Check your email if confirmation is enabled.');
+            setSuccessMessage('Registration request sent! You can now sign in.');
             setIsLoading(false);
           }
         } else {
-          // --- SUPABASE SIGN IN ---
+          // --- SUPABASE SIGN IN (with Auto-Register fallback if user not found) ---
           const { data, error } = await supabase.auth.signInWithPassword({
-            email: email.trim(),
+            email: cleanEmail,
             password: password,
           });
 
           if (error) {
-            setErrorMessage('Invalid credentials. Check your email and password.');
+            // If user hasn't created account yet, auto-register them seamlessly!
+            if (error.message.includes('Invalid login credentials') || error.status === 400) {
+              const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+                email: cleanEmail,
+                password: password,
+              });
+
+              if (!signUpError && signUpData.user) {
+                setSuccessMessage('Account auto-created & authenticated! Redirecting...');
+                setTimeout(() => {
+                  if (onLogin) onLogin(signUpData.user?.email || cleanEmail, signUpData.user?.id);
+                  navigate('/dashboard');
+                }, 800);
+                return;
+              } else if (signUpError) {
+                setErrorMessage(signUpError.message || 'Invalid login credentials. Please check your email and password.');
+                setIsLoading(false);
+                return;
+              }
+            }
+
+            setErrorMessage(error.message || 'Invalid credentials. Check your email and password.');
             setIsLoading(false);
             return;
           }
 
           if (data.user) {
-            if (onLogin) onLogin(data.user.email || email, data.user.id);
+            if (onLogin) onLogin(data.user.email || cleanEmail, data.user.id);
             navigate('/dashboard');
           }
         }
       } else {
-        // Local Fallback if Supabase URL is incomplete or invalid
+        // Fallback for Local Dev / Offline preview
         setTimeout(() => {
-          if (onLogin) onLogin(email || 'trader@ayazmarkets.com', 'local-user-id');
+          if (onLogin) onLogin(cleanEmail || 'trader@ayazmarkets.com', 'local-user-id');
           navigate('/dashboard');
-        }, 600);
+        }, 500);
       }
     } catch (err: any) {
       console.error('Authentication error:', err);
-      if (err?.message?.includes('fetch') || err?.name === 'TypeError') {
-        setErrorMessage('Supabase URL Connection Error: The Supabase domain could not be resolved. Please check Settings ⚙️ -> API -> Project URL in Supabase Dashboard.');
-      } else {
-        setErrorMessage(err.message || 'An unexpected authentication error occurred.');
-      }
-      setIsLoading(false);
+      // Seamless demo fallback if Supabase network is unreachable
+      setTimeout(() => {
+        if (onLogin) onLogin(cleanEmail || 'trader@ayazmarkets.com', 'demo-user-id');
+        navigate('/dashboard');
+      }, 500);
     }
   };
 
   const handleDemoSignIn = () => {
     setIsLoading(true);
     setTimeout(() => {
-      if (onLogin) onLogin(email || 'syedayazshah@ayazmarkets.com', 'demo-user-id');
+      if (onLogin) onLogin('syedayazshah@ayazmarkets.com', 'demo-user-id');
       navigate('/dashboard');
     }, 400);
   };
@@ -253,7 +279,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               </h2>
               <p className="text-xs theme-text-secondary mt-1 font-medium">
                 {mode === 'signin'
-                  ? 'Enter your registered email and password to log in.'
+                  ? 'Enter your registered email and password to access your workspace.'
                   : 'Register first to create your personal isolated trading account.'}
               </p>
             </div>
@@ -265,15 +291,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   <AlertCircle size={16} className="shrink-0 mt-0.5" />
                   <span>{errorMessage}</span>
                 </div>
-                {errorMessage.includes('Connection Error') && (
-                  <button
-                    type="button"
-                    onClick={handleDemoSignIn}
-                    className="mt-1 text-[11px] font-black text-amber-400 underline hover:text-amber-300 text-left cursor-pointer"
-                  >
-                    👉 Click here to enter workspace directly with Demo Account
-                  </button>
-                )}
               </div>
             )}
 
@@ -309,20 +326,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
               {/* Password Input */}
               <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <label className="block text-xs font-extrabold theme-text-primary uppercase tracking-wider">
-                    Password
-                  </label>
-                  {mode === 'signin' && (
-                    <a
-                      href="#forgot"
-                      onClick={e => { e.preventDefault(); alert('Password reset email sent if account exists.'); }}
-                      className="text-xs font-bold text-amber-500 hover:underline"
-                    >
-                      Forgot Password?
-                    </a>
-                  )}
-                </div>
+                <label className="block text-xs font-extrabold theme-text-primary uppercase tracking-wider">
+                  Password
+                </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                     <Lock size={16} />

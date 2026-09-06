@@ -100,14 +100,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           }
         }
       } else {
-        // Local Fallback if Supabase credentials not provided
-        setTimeout(() => {
-          if (onLogin) onLogin(email || 'trader@ayazmarkets.com', 'local-user-id');
-          navigate('/dashboard');
-        }, 600);
+        // Fallback if environment variables are not loaded in Vercel build
+        setErrorMessage('Supabase is not configured on Vercel yet. Please ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in Vercel Project Settings, then Redeploy.');
+        setIsLoading(false);
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'An unexpected authentication error occurred.');
+      console.error('Authentication error:', err);
+      if (err?.message?.includes('fetch') || err?.name === 'TypeError') {
+        setErrorMessage('Connection Error: Failed to reach Supabase. Please ensure your Vercel Environment Variables are saved and your Vercel deployment is updated.');
+      } else {
+        setErrorMessage(err.message || 'An unexpected authentication error occurred.');
+      }
       setIsLoading(false);
     }
   };
@@ -255,7 +258,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
             {/* Error Message Alert */}
             {errorMessage && (
-              <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold flex items-start space-x-2">
+              <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
                 <AlertCircle size={16} className="shrink-0 mt-0.5" />
                 <span>{errorMessage}</span>
               </div>
@@ -263,7 +266,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
             {/* Success Message Alert */}
             {successMessage && (
-              <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-start space-x-2">
+              <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-start space-x-2 leading-relaxed">
                 <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
                 <span>{successMessage}</span>
               </div>

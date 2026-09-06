@@ -59,15 +59,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="flex items-center space-x-2.5 overflow-hidden">
               <img
                 src={logoImg}
-                alt="Ayaz Markets Analysis Logo"
+                alt="Trading Aura Logo"
                 className="w-9 h-9 rounded-lg border border-amber-500/50 object-cover shadow-md shrink-0"
               />
               <div className="flex flex-col truncate">
                 <span className="text-xs font-black tracking-wide theme-text-primary uppercase font-mono-numeric truncate">
-                  AYAZ MARKETS
+                  TRADING AURA
                 </span>
                 <span className="text-[9px] uppercase tracking-wider text-amber-500 font-bold truncate">
-                  FX & Crypto Analysis
+                  Terminal & Analytics
                 </span>
               </div>
             </div>

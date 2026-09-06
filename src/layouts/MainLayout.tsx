@@ -17,17 +17,19 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, workspaceState
 
   return (
     <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] flex flex-col font-sans antialiased transition-colors duration-200">
-      {/* Desktop Sidebar */}
+      {/* Desktop & Mobile Sidebar */}
       <Sidebar
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed(!collapsed)}
         userSettings={workspaceState.userSettings}
         userEmail={workspaceState.userEmail}
+        mobileOpen={mobileSidebarOpen}
+        onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
       {/* Main Right Content Container */}
       <div
-        className={`flex-1 flex flex-col transition-all duration-200 ${
+        className={`flex-1 flex flex-col transition-all duration-200 ml-0 ${
           collapsed ? 'md:ml-16' : 'md:ml-64'
         }`}
       >
@@ -43,7 +45,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, workspaceState
         />
 
         {/* Page Main Content Area */}
-        <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto">
+        <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 max-w-[1600px] w-full mx-auto overflow-x-hidden">
           {children}
         </main>
 

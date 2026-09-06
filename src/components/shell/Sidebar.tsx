@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
+  ArrowLeft,
 } from 'lucide-react';
 import type { UserSettings } from '../../types';
 import logoImg from '../../assets/logo.jpg';
@@ -22,6 +23,8 @@ interface SidebarProps {
   onToggleCollapse: () => void;
   userSettings: UserSettings;
   userEmail?: string | null;
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -29,6 +32,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleCollapse,
   userSettings,
   userEmail,
+  mobileOpen = false,
+  onCloseMobile,
 }) => {
   const displayName = userEmail ? userEmail.split('@')[0] : 'Trader';
   const initialLetter = displayName.charAt(0).toUpperCase();
@@ -45,16 +50,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { label: 'Settings', icon: Settings, path: '/settings' },
   ];
 
-  return (
-    <aside
-      className={`fixed top-0 left-0 bottom-0 z-40 bg-[var(--bg-sidebar)] border-r border-[var(--border-color)] flex flex-col justify-between transition-all duration-200 ${
-        collapsed ? 'w-16' : 'w-64'
-      }`}
-    >
+  const renderContent = (isMobile: boolean = false) => (
+    <>
       {/* Brand Header */}
       <div>
         <div className="h-16 px-3 flex items-center justify-between border-b border-[var(--border-color)]">
-          {!collapsed ? (
+          {(!collapsed || isMobile) ? (
             <div className="flex items-center space-x-2.5 overflow-hidden">
               <img
                 src={logoImg}
@@ -77,13 +78,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className="w-8 h-8 mx-auto rounded-lg border border-amber-500/50 object-cover shadow-md"
             />
           )}
-          <button
-            onClick={onToggleCollapse}
-            className="p-1 rounded theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)] transition hidden md:block shrink-0"
-            title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-          >
-            {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-          </button>
+
+          {/* Desktop Toggle Button */}
+          {!isMobile && (
+            <button
+              onClick={onToggleCollapse}
+              className="p-1 rounded theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)] transition hidden md:block shrink-0 cursor-pointer"
+              title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+            >
+              {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            </button>
+          )}
+
+          {/* Mobile Back / Close Button (Near AYAZ MARKETS) */}
+          {isMobile && onCloseMobile && (
+            <button
+              type="button"
+              onClick={onCloseMobile}
+              className="px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-md transition flex items-center space-x-1 shrink-0 cursor-pointer"
+              title="Close Menu & Go Back to Page"
+            >
+              <ArrowLeft size={15} />
+              <span>Back</span>
+            </button>
+          )}
         </div>
 
         {/* Navigation Links */}
@@ -94,17 +112,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={() => {
+                  if (isMobile && onCloseMobile) {
+                    onCloseMobile();
+                  }
+                }}
                 className={({ isActive }) =>
                   `flex items-center px-3 py-2.5 rounded-lg text-xs font-bold transition group ${
                     isActive
                       ? 'bg-amber-500 text-slate-950 font-extrabold shadow-md shadow-amber-500/20'
                       : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
-                  } ${collapsed ? 'justify-center' : 'space-x-3'}`
+                  } ${collapsed && !isMobile ? 'justify-center' : 'space-x-3'}`
                 }
-                title={collapsed ? item.label : undefined}
+                title={collapsed && !isMobile ? item.label : undefined}
               >
                 <Icon size={18} className="shrink-0" />
-                {!collapsed && <span>{item.label}</span>}
+                {(!collapsed || isMobile) && <span>{item.label}</span>}
               </NavLink>
             );
           })}
@@ -113,7 +136,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Footer Info / Status */}
       <div className="p-3 border-t border-[var(--border-color)] bg-[var(--bg-subpanel)] space-y-3">
-        {!collapsed && (
+        {(!collapsed || isMobile) && (
           <div className="flex items-center justify-between text-[11px] theme-text-secondary px-1 font-mono-numeric">
             <span className="flex items-center space-x-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -128,13 +151,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         <div
           className={`flex items-center ${
-            collapsed ? 'justify-center' : 'space-x-3'
+            collapsed && !isMobile ? 'justify-center' : 'space-x-3'
           } p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] shadow-xs`}
         >
           <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs shrink-0 shadow-sm">
             {initialLetter}
           </div>
-          {!collapsed && (
+          {(!collapsed || isMobile) && (
             <div className="overflow-hidden flex-1">
               <div className="text-xs font-bold theme-text-primary truncate">
                 {userEmail || displayName}
@@ -146,6 +169,35 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar (hidden on mobile) */}
+      <aside
+        className={`hidden md:flex fixed top-0 left-0 bottom-0 z-40 bg-[var(--bg-sidebar)] border-r border-[var(--border-color)] flex-col justify-between transition-all duration-200 ${
+          collapsed ? 'w-16' : 'w-64'
+        }`}
+      >
+        {renderContent(false)}
+      </aside>
+
+      {/* Mobile Drawer Backdrop & Mobile Sidebar */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          {/* Semi-transparent dark overlay */}
+          <div
+            className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"
+            onClick={onCloseMobile}
+          />
+
+          {/* Sliding Sidebar Drawer */}
+          <aside className="relative z-50 w-72 max-w-[85vw] bg-[var(--bg-sidebar)] border-r border-[var(--border-color)] flex flex-col justify-between shadow-2xl h-full font-sans animate-in slide-in-from-left duration-200">
+            {renderContent(true)}
+          </aside>
+        </div>
+      )}
+    </>
   );
 };

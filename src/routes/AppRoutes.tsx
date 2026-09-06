@@ -14,16 +14,35 @@ import { CalendarPage } from '../pages/CalendarPage';
 import { SettingsPage } from '../pages/SettingsPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { useTradingWorkspace } from '../hooks/useTradingWorkspace';
+import { LoadingState } from '../components/common/LoadingState';
 
 interface AppRoutesProps {
   workspace: ReturnType<typeof useTradingWorkspace>;
 }
 
 export const AppRoutes: React.FC<AppRoutesProps> = ({ workspace }) => {
+  // If session is resolving on page refresh, render sleek loading screen to prevent login redirect
+  if (workspace.isAuthLoading) {
+    return (
+      <div className="min-h-screen bg-[#070b14] flex items-center justify-center p-6 text-white">
+        <LoadingState message="Restoring trading workspace session..." />
+      </div>
+    );
+  }
+
   return (
     <Routes>
       {/* Public Login Route */}
-      <Route path="/login" element={<LoginPage onLogin={workspace.login} />} />
+      <Route
+        path="/login"
+        element={
+          workspace.isAuthenticated ? (
+            <Navigate to="/dashboard" replace />
+          ) : (
+            <LoginPage onLogin={workspace.login} />
+          )
+        }
+      />
 
       {/* Main Workspace Routes wrapped in Layout */}
       <Route

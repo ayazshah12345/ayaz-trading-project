@@ -24,6 +24,9 @@ import type {
 import { supabaseDatabaseService } from '../services/supabaseDatabaseService';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
+const AUTH_STORAGE_KEY_EMAIL = 'ayaz_markets_user_email';
+const AUTH_STORAGE_KEY_UID = 'ayaz_markets_user_uid';
+
 export function useTradingWorkspace() {
   const [markets, setMarkets] = useState<MarketAsset[]>(mockMarkets);
   const [trades, setTrades] = useState<TradeRecord[]>([]);
@@ -56,40 +59,66 @@ export function useTradingWorkspace() {
   const [accountSummary] = useState(mockAccountPerformance);
   const [isDarkMode, setIsDarkMode] = useState(true);
   
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  // Instant initial auth check from localStorage on refresh
+  const storedEmail = localStorage.getItem(AUTH_STORAGE_KEY_EMAIL);
+  const storedUid = localStorage.getItem(AUTH_STORAGE_KEY_UID);
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(Boolean(storedEmail && storedUid));
+  const [userId, setUserId] = useState<string | null>(storedUid);
+  const [userEmail, setUserEmail] = useState<string | null>(storedEmail);
+  const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
 
   // Check Supabase Auth session on load
   useEffect(() => {
+    let isSubscribed = true;
+
     if (isSupabaseConfigured && supabase) {
       supabase.auth.getUser().then(({ data }) => {
+        if (!isSubscribed) return;
         if (data?.user) {
           setIsAuthenticated(true);
           setUserId(data.user.id);
           setUserEmail(data.user.email || '');
+          localStorage.setItem(AUTH_STORAGE_KEY_EMAIL, data.user.email || '');
+          localStorage.setItem(AUTH_STORAGE_KEY_UID, data.user.id);
+        } else if (!storedUid) {
+          setIsAuthenticated(false);
+          setUserId(null);
+          setUserEmail(null);
         }
+        setIsAuthLoading(false);
+      }).catch(() => {
+        if (isSubscribed) setIsAuthLoading(false);
       });
 
       const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (!isSubscribed) return;
         if (session?.user) {
           setIsAuthenticated(true);
           setUserId(session.user.id);
           setUserEmail(session.user.email || '');
-        } else {
+          localStorage.setItem(AUTH_STORAGE_KEY_EMAIL, session.user.email || '');
+          localStorage.setItem(AUTH_STORAGE_KEY_UID, session.user.id);
+        } else if (_event === 'SIGNED_OUT') {
           setIsAuthenticated(false);
           setUserId(null);
           setUserEmail(null);
+          localStorage.removeItem(AUTH_STORAGE_KEY_EMAIL);
+          localStorage.removeItem(AUTH_STORAGE_KEY_UID);
           setTrades([]);
           setJournals([]);
           setBacktests([]);
           setActivityTimeline([]);
         }
+        setIsAuthLoading(false);
       });
 
       return () => {
+        isSubscribed = false;
         authListener?.subscription.unsubscribe();
       };
+    } else {
+      setIsAuthLoading(false);
     }
   }, []);
 
@@ -112,8 +141,7 @@ export function useTradingWorkspace() {
           setInitialCapitalState(100.0);
         }
       });
-    } else {
-      // Clear data if no user is authenticated
+    } else if (!userId) {
       setTrades([]);
       setJournals([]);
       setBacktests([]);
@@ -144,13 +172,19 @@ export function useTradingWorkspace() {
   const login = (email: string, uId?: string) => {
     setIsAuthenticated(true);
     setUserEmail(email);
-    if (uId) setUserId(uId);
+    const validUid = uId || `usr-${Date.now()}`;
+    setUserId(validUid);
+    localStorage.setItem(AUTH_STORAGE_KEY_EMAIL, email);
+    localStorage.setItem(AUTH_STORAGE_KEY_UID, validUid);
+    setIsAuthLoading(false);
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setUserId(null);
     setUserEmail(null);
+    localStorage.removeItem(AUTH_STORAGE_KEY_EMAIL);
+    localStorage.removeItem(AUTH_STORAGE_KEY_UID);
     setTrades([]);
     setJournals([]);
     setBacktests([]);
@@ -388,6 +422,7 @@ export function useTradingWorkspace() {
     accountSummary,
     isDarkMode,
     isAuthenticated,
+    isAuthLoading,
     userId,
     userEmail,
     login,

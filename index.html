@@ -2,13 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/logo.jpg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trading Aura — Professional Trading Platform & Analytics</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Trading Aura — Professional Trading Platform &amp; Analytics</title>
+    <meta name="title" content="Trading Aura — Professional Trading Platform &amp; Analytics" />
+    <meta name="description" content="Track your trades, backtest strategies, analyze performance, and grow your portfolio with Trading Aura." />
+    <meta name="keywords" content="trading, stock market, analytics, backtesting, portfolio tracker, trading journal" />
+    <meta name="author" content="Trading Aura" />
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- PWA / Mobile App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Trading Aura" />
+    <meta name="application-name" content="Trading Aura" />
+    <meta name="theme-color" content="#0d0f1a" />
+    <meta name="msapplication-TileColor" content="#0d0f1a" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Trading Aura — Professional Trading Platform" />
+    <meta property="og:description" content="Track trades, backtest strategies, and analyze your performance." />
+    <meta property="og:image" content="/icon-512.jpg" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/jpeg" href="/icon-512.jpg" />
+    <link rel="apple-touch-icon" href="/icon-512.jpg" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.jpg" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Splash screen color for PWA on Android -->
+    <style>
+      html, body {
+        background-color: #0d0f1a;
+        margin: 0;
+        padding: 0;
+        /* Prevent overscroll bounce on iOS */
+        overscroll-behavior: none;
+        /* Safe area for notched phones */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

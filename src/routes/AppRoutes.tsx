@@ -45,6 +45,16 @@ export const AppRoutes: React.FC<AppRoutesProps> = ({ workspace }) => {
         }
       />
 
+      {/* Public News & Forex Factory Calendar Route */}
+      <Route
+        path="/news"
+        element={
+          <MainLayout workspaceState={workspace}>
+            <NewsPage workspace={workspace} />
+          </MainLayout>
+        }
+      />
+
       {/* Main Workspace Routes wrapped in Layout */}
       <Route
         path="/*"

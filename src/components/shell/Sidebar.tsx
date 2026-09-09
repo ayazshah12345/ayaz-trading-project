@@ -48,7 +48,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { label: 'Backtesting', icon: FlaskConical, path: '/backtesting' },
     { label: 'Analytics', icon: LineChart, path: '/analytics' },
     { label: 'Calendar', icon: Calendar, path: '/calendar' },
-    { label: 'News', icon: Newspaper, path: '/news' },
+    { label: 'News', icon: Newspaper, path: '/news', badge: 'Forex Factory' },
     { label: 'Settings', icon: Settings, path: '/settings' },
   ];
 
@@ -126,10 +126,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
                   } ${collapsed && !isMobile ? 'justify-center' : 'space-x-3'}`
                 }
-                title={collapsed && !isMobile ? item.label : undefined}
+                title={collapsed && !isMobile ? `${item.label}${item.badge ? ` (${item.badge})` : ''}` : undefined}
               >
                 <Icon size={18} className="shrink-0" />
-                {(!collapsed || isMobile) && <span>{item.label}</span>}
+                {(!collapsed || isMobile) && (
+                  <div className="flex items-center justify-between flex-1 overflow-hidden">
+                    <span className="truncate">{item.label}</span>
+                    {item.badge && (
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 shrink-0 ml-1.5">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                )}
               </NavLink>
             );
           })}

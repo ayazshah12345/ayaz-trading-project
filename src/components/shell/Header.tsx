@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Clock, Menu, Calendar as CalendarIcon, CheckCircle2, Sun, Moon, LogOut, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Search, Bell, Clock, Menu, Calendar as CalendarIcon, CheckCircle2, Sun, Moon, LogOut, User, Newspaper } from 'lucide-react';
 import type { UserSettings } from '../../types';
 
 interface HeaderProps {
@@ -70,6 +71,16 @@ export const Header: React.FC<HeaderProps> = ({
             ⌘K
           </kbd>
         </button>
+
+        {/* Forex Factory News Shortcut */}
+        <Link
+          to="/news"
+          className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold transition shadow-xs"
+          title="Open Forex Factory Economic News Calendar"
+        >
+          <Newspaper size={14} className="text-amber-400" />
+          <span>Forex Factory News</span>
+        </Link>
       </div>
 
       {/* Header Right Items: Clock, Status, Theme Toggle, Notifications, User */}

@@ -15,7 +15,8 @@ import {
   TrendingUp,
   Award,
   DollarSign,
-  BarChart2
+  BarChart2,
+  Newspaper
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -85,6 +86,34 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
             <span>Backtesting Lab</span>
           </button>
         </div>
+      </div>
+
+      {/* Forex Factory Live News & Calendar Banner */}
+      <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-500/15 via-[var(--bg-card)] to-slate-900/40 border border-amber-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+        <div className="flex items-center space-x-3">
+          <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0">
+            <Newspaper size={20} />
+          </div>
+          <div>
+            <div className="flex items-center space-x-2">
+              <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                Forex Factory Calendar & Daily News
+              </span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+            </div>
+            <p className="text-xs theme-text-secondary mt-0.5">
+              Track live high-impact economic news releases, forecasts, and market time countdowns.
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => navigate('/news')}
+          className="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-md transition flex items-center space-x-1.5 self-start sm:self-auto cursor-pointer shrink-0"
+        >
+          <span>Open Forex Factory News</span>
+          <ArrowRight size={14} />
+        </button>
       </div>
 
       {/* Top 2 Metric Groups: Trade Journal Summary & Backtesting Summary */}

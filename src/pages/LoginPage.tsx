@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   Mail,
   Lock,
@@ -15,7 +15,8 @@ import {
   AlertCircle,
   CheckCircle2,
   Crown,
-  Sparkles
+  Sparkles,
+  Newspaper
 } from 'lucide-react';
 import logoImg from '../assets/logo.jpg';
 import founderImg from '../assets/founder.png';
@@ -210,6 +211,38 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             </div>
           </div>
 
+          {/* Forex Factory Live Calendar Banner (Direct Candidate / Public Access) */}
+          <Link
+            to="/news"
+            className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-slate-900/90 to-amber-950/40 border border-amber-500/50 flex items-center justify-between font-mono-numeric backdrop-blur-md hover:border-amber-400 hover:scale-[1.01] transition group shadow-xl"
+          >
+            <div className="flex items-center space-x-3.5">
+              <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0">
+                <Newspaper size={24} />
+              </div>
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-[11px] font-black text-amber-400 uppercase tracking-wider">
+                    NEW FEATURE
+                  </span>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500 text-slate-950">
+                    FOREX FACTORY
+                  </span>
+                </div>
+                <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5">
+                  Live Economic News Time Calendar
+                </div>
+                <div className="text-[11px] text-slate-300">
+                  Real-time high-impact volatility releases & daily market news feed
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-1 text-xs font-bold text-amber-400 group-hover:translate-x-1 transition shrink-0 ml-2">
+              <span>View News</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+
           {/* Security Banner */}
           <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-mono-numeric backdrop-blur-md">
             <div className="flex items-center space-x-3.5">
@@ -396,6 +429,20 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 </>
               )}
             </button>
+
+            {/* Direct Candidate Access to Forex Factory News */}
+            <div className="pt-3 border-t border-[var(--border-color)]">
+              <Link
+                to="/news"
+                className="w-full py-2.5 px-3 rounded-xl bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] border border-amber-500/40 text-amber-400 hover:text-amber-300 font-bold transition flex items-center justify-between text-xs group"
+              >
+                <div className="flex items-center space-x-2">
+                  <Newspaper size={15} className="text-amber-400" />
+                  <span>Looking for News? Open Forex Factory Calendar</span>
+                </div>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition" />
+              </Link>
+            </div>
           </form>
         </div>
 

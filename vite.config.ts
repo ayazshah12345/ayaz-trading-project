@@ -80,5 +80,14 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    proxy: {
+      '/api/forexfactory': {
+        target: 'https://nfs.faireconomy.media',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/forexfactory/, ''),
+      },
+    },
+  },
 })
 

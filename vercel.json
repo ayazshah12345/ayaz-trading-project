@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api/forexfactory/:path*",
+      "destination": "https://nfs.faireconomy.media/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

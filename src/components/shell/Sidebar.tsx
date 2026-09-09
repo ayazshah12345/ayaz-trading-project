@@ -9,6 +9,7 @@ import {
   FlaskConical,
   LineChart,
   Calendar,
+  Newspaper,
   Settings,
   ChevronLeft,
   ChevronRight,
@@ -47,6 +48,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { label: 'Backtesting', icon: FlaskConical, path: '/backtesting' },
     { label: 'Analytics', icon: LineChart, path: '/analytics' },
     { label: 'Calendar', icon: Calendar, path: '/calendar' },
+    { label: 'News', icon: Newspaper, path: '/news' },
     { label: 'Settings', icon: Settings, path: '/settings' },
   ];
 

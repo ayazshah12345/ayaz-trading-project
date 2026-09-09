@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, BarChart2, BookMarked, BookOpen, FlaskConical, ArrowRight, X } from 'lucide-react';
+import { Search, BarChart2, BookMarked, BookOpen, FlaskConical, ArrowRight, X, Newspaper } from 'lucide-react';
 import { MarketAsset, TradeRecord, DailyJournalEntry, BacktestCampaign } from '../../types';
 
 interface GlobalSearchModalProps {
@@ -94,6 +94,20 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
 
   const handleSelectBacktest = () => {
     navigate('/backtesting');
+    onClose();
+  };
+
+  const isNewsMatch =
+    cleanQuery &&
+    ('news'.includes(cleanQuery) ||
+      'forex factory'.includes(cleanQuery) ||
+      'calendar'.includes(cleanQuery) ||
+      'economic'.includes(cleanQuery) ||
+      'cpi'.includes(cleanQuery) ||
+      'nfp'.includes(cleanQuery));
+
+  const handleSelectNews = () => {
+    navigate('/news');
     onClose();
   };
 
@@ -241,7 +255,31 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
             </div>
           )}
 
-          {filteredMarkets.length === 0 && filteredTrades.length === 0 && !isJournalMatch && filteredBacktests.length === 0 && (
+          {/* News & Forex Factory Calendar Section */}
+          {isNewsMatch && (
+            <div>
+              <div className="text-[11px] font-semibold theme-text-secondary uppercase tracking-wider mb-2 flex items-center space-x-1.5">
+                <Newspaper size={13} className="text-amber-500" />
+                <span>Market News & Forex Factory Calendar</span>
+              </div>
+              <button
+                onClick={handleSelectNews}
+                className="w-full p-3 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] hover:border-amber-500/50 hover:bg-[var(--bg-card-hover)] text-left transition flex items-center justify-between group"
+              >
+                <div>
+                  <div className="font-bold theme-text-primary group-hover:text-amber-400 transition">
+                    Forex Factory Economic Calendar & Daily News
+                  </div>
+                  <p className="theme-text-secondary text-xs mt-0.5">
+                    View live high-impact economic releases, time countdowns, and real-time market feeds.
+                  </p>
+                </div>
+                <ArrowRight size={16} className="text-amber-500 group-hover:translate-x-1 transition shrink-0 ml-2" />
+              </button>
+            </div>
+          )}
+
+          {filteredMarkets.length === 0 && filteredTrades.length === 0 && !isJournalMatch && filteredBacktests.length === 0 && !isNewsMatch && (
             <div className="py-8 text-center text-slate-400">
               No matching records found for "{query}".
             </div>

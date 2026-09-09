@@ -11,6 +11,7 @@ import { TradeJournalPage } from '../pages/TradeJournalPage';
 import { BacktestingPage } from '../pages/BacktestingPage';
 import { AnalyticsPage } from '../pages/AnalyticsPage';
 import { CalendarPage } from '../pages/CalendarPage';
+import { NewsPage } from '../pages/NewsPage';
 import { SettingsPage } from '../pages/SettingsPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { useTradingWorkspace } from '../hooks/useTradingWorkspace';
@@ -61,6 +62,7 @@ export const AppRoutes: React.FC<AppRoutesProps> = ({ workspace }) => {
                 <Route path="/backtesting" element={<BacktestingPage workspace={workspace} />} />
                 <Route path="/analytics" element={<AnalyticsPage workspace={workspace} />} />
                 <Route path="/calendar" element={<CalendarPage workspace={workspace} />} />
+                <Route path="/news" element={<NewsPage workspace={workspace} />} />
                 <Route path="/settings" element={<SettingsPage workspace={workspace} />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

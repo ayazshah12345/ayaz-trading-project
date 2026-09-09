@@ -6,10 +6,11 @@ import {
   ExternalLink,
   RefreshCw,
   Newspaper,
-  Globe,
-  BarChart2,
   AlertOctagon,
   TrendingUp,
+  MessageSquare,
+  Zap,
+  ShieldCheck,
 } from 'lucide-react';
 import { useTradingWorkspace } from '../hooks/useTradingWorkspace';
 import {
@@ -20,9 +21,6 @@ import {
   CURRENCY_FLAGS,
 } from '../services/forexFactoryService';
 import { ForexFactoryCalendar } from '../components/news/ForexFactoryCalendar';
-import { TradingViewNewsWidget } from '../components/news/TradingViewNewsWidget';
-import { TradingViewCalendarWidget } from '../components/news/TradingViewCalendarWidget';
-import { ForexFactoryWebPortal } from '../components/news/ForexFactoryWebPortal';
 import { LoadingState } from '../components/common/LoadingState';
 
 interface NewsPageProps {
@@ -34,9 +32,6 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [source, setSource] = useState<'live' | 'proxy' | 'fallback'>('live');
   const [lastUpdated, setLastUpdated] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<
-    'forexfactory' | 'daily_news' | 'portal' | 'tv_calendar'
-  >('forexfactory');
 
   const loadEvents = async () => {
     setIsLoading(true);
@@ -57,7 +52,37 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
   }, []);
 
   const summary = computeForexFactorySummary(events);
-  const theme = workspace.isDarkMode ? 'dark' : 'light';
+
+  const officialShortcuts = [
+    {
+      title: 'Forex Factory Calendar',
+      desc: 'Official economic release calendar & forecasts',
+      url: 'https://www.forexfactory.com/calendar',
+      icon: Calendar,
+      tag: 'Time Calendar',
+    },
+    {
+      title: 'Forex Factory News',
+      desc: 'Breaking global macro headlines & central banks',
+      url: 'https://www.forexfactory.com/news',
+      icon: Newspaper,
+      tag: 'Daily News',
+    },
+    {
+      title: 'Live Market Trades',
+      desc: 'Real-time trader positioning & live execution sentiment',
+      url: 'https://www.forexfactory.com/trades',
+      icon: TrendingUp,
+      tag: 'Live Sentiment',
+    },
+    {
+      title: 'Trader Forums',
+      desc: 'Trading strategy discussions & community market analysis',
+      url: 'https://www.forexfactory.com/forum',
+      icon: MessageSquare,
+      tag: 'Discussion',
+    },
+  ];
 
   return (
     <div className="space-y-6">
@@ -67,19 +92,18 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
           <div className="flex items-center space-x-2.5">
             <h1 className="text-xl sm:text-2xl font-extrabold theme-text-primary flex items-center space-x-2">
               <Newspaper className="text-amber-500" />
-              <span>Market News & Forex Factory Calendar</span>
+              <span>Forex Factory News & Economic Calendar</span>
             </h1>
             <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40">
               Live Feed
             </span>
           </div>
           <p className="text-xs theme-text-secondary mt-1 font-medium">
-            Forex Factory economic news time calendars, high-impact volatility alerts, and daily market
-            intelligence.
+            Forex Factory economic news time calendars, high-impact volatility releases, and monthly market intelligence.
           </p>
         </div>
 
-        {/* Action Buttons */}
+        {/* Header Actions */}
         <div className="flex items-center space-x-2 shrink-0">
           <button
             onClick={loadEvents}
@@ -103,7 +127,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
         </div>
       </div>
 
-      {/* High Volatility Event Banner (if imminent within 2 hours) */}
+      {/* High Volatility Event Alert Banner (if imminent within 2 hours) */}
       {summary.nextHighImpactEvent &&
         formatEventCountdown(summary.nextHighImpactEvent.date).isImminent && (
           <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-rose-950/40 via-rose-900/20 to-amber-950/30 border border-rose-500/50 text-rose-300 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-pulse">
@@ -129,12 +153,6 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
                   {formatEventCountdown(summary.nextHighImpactEvent.date).label}
                 </div>
               </div>
-              <button
-                onClick={() => setActiveTab('forexfactory')}
-                className="px-3 py-1.5 rounded-lg bg-rose-500 text-white font-bold text-xs hover:bg-rose-600 transition"
-              >
-                Inspect Event
-              </button>
             </div>
           </div>
         )}
@@ -208,79 +226,54 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
         </div>
       </div>
 
-      {/* Tabs Navigation */}
-      <div className="flex items-center space-x-1.5 sm:space-x-2 border-b border-[var(--border-color)] overflow-x-auto pb-1">
-        <button
-          onClick={() => setActiveTab('forexfactory')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
-            activeTab === 'forexfactory'
-              ? 'border-amber-500 text-amber-500 bg-amber-500/10'
-              : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
-          }`}
-        >
-          <Calendar size={14} />
-          <span>Forex Factory Calendar & All Month News</span>
-          <span className="px-1.5 py-0.2 rounded text-[10px] bg-amber-500/20 text-amber-400 font-mono">
-            LIVE
-          </span>
-        </button>
+      {/* Official Forex Factory Quick Launch Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {officialShortcuts.map(item => {
+          const Icon = item.icon;
+          return (
+            <a
+              key={item.title}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-amber-500/50 hover:bg-[var(--bg-card-hover)] transition flex flex-col justify-between group shadow-xs cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="p-2 rounded-lg bg-[var(--bg-subpanel)] text-amber-400 border border-[var(--border-color)]">
+                    <Icon size={16} />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">
+                    {item.tag}
+                  </span>
+                </div>
+                <h4 className="text-xs font-bold theme-text-primary group-hover:text-amber-400 transition">
+                  {item.title}
+                </h4>
+                <p className="text-[11px] theme-text-secondary mt-1 line-clamp-2 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
 
-        <button
-          onClick={() => setActiveTab('daily_news')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
-            activeTab === 'daily_news'
-              ? 'border-amber-500 text-amber-500 bg-amber-500/10'
-              : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
-          }`}
-        >
-          <Newspaper size={14} />
-          <span>Market Daily News Feed</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('portal')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
-            activeTab === 'portal'
-              ? 'border-amber-500 text-amber-500 bg-amber-500/10'
-              : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
-          }`}
-        >
-          <Globe size={14} />
-          <span>Forex Factory Official Portal</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('tv_calendar')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
-            activeTab === 'tv_calendar'
-              ? 'border-amber-500 text-amber-500 bg-amber-500/10'
-              : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
-          }`}
-        >
-          <BarChart2 size={14} />
-          <span>Macro Economic Events</span>
-        </button>
+              <div className="flex items-center justify-between pt-3 mt-2 border-t border-[var(--border-color)]/60 text-[11px]">
+                <span className="text-amber-400 font-bold inline-flex items-center space-x-1">
+                  <span>Open Official</span>
+                  <ExternalLink size={12} />
+                </span>
+                <span className="font-mono text-[10px] theme-text-secondary">ForexFactory.com</span>
+              </div>
+            </a>
+          );
+        })}
       </div>
 
-      {/* Tab Content Display */}
+      {/* Main Forex Factory Calendar & Month News */}
       {isLoading && events.length === 0 ? (
         <div className="py-20 flex justify-center">
           <LoadingState message="Connecting to Forex Factory Live Feed..." />
         </div>
       ) : (
-        <div>
-          {activeTab === 'forexfactory' && (
-            <ForexFactoryCalendar events={events} isDarkMode={workspace.isDarkMode} />
-          )}
-
-          {activeTab === 'daily_news' && <TradingViewNewsWidget theme={theme} height={700} />}
-
-          {activeTab === 'portal' && <ForexFactoryWebPortal />}
-
-          {activeTab === 'tv_calendar' && (
-            <TradingViewCalendarWidget theme={theme} height={700} />
-          )}
-        </div>
+        <ForexFactoryCalendar events={events} isDarkMode={workspace.isDarkMode} />
       )}
 
       {/* Footer Info */}

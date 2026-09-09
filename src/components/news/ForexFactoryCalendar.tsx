@@ -218,15 +218,15 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
         );
       case 'Medium':
         return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5" />
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 border border-orange-500/40 shadow-xs shadow-orange-500/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 mr-1.5" />
             Medium
           </span>
         );
       case 'Low':
         return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium uppercase tracking-wider bg-yellow-500/15 text-yellow-400 border border-yellow-500/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 mr-1.5" />
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-xs shadow-emerald-500/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5" />
             Low
           </span>
         );
@@ -238,7 +238,8 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
         );
       default:
         return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium text-slate-400 bg-slate-500/10">
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5" />
             Low
           </span>
         );
@@ -353,11 +354,15 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               <div className="flex items-center space-x-3 text-[11px] font-mono">
                 <span className="flex items-center space-x-1">
                   <span className="w-2 h-2 rounded-full bg-rose-500" />
-                  <span className="text-rose-400">High Impact</span>
+                  <span className="text-rose-400">High</span>
                 </span>
                 <span className="flex items-center space-x-1">
-                  <span className="w-2 h-2 rounded-full bg-amber-500" />
-                  <span className="text-amber-400">Medium</span>
+                  <span className="w-2 h-2 rounded-full bg-orange-500" />
+                  <span className="text-orange-400">Medium</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="text-emerald-400">Low</span>
                 </span>
               </div>
             </div>
@@ -419,8 +424,14 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
                         )}
                         {dayStats.med > 0 && (
                           <span
-                            className="w-2 h-2 rounded-full bg-amber-500 shrink-0"
-                            title={`${dayStats.med} Medium Impact`}
+                            className="w-2 h-2 rounded-full bg-orange-500 shrink-0"
+                            title={`${dayStats.med} Medium Impact (Orange)`}
+                          />
+                        )}
+                        {dayStats.low > 0 && (
+                          <span
+                            className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"
+                            title={`${dayStats.low} Low Impact (Green)`}
                           />
                         )}
                         <span className="text-[10px] font-mono theme-text-secondary">
@@ -493,8 +504,8 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               onClick={() => setSelectedImpact('Medium')}
               className={`px-2.5 py-1 rounded text-xs font-bold transition border ${
                 selectedImpact === 'Medium'
-                  ? 'bg-amber-500/20 text-amber-400 border-amber-500'
-                  : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] text-amber-400/80 hover:text-amber-400'
+                  ? 'bg-orange-500/20 text-orange-400 border-orange-500 shadow-xs'
+                  : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] text-orange-400/80 hover:text-orange-400'
               }`}
             >
               Medium
@@ -503,8 +514,8 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               onClick={() => setSelectedImpact('Low')}
               className={`px-2.5 py-1 rounded text-xs font-bold transition border ${
                 selectedImpact === 'Low'
-                  ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500'
-                  : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] text-yellow-400/80 hover:text-yellow-400'
+                  ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500 shadow-xs'
+                  : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] text-emerald-400/80 hover:text-emerald-400'
               }`}
             >
               Low

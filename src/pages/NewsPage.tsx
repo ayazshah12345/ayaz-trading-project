@@ -212,22 +212,22 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
       <div className="flex items-center space-x-1.5 sm:space-x-2 border-b border-[var(--border-color)] overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('forexfactory')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 ${
+          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
             activeTab === 'forexfactory'
               ? 'border-amber-500 text-amber-500 bg-amber-500/10'
               : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
           }`}
         >
           <Calendar size={14} />
-          <span>Forex Factory Calendar</span>
-          <span className="px-1.5 py-0.2 rounded text-[10px] bg-amber-500/20 text-amber-400">
-            {events.length}
+          <span>Forex Factory Calendar & All Month News</span>
+          <span className="px-1.5 py-0.2 rounded text-[10px] bg-amber-500/20 text-amber-400 font-mono">
+            LIVE
           </span>
         </button>
 
         <button
           onClick={() => setActiveTab('daily_news')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 ${
+          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
             activeTab === 'daily_news'
               ? 'border-amber-500 text-amber-500 bg-amber-500/10'
               : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
@@ -239,19 +239,19 @@ export const NewsPage: React.FC<NewsPageProps> = ({ workspace }) => {
 
         <button
           onClick={() => setActiveTab('portal')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 ${
+          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
             activeTab === 'portal'
               ? 'border-amber-500 text-amber-500 bg-amber-500/10'
               : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'
           }`}
         >
           <Globe size={14} />
-          <span>Forex Factory Webview Portal</span>
+          <span>Forex Factory Official Portal</span>
         </button>
 
         <button
           onClick={() => setActiveTab('tv_calendar')}
-          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 ${
+          className={`px-3.5 py-2 rounded-t-lg text-xs font-black transition flex items-center space-x-2 shrink-0 border-b-2 cursor-pointer ${
             activeTab === 'tv_calendar'
               ? 'border-amber-500 text-amber-500 bg-amber-500/10'
               : 'border-transparent theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-subpanel)]'

@@ -6,18 +6,18 @@ import {
   Newspaper,
   TrendingUp,
   MessageSquare,
-  Maximize2,
-  RefreshCw,
+  Sparkles,
   ShieldCheck,
+  Zap,
 } from 'lucide-react';
+import { TradingViewNewsWidget } from './TradingViewNewsWidget';
 
 export const ForexFactoryWebPortal: React.FC = () => {
-  const [activeUrl, setActiveUrl] = useState<string>('https://www.forexfactory.com/news');
-  const [iframeKey, setIframeKey] = useState<number>(1);
-  const [hasLoaded, setHasLoaded] = useState<boolean>(false);
+  const [activeShortcut, setActiveShortcut] = useState<string>('news');
 
   const portalShortcuts = [
     {
+      id: 'news',
       title: 'Forex Factory News',
       desc: 'Breaking macro headlines, central bank speeches & market insights',
       url: 'https://www.forexfactory.com/news',
@@ -25,6 +25,7 @@ export const ForexFactoryWebPortal: React.FC = () => {
       badge: 'Daily News',
     },
     {
+      id: 'calendar',
       title: 'Forex Factory Calendar',
       desc: 'Official high-impact economic calendar, forecasts and historical records',
       url: 'https://www.forexfactory.com/calendar',
@@ -32,13 +33,15 @@ export const ForexFactoryWebPortal: React.FC = () => {
       badge: 'Time Calendar',
     },
     {
+      id: 'trades',
       title: 'Live Market Trades',
-      desc: 'Real-time positioning & live trade feeds from thousands of verified traders',
+      desc: 'Real-time positioning & live trade feeds from verified traders',
       url: 'https://www.forexfactory.com/trades',
       icon: TrendingUp,
       badge: 'Sentiment',
     },
     {
+      id: 'forum',
       title: 'Trader Forums',
       desc: 'Discussion threads on trading strategies, setups and market bias',
       url: 'https://www.forexfactory.com/forum',
@@ -51,10 +54,7 @@ export const ForexFactoryWebPortal: React.FC = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleRefreshIframe = () => {
-    setHasLoaded(false);
-    setIframeKey(prev => prev + 1);
-  };
+  const selectedItem = portalShortcuts.find(s => s.id === activeShortcut) || portalShortcuts[0];
 
   return (
     <div className="space-y-4">
@@ -62,15 +62,11 @@ export const ForexFactoryWebPortal: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {portalShortcuts.map(item => {
           const Icon = item.icon;
-          const isActive = activeUrl === item.url;
+          const isActive = activeShortcut === item.id;
           return (
             <div
-              key={item.url}
-              onClick={() => {
-                setActiveUrl(item.url);
-                setHasLoaded(false);
-                setIframeKey(prev => prev + 1);
-              }}
+              key={item.id}
+              onClick={() => setActiveShortcut(item.id)}
               className={`p-3.5 rounded-xl border transition cursor-pointer flex flex-col justify-between ${
                 isActive
                   ? 'bg-amber-500/10 border-amber-500 shadow-sm'
@@ -93,106 +89,76 @@ export const ForexFactoryWebPortal: React.FC = () => {
               </div>
 
               <div className="flex items-center justify-between pt-3 mt-2 border-t border-[var(--border-color)]/60 text-[11px]">
-                <span className="font-mono font-bold text-amber-400">
-                  {isActive ? 'Active View' : 'Select View'}
-                </span>
                 <button
+                  type="button"
                   onClick={e => {
                     e.stopPropagation();
                     handleOpenExternal(item.url);
                   }}
-                  className="p-1 rounded hover:bg-[var(--bg-subpanel)] text-slate-400 hover:text-white transition"
-                  title="Open in new window"
+                  className="inline-flex items-center space-x-1 text-amber-400 hover:text-amber-300 font-bold"
                 >
-                  <ExternalLink size={13} />
+                  <span>Launch Official</span>
+                  <ExternalLink size={12} />
                 </button>
+                <span className="font-mono text-[10px] theme-text-secondary">Direct Link</span>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Embedded Portal Webview Bar */}
-      <div className="rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-card)] shadow-md">
-        {/* Browser-style Titlebar */}
-        <div className="px-4 py-2.5 bg-[var(--bg-subpanel)] border-b border-[var(--border-color)] flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center space-x-2">
-            <Globe size={15} className="text-amber-500 shrink-0" />
-            <span className="text-xs font-mono font-bold theme-text-primary truncate max-w-xs sm:max-w-md">
-              {activeUrl}
-            </span>
-            <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-              <ShieldCheck size={11} className="mr-1" />
-              Secure Portal
-            </span>
+      {/* Official Forex Factory Quick-Launch Hero Banner */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-slate-900/90 to-amber-950/40 border border-amber-500/50 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start sm:items-center space-x-3.5">
+          <div className="p-3 rounded-xl bg-amber-500 text-slate-950 font-black shrink-0 shadow-lg">
+            <Zap size={22} />
           </div>
-
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={handleRefreshIframe}
-              className="p-1.5 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] theme-text-secondary hover:theme-text-primary hover:border-amber-500/50 transition text-xs flex items-center space-x-1"
-              title="Reload Frame"
-            >
-              <RefreshCw size={13} />
-              <span className="hidden sm:inline">Reload</span>
-            </button>
-            <button
-              onClick={() => handleOpenExternal(activeUrl)}
-              className="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black text-xs hover:bg-amber-600 transition flex items-center space-x-1.5 shadow-sm"
-              title="Open full page directly on Forex Factory"
-            >
-              <Maximize2 size={13} />
-              <span>Open in New Tab</span>
-              <ExternalLink size={13} />
-            </button>
-          </div>
-        </div>
-
-        {/* Security & Frame Policy Notice */}
-        <div className="px-4 py-2 bg-slate-900/60 border-b border-[var(--border-color)] text-[11px] theme-text-secondary flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-          <span>
-            💡 <strong>Trader Note:</strong> Forex Factory web pages use Cloudflare security. For
-            interactive charting and filters, you can use our built-in{' '}
-            <strong className="text-amber-400">Forex Factory Calendar</strong> tab or click{' '}
-            <strong className="text-white">"Open in New Tab"</strong> above.
-          </span>
-          <a
-            href={activeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-amber-400 font-bold hover:underline shrink-0"
-          >
-            Direct Launch ↗
-          </a>
-        </div>
-
-        {/* Iframe Frame Container */}
-        <div className="relative w-full h-[650px] bg-[#0c1017]">
-          {!hasLoaded && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10 bg-[var(--bg-card)]/90 backdrop-blur-xs space-y-3">
-              <div className="w-10 h-10 rounded-full border-2 border-amber-500 border-t-transparent animate-spin" />
-              <div className="text-xs font-bold theme-text-primary">Loading Forex Factory Portal...</div>
-              <p className="text-[11px] theme-text-secondary max-w-sm">
-                Connecting to Forex Factory secure servers. If your browser blocks external iframe
-                embedding, click "Open in New Tab" to launch instantly.
-              </p>
-              <button
-                onClick={() => handleOpenExternal(activeUrl)}
-                className="px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black text-xs hover:bg-amber-600 transition"
-              >
-                Open Full Forex Factory ↗
-              </button>
+          <div>
+            <div className="flex items-center space-x-2">
+              <span className="text-xs font-black uppercase tracking-wider text-amber-400 font-mono">
+                OFFICIAL PORTAL
+              </span>
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <ShieldCheck size={10} className="mr-1" />
+                Verified Link
+              </span>
             </div>
-          )}
+            <h3 className="text-sm sm:text-base font-extrabold text-white mt-0.5">
+              Open {selectedItem.title} on ForexFactory.com
+            </h3>
+            <p className="text-xs text-slate-300 mt-0.5 max-w-xl">
+              Launch the official Forex Factory portal in an isolated, high-speed tab with full access to
+              breaking economic events, live forum sentiment, and original calendar tables.
+            </p>
+          </div>
+        </div>
 
-          <iframe
-            key={iframeKey}
-            src={activeUrl}
-            title="Forex Factory Web"
-            onLoad={() => setHasLoaded(true)}
-            className="w-full h-full border-0"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-          />
+        <button
+          onClick={() => handleOpenExternal(selectedItem.url)}
+          className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-lg transition flex items-center space-x-2 shrink-0 self-start sm:self-auto cursor-pointer"
+        >
+          <span>Launch {selectedItem.badge} Now</span>
+          <ExternalLink size={15} />
+        </button>
+      </div>
+
+      {/* Embedded Live Market News Feed (Clean & 100% Connected, No Frame Rejection) */}
+      <div className="rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-card)] shadow-md">
+        <div className="px-4 py-2.5 bg-[var(--bg-subpanel)] border-b border-[var(--border-color)] flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Globe size={15} className="text-amber-500" />
+            <span className="text-xs font-mono font-bold theme-text-primary">
+              Live Financial Market Feed & Breaking News
+            </span>
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 font-bold">
+              ● Connected
+            </span>
+          </div>
+          <span className="text-[11px] theme-text-secondary">Real-time Stream</span>
+        </div>
+
+        <div className="p-3">
+          <TradingViewNewsWidget height={600} theme="dark" />
         </div>
       </div>
     </div>

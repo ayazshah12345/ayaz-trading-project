@@ -1,4 +1,4 @@
-// Build: 20260907153755
+// Build: 20260909155500
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -15,6 +15,8 @@ export default defineConfig({
       strategies: 'generateSW',
       includeAssets: ['favicon.svg', 'logo.jpg', 'icon-512.jpg'],
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
         // Cache everything from the build
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,woff2}'],
         // Network-first for navigation (always load latest HTML)

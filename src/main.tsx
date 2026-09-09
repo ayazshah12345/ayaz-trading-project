@@ -9,7 +9,7 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// Register PWA Service Worker
+// Register PWA Service Worker with auto-update
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
@@ -17,12 +17,22 @@ if ('serviceWorker' in navigator) {
       .then((registration) => {
         console.log('[Trading Aura] Service Worker registered:', registration.scope)
 
-        // Check for updates every 60 seconds
-        setInterval(() => registration.update(), 60_000)
+        // Check for updates immediately and periodically
+        registration.update()
+        setInterval(() => registration.update(), 15_000)
       })
       .catch((err) => {
         console.warn('[Trading Aura] Service Worker registration failed:', err)
       })
+  })
+
+  // When a new service worker takes over, reload the window automatically
+  let refreshing = false
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      refreshing = true
+      window.location.reload()
+    }
   })
 }
 

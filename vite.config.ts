@@ -13,7 +13,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       // Generate a service worker automatically (caches all build output)
       strategies: 'generateSW',
-      includeAssets: ['favicon.svg', 'logo.jpg', 'icon-512.jpg'],
+      includeAssets: ['favicon.svg', 'favicon.png', 'logo.png', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'],
       workbox: {
         skipWaiting: true,
         clientsClaim: true,
@@ -62,10 +62,22 @@ export default defineConfig({
         categories: ['finance', 'business', 'productivity'],
         icons: [
           {
-            src: '/icon-512.jpg',
+            src: '/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: '/icon-512.png',
             sizes: '512x512',
-            type: 'image/jpeg',
-            purpose: 'any maskable',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: '/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
           },
         ],
         shortcuts: [
@@ -73,7 +85,7 @@ export default defineConfig({
             name: 'Dashboard',
             short_name: 'Dashboard',
             url: '/dashboard',
-            icons: [{ src: '/icon-512.jpg', sizes: '512x512' }],
+            icons: [{ src: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
           },
         ],
       },

@@ -1,34 +1,41 @@
-// Trading Aura Service Worker
-const CACHE_NAME = 'trading-aura-v1';
-const STATIC_CACHE = 'trading-aura-static-v1';
-const DYNAMIC_CACHE = 'trading-aura-dynamic-v1';
+// Black FX Trading Platform Service Worker
+const CACHE_NAME = 'blackfx-pwa-v2';
+const STATIC_CACHE = 'blackfx-static-v2';
+const DYNAMIC_CACHE = 'blackfx-dynamic-v2';
 
-// Assets to pre-cache for offline support
+// Assets to pre-cache for offline support & immediate launch
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon-512.jpg',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/favicon.png',
+  '/apple-touch-icon.png',
+  '/logo.png',
 ];
 
 // Install: precache static assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
-      console.log('[SW] Pre-caching static assets');
+      console.log('[SW] Pre-caching Black FX static assets');
       return cache.addAll(PRECACHE_ASSETS);
     }).then(() => self.skipWaiting())
   );
 });
 
-// Activate: clean up old caches
+// Activate: clean up all old caches (including legacy trading-aura caches)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
           .filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
-          .map((name) => caches.delete(name))
+          .map((name) => {
+            console.log('[SW] Purging stale cache:', name);
+            return caches.delete(name);
+          })
       );
     }).then(() => self.clients.claim())
   );
@@ -102,7 +109,7 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(data.title || 'Black FX', {
       body: data.body || 'New notification',
-      icon: '/icon-512.jpg',
+      icon: '/icon-512.png',
       badge: '/icon-192.png',
       data: { url: data.url || '/' },
     })

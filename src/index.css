@@ -189,10 +189,21 @@ html[data-theme="dark"] .terminal-card {
   100% { transform: translateX(-50%); }
 }
 
+@keyframes chart-seamless-loop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-432px); }
+}
+
 .animate-chart-stream {
   display: flex;
   width: max-content;
   animation: chart-loop 30s linear infinite;
+}
+
+.animate-chart-seamless {
+  display: flex;
+  width: max-content;
+  animation: chart-seamless-loop 20s linear infinite;
 }
 
 @keyframes pulse-laser {

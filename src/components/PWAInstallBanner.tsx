@@ -81,18 +81,19 @@ export function PWAInstallBanner() {
       `}</style>
 
       {/* Icon */}
-      <div style={{
-        width: 44,
-        height: 44,
-        borderRadius: 10,
-        background: 'linear-gradient(135deg, #ffd700, #22c55e)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-      }}>
-        <Smartphone size={22} color="#0d0f1a" />
-      </div>
+      <img
+        src="/icon-192.png"
+        alt="Black FX Logo"
+        style={{
+          width: 44,
+          height: 44,
+          borderRadius: 10,
+          objectFit: 'contain',
+          background: '#07080c',
+          border: '1px solid rgba(245, 158, 11, 0.4)',
+          flexShrink: 0,
+        }}
+      />
 
       {/* Text */}
       <div style={{ flex: 1, minWidth: 0 }}>

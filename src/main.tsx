@@ -39,16 +39,23 @@ if ('serviceWorker' in navigator) {
 // PWA install prompt handler — store it for use in UI
 let deferredInstallPrompt: BeforeInstallPromptEvent | null = null
 
-interface BeforeInstallPromptEvent extends Event {
+export interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[]
   readonly userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
   prompt(): Promise<void>
+}
+
+declare global {
+  interface Window {
+    deferredInstallPrompt?: BeforeInstallPromptEvent | null
+  }
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault()
   deferredInstallPrompt = e as BeforeInstallPromptEvent
+  window.deferredInstallPrompt = e as BeforeInstallPromptEvent
 
   // Dispatch a custom event so any component can show the install button
   window.dispatchEvent(new CustomEvent('pwa-installable', { detail: { prompt: e } }))
@@ -57,6 +64,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 window.addEventListener('appinstalled', () => {
   console.log('[Black FX] App installed as PWA ✓')
   deferredInstallPrompt = null
+  window.deferredInstallPrompt = null
 })
 
 export { deferredInstallPrompt }

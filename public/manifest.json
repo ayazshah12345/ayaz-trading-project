@@ -2,11 +2,12 @@
   "name": "Black FX — The Traders Backtesting and Journal Platform",
   "short_name": "Black FX",
   "description": "Black FX — The ultimate backtesting and journal platform for professional traders.",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0d0f1a",
-  "theme_color": "#0d0f1a",
-  "orientation": "portrait-primary",
+  "background_color": "#060813",
+  "theme_color": "#060813",
+  "orientation": "any",
   "scope": "/",
   "lang": "en",
   "categories": ["finance", "business", "productivity"],
@@ -22,15 +23,42 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "/ai_trading_terminal.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Black FX Professional Trading Terminal"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Dashboard",
       "short_name": "Dashboard",
-      "description": "Open the trading dashboard",
+      "description": "Open trading dashboard",
       "url": "/dashboard",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Trade Journal",
+      "short_name": "Journal",
+      "description": "Open Trade Journal",
+      "url": "/trades",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ]

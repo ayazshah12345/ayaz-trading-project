@@ -83,7 +83,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
           <select
             value={selectedSymbol}
             onChange={e => handleSymbolChange(e.target.value)}
-            className="bg-[var(--bg-subpanel)] theme-text-primary font-extrabold font-mono-numeric text-xs sm:text-sm px-3 py-1.5 rounded-lg border border-[var(--border-color)] focus:outline-none focus:border-amber-500 cursor-pointer shadow-xs"
+            className="bg-[var(--bg-subpanel)] theme-text-primary font-extrabold font-mono-numeric text-xs sm:text-sm px-3 py-1.5 rounded-lg border border-[var(--border-color)] focus:outline-none focus:border-cyan-500 cursor-pointer shadow-xs"
           >
             {markets.map(m => (
               <option key={m.symbol} value={m.symbol} className="bg-[var(--bg-card)] theme-text-primary font-bold">
@@ -97,7 +97,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
               onClick={() => onToggleFavorite(activeMarket.symbol)}
               className={`p-1.5 rounded-lg border transition ${
                 activeMarket.isFavorite
-                  ? 'text-amber-500 bg-amber-500/10 border-amber-500/30'
+                  ? 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30'
                   : 'theme-text-secondary border-[var(--border-color)] hover:bg-[var(--bg-card-hover)]'
               }`}
               title="Favorite Symbol"
@@ -107,7 +107,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
           )}
 
           <div className="hidden sm:flex items-center space-x-2 font-mono-numeric text-xs">
-            <span className="text-amber-500 font-black text-sm sm:text-base">${activeMarket.price}</span>
+            <span className="text-cyan-400 font-black text-sm sm:text-base">${activeMarket.price}</span>
             <span
               className={`font-bold px-2 py-0.5 rounded text-[11px] ${
                 activeMarket.change24h >= 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-500 border border-rose-500/20'
@@ -126,7 +126,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
               onClick={() => setTimeframe(tf)}
               className={`px-2.5 py-1 text-xs font-mono-numeric rounded-md font-extrabold transition ${
                 timeframe === tf
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                   : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
               }`}
             >
@@ -150,7 +150,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
 
           <button
             onClick={toggleFullscreen}
-            className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-extrabold rounded-lg shadow-md transition cursor-pointer"
+            className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-extrabold rounded-lg shadow-md transition cursor-pointer"
             title={isFullscreen ? 'Exit Full Screen' : 'Full Screen View'}
           >
             {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
@@ -179,7 +179,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
             <div>
               <h4 className="text-xs font-extrabold theme-text-primary uppercase tracking-wider mb-3 flex items-center justify-between border-b border-[var(--border-color)] pb-2">
                 <span>Market Details</span>
-                <span className="text-[11px] text-amber-500 font-mono-numeric font-extrabold">{activeMarket.symbol}</span>
+                <span className="text-[11px] text-cyan-400 font-mono-numeric font-extrabold">{activeMarket.symbol}</span>
               </h4>
               <div className="space-y-2 text-xs font-mono-numeric">
                 <div className="flex justify-between theme-text-secondary">
@@ -196,7 +196,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
                 </div>
                 <div className="flex justify-between theme-text-secondary">
                   <span>24H Volume</span>
-                  <span className="text-indigo-500 font-bold">{activeMarket.volume24h}</span>
+                  <span className="text-cyan-400 font-bold">{activeMarket.volume24h}</span>
                 </div>
                 <div className="flex justify-between theme-text-secondary">
                   <span>Category</span>
@@ -218,12 +218,12 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
                     onClick={() => handleSymbolChange(m.symbol)}
                     className={`w-full flex items-center justify-between p-2.5 rounded-lg text-xs transition font-mono-numeric ${
                       m.symbol === activeMarket.symbol
-                        ? 'bg-amber-500/10 border border-amber-500/40 theme-text-primary font-extrabold'
+                        ? 'bg-cyan-500/10 border border-cyan-500/40 theme-text-primary font-extrabold'
                         : 'bg-[var(--bg-subpanel)] border border-[var(--border-color)] hover:bg-[var(--bg-card-hover)] theme-text-secondary'
                     }`}
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="font-extrabold text-amber-500">{m.symbol}</span>
+                      <span className="font-extrabold text-cyan-400">{m.symbol}</span>
                     </div>
                     <div className="text-right">
                       <div className="theme-text-primary font-bold">${m.price}</div>

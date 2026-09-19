@@ -92,7 +92,7 @@ export const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({
           theme,
           style: '1', // Candlestick style
           locale: 'en',
-          toolbar_bg: theme === 'light' ? '#ffffff' : '#0b0e14',
+          toolbar_bg: theme === 'light' ? '#ffffff' : '#060813',
           enable_publishing: false,
           allow_symbol_change: true,
           container_id: containerId.current,
@@ -103,11 +103,11 @@ export const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({
           studies: [],
           overrides: {
             'mainSeriesProperties.style': 1,
-            'paneProperties.background': theme === 'light' ? '#ffffff' : '#0b0e14',
-            'paneProperties.vertGridProperties.color': theme === 'light' ? '#f1f5f9' : '#1e293b',
-            'paneProperties.horzGridProperties.color': theme === 'light' ? '#f1f5f9' : '#1e293b',
+            'paneProperties.background': theme === 'light' ? '#ffffff' : '#060813',
+            'paneProperties.vertGridProperties.color': theme === 'light' ? '#f1f5f9' : '#141d33',
+            'paneProperties.horzGridProperties.color': theme === 'light' ? '#f1f5f9' : '#141d33',
             'symbolWatermarkProperties.transparency': 90,
-            'scalesProperties.textColor': theme === 'light' ? '#334155' : '#94a3b8',
+            'scalesProperties.textColor': theme === 'light' ? '#334155' : '#38bdf8',
           },
         });
       }

@@ -115,7 +115,7 @@ export const EquityChart: React.FC = () => {
 
       <div className="flex items-center justify-between text-[11px] theme-text-secondary mt-2 font-mono-numeric border-t border-[var(--border-color)] pt-2 font-medium">
         <span>Initial Deposit: $10,000.00</span>
-        <span>Peak Drawdown: <span className="text-amber-500 font-bold">1.8%</span></span>
+        <span>Peak Drawdown: <span className="text-cyan-400 font-bold">1.8%</span></span>
       </div>
     </div>
   );

@@ -17,9 +17,9 @@ interface WinLossChartProps {
 
 export const WinLossChart: React.FC<WinLossChartProps> = ({ wins, losses, breakevens }) => {
   const data = [
-    { name: 'Wins', count: wins, color: '#00e676' },
-    { name: 'Losses', count: losses, color: '#ff5252' },
-    { name: 'Breakeven', count: breakevens, color: '#f59e0b' },
+    { name: 'Wins', count: wins, color: '#10b981' },
+    { name: 'Losses', count: losses, color: '#f43f5e' },
+    { name: 'Breakeven', count: breakevens, color: '#38bdf8' },
   ];
 
   const total = wins + losses + breakevens || 1;
@@ -43,8 +43,8 @@ export const WinLossChart: React.FC<WinLossChartProps> = ({ wins, losses, breake
             <YAxis stroke="#64748b" fontSize={11} fontFamily="JetBrains Mono" />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#131722',
-                borderColor: '#2a2e39',
+                backgroundColor: 'var(--bg-card)',
+                borderColor: 'var(--border-color)',
                 borderRadius: '6px',
                 color: '#f8fafc',
                 fontSize: '12px',
@@ -59,7 +59,7 @@ export const WinLossChart: React.FC<WinLossChartProps> = ({ wins, losses, breake
         </ResponsiveContainer>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono-numeric border-t border-[#2a2e39] pt-2">
+      <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono-numeric border-t border-[var(--border-color)] pt-2">
         <div>
           <div className="text-emerald-400 font-bold text-sm">{wins}</div>
           <div className="text-slate-400 text-[10px]">Winning Trades</div>
@@ -69,7 +69,7 @@ export const WinLossChart: React.FC<WinLossChartProps> = ({ wins, losses, breake
           <div className="text-slate-400 text-[10px]">Losing Trades</div>
         </div>
         <div>
-          <div className="text-amber-400 font-bold text-sm">{breakevens}</div>
+          <div className="text-cyan-400 font-bold text-sm">{breakevens}</div>
           <div className="text-slate-400 text-[10px]">Breakevens</div>
         </div>
       </div>

@@ -98,12 +98,12 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
   ];
 
   return (
-    <div className="relative w-full bg-[#131722] border border-[#2a2e39] rounded-md overflow-hidden p-4 select-none">
+    <div className="relative w-full bg-[#060813] border border-[#1a233b] rounded-md overflow-hidden p-4 select-none">
       {/* Top Candle OHLC Header */}
-      <div className="flex items-center justify-between mb-3 text-xs font-mono-numeric border-b border-[#2a2e39] pb-2 flex-wrap gap-2">
+      <div className="flex items-center justify-between mb-3 text-xs font-mono-numeric border-b border-[#1a233b] pb-2 flex-wrap gap-2">
         <div className="flex items-center space-x-3">
           <span className="font-bold text-slate-100 text-sm">{symbol}</span>
-          <span className="text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 text-[11px]">
+          <span className="text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 text-[11px]">
             {timeframe}
           </span>
           <span className="text-slate-400">Time: <span className="text-slate-200">{activeCandle.time}</span></span>
@@ -115,7 +115,7 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
           <span>C: <span className={activeCandle.close >= activeCandle.open ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold'}>
             {activeCandle.close.toFixed(2)}
           </span></span>
-          <span>Vol: <span className="text-indigo-300">{activeCandle.volume}</span></span>
+          <span>Vol: <span className="text-cyan-400">{activeCandle.volume}</span></span>
         </div>
       </div>
 
@@ -128,7 +128,7 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
         >
           {/* Grid lines */}
           {showGrid && (
-            <g stroke="#2a2e39" strokeWidth="0.5" strokeDasharray="3 3">
+            <g stroke="#1a233b" strokeWidth="0.5" strokeDasharray="3 3">
               {priceTicks.map((price, i) => (
                 <line key={i} x1="0" y1={getY(price)} x2="740" y2={getY(price)} />
               ))}
@@ -198,8 +198,8 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
 
           {/* Y-Axis Price Label Sidebar */}
           <g transform="translate(740, 0)">
-            <rect x="0" y="0" width="60" height={chartHeight} fill="#0b0e14" />
-            <line x1="0" y1="0" x2="0" y2={chartHeight} stroke="#2a2e39" strokeWidth="1" />
+            <rect x="0" y="0" width="60" height={chartHeight} fill="#060813" />
+            <line x1="0" y1="0" x2="0" y2={chartHeight} stroke="#1a233b" strokeWidth="1" />
             {priceTicks.map((price, i) => (
               <text
                 key={i}
@@ -217,9 +217,9 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
       </div>
 
       {/* TradingView Phase 2 Badge Notice */}
-      <div className="mt-2 pt-2 border-t border-[#2a2e39] flex items-center justify-between text-[11px] text-slate-400 font-mono-numeric">
+      <div className="mt-2 pt-2 border-t border-[#1a233b] flex items-center justify-between text-[11px] text-slate-400 font-mono-numeric">
         <span className="flex items-center space-x-1">
-          <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+          <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
           <span>Chart Container: Interactive Canvas Mode</span>
         </span>
         <span className="text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">

@@ -97,11 +97,37 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         if (choiceResult?.outcome === 'accepted') {
           setIsInstalled(true);
         }
+        return;
       } catch (e) {
-        setShowInstallGuide(true);
+        console.warn('Native prompt error, initiating direct download', e);
       }
-    } else {
-      setShowInstallGuide(true);
+    }
+
+    // Direct Instant Download of Black FX desktop app launcher (No Guide Redirect)
+    try {
+      const shortcutContent = `[InternetShortcut]
+URL=${window.location.origin}/
+IconIndex=0
+IconFile=${window.location.origin}/favicon.ico
+HotKey=0
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,0
+[Desktop]
+AppId=BlackFX.TradingPlatform
+`;
+      const blob = new Blob([shortcutContent], { type: 'application/octet-stream' });
+      const downloadUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = 'Black-FX.url';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(downloadUrl);
+
+      setSuccessMessage('Black FX App downloaded! Check your Downloads folder to launch anytime.');
+    } catch (err) {
+      console.error('Download error', err);
     }
   };
 

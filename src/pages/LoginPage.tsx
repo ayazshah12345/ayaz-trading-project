@@ -312,9 +312,115 @@ exit
     <div className="min-h-screen w-full bg-[#060813] text-slate-100 flex flex-col font-sans overflow-x-hidden selection:bg-cyan-500 selection:text-black relative">
       
       {/* ================= BACKGROUND GLOWS & AMBIENT AURAS (FREE-STYLE, ENTIRE PAGE) ================= */}
-      <div className="absolute top-0 right-1/4 w-[750px] h-[750px] rounded-full bg-gradient-to-br from-blue-600/20 via-cyan-500/15 to-transparent blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/3 left-[-100px] w-[600px] h-[600px] rounded-full bg-blue-700/10 blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-cyan-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[750px] h-[750px] rounded-full bg-gradient-to-br from-blue-600/20 via-cyan-500/15 to-transparent blur-[160px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 left-[-100px] w-[600px] h-[600px] rounded-full bg-blue-700/10 blur-[180px] pointer-events-none z-0" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-cyan-600/10 blur-[150px] pointer-events-none z-0" />
+
+      {/* ================= FLOATING CELESTIAL SKY (UPPER ATMOSPHERE & NEBULA HORIZON) ================= */}
+      <div className="absolute inset-x-0 top-0 h-[680px] overflow-hidden pointer-events-none z-0 select-none">
+        {/* Soft Drifting Nebula Mists */}
+        <div className="absolute -top-24 left-1/4 w-[700px] h-[450px] rounded-full bg-gradient-to-b from-blue-600/18 via-cyan-400/12 to-transparent blur-[120px] animate-sky-slow" />
+        <div className="absolute top-10 right-10 w-[600px] h-[400px] rounded-full bg-gradient-to-bl from-cyan-500/15 via-indigo-600/10 to-transparent blur-[110px] animate-sky-reverse" />
+        <div className="absolute -top-10 left-[-50px] w-[500px] h-[350px] rounded-full bg-blue-500/12 blur-[100px] animate-sky-slow" />
+        
+        {/* Aurora Shimmer Veil across upper sky */}
+        <div className="absolute top-0 inset-x-0 h-80 bg-gradient-to-b from-cyan-500/8 via-blue-600/5 to-transparent blur-3xl animate-sky-shimmer" />
+
+        {/* Twinkling Celestial Stars */}
+        <div className="absolute inset-0">
+          <div className="absolute top-16 left-[12%] w-1.5 h-1.5 rounded-full bg-cyan-200 animate-star-twinkle shadow-[0_0_8px_#38bdf8]" style={{ animationDelay: '0.2s' }} />
+          <div className="absolute top-28 left-[28%] w-1 h-1 rounded-full bg-sky-100 animate-star-twinkle shadow-[0_0_6px_#0ea5e9]" style={{ animationDelay: '1.4s' }} />
+          <div className="absolute top-12 left-[45%] w-1.5 h-1.5 rounded-full bg-white animate-star-twinkle shadow-[0_0_10px_#ffffff]" style={{ animationDelay: '0.8s' }} />
+          <div className="absolute top-36 left-[62%] w-1 h-1 rounded-full bg-cyan-300 animate-star-twinkle shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '2.1s' }} />
+          <div className="absolute top-20 left-[78%] w-1.5 h-1.5 rounded-full bg-sky-200 animate-star-twinkle shadow-[0_0_8px_#38bdf8]" style={{ animationDelay: '1.1s' }} />
+          <div className="absolute top-44 left-[88%] w-1 h-1 rounded-full bg-cyan-100 animate-star-twinkle shadow-[0_0_6px_#0ea5e9]" style={{ animationDelay: '2.8s' }} />
+          <div className="absolute top-60 left-[18%] w-1 h-1 rounded-full bg-blue-200 animate-star-twinkle shadow-[0_0_6px_#60a5fa]" style={{ animationDelay: '3.2s' }} />
+          <div className="absolute top-52 left-[54%] w-1.5 h-1.5 rounded-full bg-emerald-200 animate-star-twinkle shadow-[0_0_8px_#34d399]" style={{ animationDelay: '1.9s' }} />
+        </div>
+      </div>
+
+      {/* ================= LIVELY LIQUID MOVING WATER (BOTTOM / HORIZON) ================= */}
+      <div className="absolute inset-x-0 bottom-0 h-[380px] sm:h-[460px] overflow-hidden pointer-events-none z-0 select-none">
+        
+        {/* Soft Liquid Atmospheric Caustic Aura */}
+        <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-blue-950/40 via-cyan-950/20 to-transparent blur-2xl" />
+
+        {/* Liquid Wave Layer 1 (Deep Rolling Ocean Swell - Slower) */}
+        <svg
+          className="absolute bottom-0 w-[200%] h-[240px] sm:h-[280px] opacity-45 animate-liquid-2"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="liquidDeepWave" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#0284c7" stopOpacity="0.45" />
+              <stop offset="50%" stopColor="#1e3a8a" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#060813" stopOpacity="0.9" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#liquidDeepWave)"
+            d="M0,192L60,181.3C120,171,240,149,360,160C480,171,600,213,720,208C840,203,960,149,1080,144C1200,139,1320,181,1380,202.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+          />
+        </svg>
+
+        {/* Liquid Wave Layer 2 (Lively Cyan Liquid Swell - Medium) */}
+        <svg
+          className="absolute bottom-0 w-[200%] h-[200px] sm:h-[240px] opacity-60 animate-liquid-1"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="liquidCyanWave" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.5" />
+              <stop offset="40%" stopColor="#0ea5e9" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#060813" stopOpacity="0.95" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#liquidCyanWave)"
+            d="M0,96L48,112C96,128,192,160,288,181.3C384,203,480,213,576,192C672,171,768,117,864,117.3C960,117,1056,171,1152,186.7C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          />
+        </svg>
+
+        {/* Liquid Wave Layer 3 (Glowing Specular Liquid Surface Crest - Lively & Fast) */}
+        <svg
+          className="absolute bottom-0 w-[200%] h-[160px] sm:h-[190px] opacity-85 animate-liquid-3"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="liquidSurfaceCrest" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.75" />
+              <stop offset="25%" stopColor="#0ea5e9" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#060813" stopOpacity="0.95" />
+            </linearGradient>
+            <linearGradient id="crestGleam" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#38bdf8" />
+              <stop offset="35%" stopColor="#bae6fd" />
+              <stop offset="70%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#34d399" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#liquidSurfaceCrest)"
+            stroke="url(#crestGleam)"
+            strokeWidth="2.5"
+            filter="drop-shadow(0 0 12px rgba(56,189,248,0.85))"
+            d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,181.3C672,192,768,160,864,138.7C960,117,1056,107,1152,122.7C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          />
+        </svg>
+
+        {/* Floating Bioluminescent Water Droplets */}
+        <div className="absolute inset-0">
+          <div className="absolute bottom-24 left-[15%] w-2 h-2 rounded-full bg-cyan-300 animate-float-slow shadow-[0_0_10px_#38bdf8]" />
+          <div className="absolute bottom-36 left-[35%] w-1.5 h-1.5 rounded-full bg-sky-200 animate-float-reverse shadow-[0_0_8px_#0ea5e9]" />
+          <div className="absolute bottom-16 left-[58%] w-2.5 h-2.5 rounded-full bg-cyan-400 animate-float-slow shadow-[0_0_12px_#38bdf8]" />
+          <div className="absolute bottom-28 left-[75%] w-2 h-2 rounded-full bg-emerald-300 animate-float-reverse shadow-[0_0_10px_#34d399]" />
+          <div className="absolute bottom-40 left-[88%] w-1.5 h-1.5 rounded-full bg-sky-300 animate-float-slow shadow-[0_0_8px_#38bdf8]" />
+        </div>
+
+      </div>
 
       {/* ================= TOP CONTINUOUS MOVING TICKER ================= */}
       <div className="w-full bg-[#070a17]/90 border-b border-cyan-500/15 py-2 overflow-hidden whitespace-nowrap shadow-sm z-30 select-none backdrop-blur-md">

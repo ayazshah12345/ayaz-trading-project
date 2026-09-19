@@ -1,7 +1,7 @@
 // Black FX Trading Platform Service Worker
-const CACHE_NAME = 'blackfx-pwa-v2';
-const STATIC_CACHE = 'blackfx-static-v2';
-const DYNAMIC_CACHE = 'blackfx-dynamic-v2';
+const CACHE_NAME = 'blackfx-pwa-v3';
+const STATIC_CACHE = 'blackfx-static-v3';
+const DYNAMIC_CACHE = 'blackfx-dynamic-v3';
 
 // Assets to pre-cache for offline support & immediate launch
 const PRECACHE_ASSETS = [
@@ -11,6 +11,7 @@ const PRECACHE_ASSETS = [
   '/icon-192.png',
   '/icon-512.png',
   '/favicon.png',
+  '/favicon.ico',
   '/apple-touch-icon.png',
   '/logo.png',
 ];

@@ -89,6 +89,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   }, []);
 
   const handleInstallClick = async () => {
+    // 1. Check if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true) {
+      setIsInstalled(true);
+      setSuccessMessage('Black FX is already installed and running as a standalone Windows app! You can find it in your Start Menu.');
+      return;
+    }
+
+    // 2. Trigger native Windows / Chrome / Edge PWA install prompt
     const promptToUse = installPrompt || (window as any).deferredInstallPrompt;
     if (promptToUse) {
       try {
@@ -96,38 +104,91 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         const choiceResult = await promptToUse.userChoice;
         if (choiceResult?.outcome === 'accepted') {
           setIsInstalled(true);
+          setSuccessMessage('Black FX installed successfully! Check your Windows Desktop and Start Menu.');
+          return;
+        } else {
+          setErrorMessage('Installation was cancelled. You can click Install again anytime.');
+          return;
         }
-        return;
       } catch (e) {
-        console.warn('Native prompt error, initiating direct download', e);
+        console.warn('Native prompt invocation error', e);
       }
     }
 
-    // Direct Instant Download of Black FX desktop app launcher (No Guide Redirect)
+    // 3. Automated 1-Click Windows App Installer (.cmd)
     try {
-      const shortcutContent = `[InternetShortcut]
-URL=${window.location.origin}/
-IconIndex=0
-IconFile=${window.location.origin}/favicon.ico
-HotKey=0
-[{000214A0-0000-0000-C000-000000000046}]
-Prop3=19,0
-[Desktop]
-AppId=BlackFX.TradingPlatform
+      const currentOrigin = window.location.origin;
+      const cmdContent = `@echo off
+title Installing Black FX Desktop App...
+echo ========================================================
+echo         BLACK FX - AUTOMATIC WINDOWS INSTALLER
+echo ========================================================
+echo.
+echo Installing Black FX to your Windows Desktop and Start Menu...
+echo.
+
+set "APP_URL=${currentOrigin}"
+
+:: Detect Microsoft Edge or Google Chrome
+set "BROWSER_EXE="
+if exist "%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe" (
+    set "BROWSER_EXE=%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe"
+) else if exist "%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe" (
+    set "BROWSER_EXE=%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe"
+) else if exist "%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe" (
+    set "BROWSER_EXE=%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe"
+) else if exist "%ProgramFiles(x86)%\\Google\\Chrome\\Application\\chrome.exe" (
+    set "BROWSER_EXE=%ProgramFiles(x86)%\\Google\\Chrome\\Application\\chrome.exe"
+) else if exist "%LocalAppData%\\Google\\Chrome\\Application\\chrome.exe" (
+    set "BROWSER_EXE=%LocalAppData%\\Google\\Chrome\\Application\\chrome.exe"
+)
+
+if "%BROWSER_EXE%"=="" (
+    echo Opening Black FX in your default browser...
+    start "" "%APP_URL%"
+    goto finish
+)
+
+:: Automatically Create Windows Desktop and Start Menu Shortcuts
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$ws = New-Object -ComObject WScript.Shell; ^
+   $desktop = [Environment]::GetFolderPath('Desktop'); ^
+   $startMenu = [System.IO.Path]::Combine([Environment]::GetFolderPath('StartMenu'), 'Programs'); ^
+   $s1 = $ws.CreateShortcut([System.IO.Path]::Combine($desktop, 'Black FX.lnk')); ^
+   $s1.TargetPath = '%BROWSER_EXE%'; ^
+   $s1.Arguments = '--app=%APP_URL%'; ^
+   $s1.Description = 'Black FX - The Traders Backtesting and Journal Platform'; ^
+   $s1.Save(); ^
+   $s2 = $ws.CreateShortcut([System.IO.Path]::Combine($startMenu, 'Black FX.lnk')); ^
+   $s2.TargetPath = '%BROWSER_EXE%'; ^
+   $s2.Arguments = '--app=%APP_URL%'; ^
+   $s2.Description = 'Black FX - The Traders Backtesting and Journal Platform'; ^
+   $s2.Save();"
+
+echo.
+echo [SUCCESS] Black FX Desktop App installed successfully!
+echo [SUCCESS] Shortcut created on your Windows Desktop and Start Menu.
+echo.
+echo Launching Black FX standalone app...
+start "" "%BROWSER_EXE%" --app="%APP_URL%"
+
+:finish
+timeout /t 2 >nul
+exit
 `;
-      const blob = new Blob([shortcutContent], { type: 'application/octet-stream' });
+      const blob = new Blob([cmdContent], { type: 'text/plain' });
       const downloadUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = downloadUrl;
-      a.download = 'Black-FX.url';
+      a.download = 'Install-Black-FX.cmd';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(downloadUrl);
 
-      setSuccessMessage('Black FX App downloaded! Check your Downloads folder to launch anytime.');
+      setSuccessMessage('Installer downloaded! Click "Install-Black-FX.cmd" to automatically install Black FX onto your Windows Desktop & Start Menu, or click the Install icon (🖥️ ⬇️) in your browser address bar.');
     } catch (err) {
-      console.error('Download error', err);
+      console.error('Install error', err);
     }
   };
 

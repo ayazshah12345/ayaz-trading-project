@@ -89,19 +89,19 @@ export function PWAInstallBanner() {
           height: 44,
           borderRadius: 10,
           objectFit: 'contain',
-          background: '#07080c',
-          border: '1px solid rgba(245, 158, 11, 0.4)',
+          background: '#060813',
+          border: '1px solid rgba(56, 189, 248, 0.4)',
           flexShrink: 0,
         }}
       />
 
       {/* Text */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ color: '#fff', fontSize: 14, fontWeight: 600, lineHeight: 1.3 }}>
+        <div style={{ color: '#fff', fontSize: 14, fontWeight: 700, lineHeight: 1.3 }}>
           Install Black FX
         </div>
-        <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, marginTop: 2 }}>
-          Add to home screen for the full app experience
+        <div style={{ color: 'rgba(148,163,184,0.9)', fontSize: 12, marginTop: 2 }}>
+          Install standalone app for Windows, Android & iOS
         </div>
       </div>
 
@@ -112,9 +112,9 @@ export function PWAInstallBanner() {
           display: 'flex',
           alignItems: 'center',
           gap: 6,
-          padding: '8px 14px',
-          background: 'linear-gradient(135deg, #ffd700, #f59e0b)',
-          color: '#0d0f1a',
+          padding: '8px 16px',
+          background: 'linear-gradient(135deg, #2563eb, #0ea5e9)',
+          color: '#ffffff',
           border: 'none',
           borderRadius: 8,
           fontSize: 13,
@@ -122,10 +122,11 @@ export function PWAInstallBanner() {
           cursor: 'pointer',
           flexShrink: 0,
           whiteSpace: 'nowrap',
+          boxShadow: '0 2px 12px rgba(14,165,233,0.3)',
         }}
       >
         <Download size={14} />
-        Install
+        Install App
       </button>
 
       {/* Dismiss */}

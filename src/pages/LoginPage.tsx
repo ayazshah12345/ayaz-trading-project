@@ -427,12 +427,12 @@ exit
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
             </div>
 
-            {/* Grand Typography (FundingPips-Inspired Bold Impact) */}
+            {/* Grand Typography (Institutional High-Impact Headline) */}
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
-                Turn your trading skills into{' '}
+                Master your edge with{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
-                  consistent alpha
+                  institutional precision
                 </span>
               </h1>
               

@@ -15,14 +15,14 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register('/sw.js', { scope: '/' })
       .then((registration) => {
-        console.log('[Trading Aura] Service Worker registered:', registration.scope)
+        console.log('[Black FX] Service Worker registered:', registration.scope)
 
         // Check for updates immediately and periodically
         registration.update()
         setInterval(() => registration.update(), 15_000)
       })
       .catch((err) => {
-        console.warn('[Trading Aura] Service Worker registration failed:', err)
+        console.warn('[Black FX] Service Worker registration failed:', err)
       })
   })
 
@@ -55,7 +55,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 })
 
 window.addEventListener('appinstalled', () => {
-  console.log('[Trading Aura] App installed as PWA ✓')
+  console.log('[Black FX] App installed as PWA ✓')
   deferredInstallPrompt = null
 })
 

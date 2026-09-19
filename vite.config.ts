@@ -50,9 +50,9 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: 'Trading Aura — Professional Trading Platform',
-        short_name: 'Trading Aura',
-        description: 'Track trades, backtest strategies, and analyze your performance with Trading Aura.',
+        name: 'Black FX — The Traders Backtesting and Journal Platform',
+        short_name: 'Black FX',
+        description: 'Black FX — The ultimate backtesting and journal platform for professional traders.',
         theme_color: '#0d0f1a',
         background_color: '#0d0f1a',
         display: 'standalone',

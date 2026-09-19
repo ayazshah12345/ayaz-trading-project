@@ -100,7 +100,7 @@ self.addEventListener('push', (event) => {
   if (!event.data) return;
   const data = event.data.json();
   event.waitUntil(
-    self.registration.showNotification(data.title || 'Trading Aura', {
+    self.registration.showNotification(data.title || 'Black FX', {
       body: data.body || 'New notification',
       icon: '/icon-512.jpg',
       badge: '/icon-192.png',

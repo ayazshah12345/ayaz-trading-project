@@ -1,7 +1,7 @@
 {
-  "name": "Trading Aura — Professional Trading Platform",
-  "short_name": "Trading Aura",
-  "description": "Professional Trading Platform & Analytics — track your trades, backtest strategies, and analyze performance.",
+  "name": "Black FX — The Traders Backtesting and Journal Platform",
+  "short_name": "Black FX",
+  "description": "Black FX — The ultimate backtesting and journal platform for professional traders.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0d0f1a",

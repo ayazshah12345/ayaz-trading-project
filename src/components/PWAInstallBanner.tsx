@@ -97,7 +97,7 @@ export function PWAInstallBanner() {
       {/* Text */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ color: '#fff', fontSize: 14, fontWeight: 600, lineHeight: 1.3 }}>
-          Install Trading Aura
+          Install Black FX
         </div>
         <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, marginTop: 2 }}>
           Add to home screen for the full app experience

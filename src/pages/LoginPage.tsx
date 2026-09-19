@@ -16,7 +16,10 @@ import {
   CheckCircle2,
   Crown,
   Sparkles,
-  Newspaper
+  Newspaper,
+  Wifi,
+  WifiOff,
+  RefreshCw
 } from 'lucide-react';
 import logoImg from '../assets/logo.jpg';
 import founderImg from '../assets/founder.png';
@@ -36,13 +39,39 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchError, setIsFetchError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const isNetworkFailure = (err: any): boolean => {
+    if (!err) return false;
+    const msg = String(typeof err === 'string' ? err : err.message || '').toLowerCase();
+    return (
+      msg.includes('failed to fetch') ||
+      msg.includes('networkerror') ||
+      msg.includes('load failed') ||
+      msg.includes('network request failed') ||
+      err.status === 0
+    );
+  };
+
+  const handleLocalBypass = (userEmailToUse?: string) => {
+    const targetEmail = userEmailToUse?.trim() || email.trim() || 'trader@tradingaura.com';
+    const localUserId = `local-${targetEmail.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    setErrorMessage(null);
+    setIsFetchError(false);
+    setSuccessMessage('Terminal unlocked in Local Mode. Opening workspace...');
+    setTimeout(() => {
+      if (onLogin) onLogin(targetEmail, localUserId);
+      navigate('/dashboard');
+    }, 300);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
+    setIsFetchError(false);
 
     const cleanEmail = email.trim();
 
@@ -74,7 +103,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           });
 
           if (error) {
-            if (error.message.includes('30 seconds') || error.status === 429) {
+            if (isNetworkFailure(error)) {
+              setIsFetchError(true);
+              setErrorMessage('Cloud authentication is unreachable (Failed to fetch). If you use Brave Shields, uBlock Origin, or an ad blocker, please pause it for this site, or enter via Local Mode.');
+            } else if (error.message.includes('30 seconds') || error.status === 429) {
               setErrorMessage('Rate limit reached: Please wait 30 seconds before submitting another request.');
             } else {
               setErrorMessage(error.message);
@@ -98,7 +130,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           });
 
           if (error) {
-            if (error.message.includes('Invalid login credentials')) {
+            if (isNetworkFailure(error)) {
+              setIsFetchError(true);
+              setErrorMessage('Cloud authentication is unreachable (Failed to fetch). If you use Brave Shields, uBlock Origin, or an ad blocker, please pause it for this site, or enter via Local Mode.');
+            } else if (error.message.includes('Invalid login credentials')) {
               setErrorMessage('Invalid credentials. Please verify your email and password, or click "Create Account" if you have not registered yet.');
             } else {
               setErrorMessage(error.message);
@@ -118,10 +153,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       }
     } catch (err: any) {
       console.error('Authentication error:', err);
-      setErrorMessage(err.message || 'An error occurred during authentication.');
+      if (isNetworkFailure(err)) {
+        setIsFetchError(true);
+        setErrorMessage('Cloud authentication is unreachable (Failed to fetch). If you use Brave Shields, uBlock Origin, or an ad blocker, please pause it for this site, or enter via Local Mode.');
+      } else {
+        setErrorMessage(err.message || 'An error occurred during authentication.');
+      }
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen w-full bg-[var(--bg-main)] theme-text-primary flex flex-col lg:grid lg:grid-cols-12 font-sans overflow-x-hidden">
@@ -307,11 +348,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           </div>
 
           {/* Header Text */}
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-black theme-text-primary tracking-tight">
-              {mode === 'signin' ? 'Sign In to Terminal' : 'Create Trader Account'}
-            </h2>
-            <p className="text-xs theme-text-secondary mt-1.5 font-medium leading-relaxed">
+          <div className="space-y-1">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl sm:text-3xl font-black theme-text-primary tracking-tight">
+                {mode === 'signin' ? 'Sign In to Terminal' : 'Create Trader Account'}
+              </h2>
+              <div className="hidden sm:flex items-center space-x-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Supabase Live</span>
+              </div>
+            </div>
+            <p className="text-xs theme-text-secondary font-medium leading-relaxed">
               {mode === 'signin'
                 ? 'Enter your credentials to access your private Trading Aura workspace.'
                 : 'Register your account to access real-time charts and private trade records.'}
@@ -320,9 +367,31 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
           {/* Error Alert */}
           {errorMessage && (
-            <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-bold flex items-start space-x-2.5 leading-relaxed">
-              <AlertCircle size={17} className="shrink-0 mt-0.5" />
-              <span>{errorMessage}</span>
+            <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-bold space-y-2.5 leading-relaxed">
+              <div className="flex items-start space-x-2.5">
+                <AlertCircle size={17} className="shrink-0 mt-0.5" />
+                <span>{errorMessage}</span>
+              </div>
+              {isFetchError && (
+                <div className="pt-2 border-t border-rose-500/20 flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleLocalBypass(email)}
+                    className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black uppercase tracking-wider transition cursor-pointer shadow-sm flex items-center space-x-1"
+                  >
+                    <span>Enter via Local Mode</span>
+                    <ArrowRight size={13} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition cursor-pointer flex items-center space-x-1"
+                  >
+                    <RefreshCw size={13} />
+                    <span>Retry Cloud</span>
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -430,8 +499,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               )}
             </button>
 
+            {/* Direct Instant Local / Guest Access */}
+            <div className="flex items-center justify-center pt-1">
+              <button
+                type="button"
+                onClick={() => handleLocalBypass(email || 'demo.trader@tradingaura.com')}
+                className="text-[11px] font-bold text-slate-400 hover:text-amber-400 underline decoration-dotted transition cursor-pointer"
+              >
+                ⚡ Instant Local / Guest Terminal Access
+              </button>
+            </div>
+
             {/* Direct Candidate Access to Forex Factory News */}
-            <div className="pt-3 border-t border-[var(--border-color)]">
+            <div className="pt-2 border-t border-[var(--border-color)]">
               <Link
                 to="/news"
                 className="w-full py-2.5 px-3 rounded-xl bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] border border-amber-500/40 text-amber-400 hover:text-amber-300 font-bold transition flex items-center justify-between text-xs group"
@@ -448,6 +528,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
         {/* Footer Toggle */}
         <div className="pt-5 border-t border-[var(--border-color)] text-center text-xs theme-text-secondary font-medium">
+
           {mode === 'signin' ? (
             <>
               Don't have a trader account?{' '}

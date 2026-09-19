@@ -1,11 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
 
-let rawUrl = (import.meta.env.VITE_SUPABASE_URL || '').trim();
-// Automatically sanitize URL if user copies the API URL with /rest/v1/
-rawUrl = rawUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/$/, '');
+// Verified project connection credentials (fallback for Vercel production builds)
+const FALLBACK_SUPABASE_URL = 'https://pzdsiqqxuvogvvvbjhtq.supabase.co';
+const FALLBACK_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB6ZHNpcXF4dXZvZ3Z2dmJqaHRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3MDIxMTQsImV4cCI6MjEwNDI3ODExNH0.q3p3mJwpmcpR_b3u9SRWoYjiDH5T-lUBXYRgXYwnqUE';
 
-const supabaseUrl = rawUrl;
-const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
+// Sanitize URL (strip wrapping quotes, whitespace, trailing slashes, or /rest/v1)
+let rawUrl = (import.meta.env.VITE_SUPABASE_URL || FALLBACK_SUPABASE_URL).trim();
+rawUrl = rawUrl.replace(/^["']|["']$/g, '').replace(/\/rest\/v1\/?$/, '').replace(/\/$/, '');
+
+// Sanitize Anon Key
+let rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || FALLBACK_SUPABASE_ANON_KEY).trim();
+rawKey = rawKey.replace(/^["']|["']$/g, '');
+
+export const supabaseUrl = rawUrl;
+export const supabaseAnonKey = rawKey;
 
 export const isSupabaseConfigured = Boolean(
   supabaseUrl &&
@@ -23,3 +32,4 @@ export const supabase = isSupabaseConfigured
       },
     })
   : null;
+

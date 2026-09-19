@@ -124,7 +124,7 @@ export function useTradingWorkspace() {
 
   // Fetch isolated user data whenever userId changes
   useEffect(() => {
-    if (userId && isSupabaseConfigured) {
+    if (userId) {
       supabaseDatabaseService.fetchTrades(userId).then(fetchedTrades => {
         setTrades(fetchedTrades || []);
       });

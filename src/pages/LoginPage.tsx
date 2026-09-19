@@ -416,49 +416,11 @@ exit
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
-          {/* ================= LEFT HERO COLUMN: BOLD HEADLINE & FOUNDER EDITORIAL ================= */}
-          <div className="lg:col-span-6 space-y-8">
+          {/* ================= LEFT HERO COLUMN: FOUNDER EDITORIAL & BOLD HEADLINE ================= */}
+          <div className="lg:col-span-6 space-y-7">
             
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-950/70 to-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
-              <Sparkles size={13} className="text-cyan-400" />
-              <span>Institutional Quantitative Execution</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            </div>
-
-            {/* Grand Typography (Institutional High-Impact Headline) */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
-                Master your edge with{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
-                  institutional precision
-                </span>
-              </h1>
-              
-              <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
-                The institutional-grade platform engineered to journal daily executions, stress-test historical setups, and track live price analytics with statistical mastery.
-              </p>
-            </div>
-
-            {/* Quick Action Pill Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <BookOpen size={14} className="text-cyan-400 shrink-0" />
-                <span>Daily Trade Log</span>
-              </div>
-              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <FlaskConical size={14} className="text-blue-400 shrink-0" />
-                <span>Historical Backtesting</span>
-              </div>
-              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <LineChart size={14} className="text-emerald-400 shrink-0" />
-                <span>TradingView Charts</span>
-              </div>
-            </div>
-
-            {/* ================= FOUNDER CREDENTIAL EDITORIAL (FREE-FLOWING, NO BOXES) ================= */}
-            <div className="pt-3 space-y-4">
-              
+            {/* ================= FOUNDER CREDENTIAL (PRESENT BELOW THE COMPANY LOGO) ================= */}
+            <div className="space-y-3.5 pb-1">
               <div className="flex items-center space-x-4">
                 <div className="relative shrink-0 group">
                   <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-cyan-400 via-blue-500 to-emerald-400 blur-sm opacity-80 group-hover:opacity-100 transition duration-500" />
@@ -490,7 +452,43 @@ exit
                   "I am <strong className="text-white font-bold not-italic">Syed Ayaz Shah</strong>, an experienced Forex trader with over 3 years of hands-on market execution. Black FX was built from the ground up to empower traders with institutional clarity — created specifically to document daily trading journals, preserve comprehensive backtesting records, and analyze real-time live charts with disciplined precision."
                 </p>
               </div>
+            </div>
 
+            {/* Tagline Badge */}
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-950/70 to-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
+              <Sparkles size={13} className="text-cyan-400" />
+              <span>Institutional Quantitative Execution</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            </div>
+
+            {/* Grand Typography (Institutional High-Impact Headline) */}
+            <div className="space-y-3">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
+                Master your edge with{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
+                  institutional precision
+                </span>
+              </h1>
+              
+              <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
+                The institutional-grade platform engineered to journal daily executions, stress-test historical setups, and track live price analytics with statistical mastery.
+              </p>
+            </div>
+
+            {/* Quick Action Pill Row */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
+                <BookOpen size={14} className="text-cyan-400 shrink-0" />
+                <span>Daily Trade Log</span>
+              </div>
+              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
+                <FlaskConical size={14} className="text-blue-400 shrink-0" />
+                <span>Historical Backtesting</span>
+              </div>
+              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
+                <LineChart size={14} className="text-emerald-400 shrink-0" />
+                <span>TradingView Charts</span>
+              </div>
             </div>
 
           </div>

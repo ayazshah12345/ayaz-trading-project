@@ -14,7 +14,7 @@ export const TopMetrics: React.FC<TopMetricsProps> = ({ account }) => {
         <h3 className="text-xs font-extrabold theme-text-secondary uppercase tracking-wider">
           Top Performance Metrics
         </h3>
-        <span className="text-[10px] text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20 font-mono-numeric font-extrabold">
+        <span className="text-[10px] text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 font-mono-numeric font-extrabold">
           MOCK DEMO DATA
         </span>
       </div>
@@ -98,11 +98,11 @@ export const TopMetrics: React.FC<TopMetricsProps> = ({ account }) => {
         <div className="terminal-card p-4 flex flex-col justify-between shadow-xs">
           <div className="flex items-center justify-between theme-text-secondary mb-1">
             <span className="text-[11px] font-extrabold uppercase tracking-wide">Max Drawdown</span>
-            <div className="p-1.5 rounded-md bg-amber-500/10 text-amber-500">
+            <div className="p-1.5 rounded-md bg-cyan-500/10 text-cyan-400">
               <ShieldAlert size={15} />
             </div>
           </div>
-          <div className="text-lg sm:text-xl font-extrabold font-mono-numeric text-amber-500">
+          <div className="text-lg sm:text-xl font-extrabold font-mono-numeric text-cyan-400">
             {account.maxDrawdownCurrent}%
           </div>
           <span className="text-[10px] theme-text-secondary mt-1 font-mono-numeric font-bold">Peak-to-Trough Max</span>

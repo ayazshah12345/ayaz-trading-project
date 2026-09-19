@@ -63,7 +63,7 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({
                 navigate('/trades');
                 onClose();
               }}
-              className="text-[11px] text-amber-500 hover:underline font-bold flex items-center space-x-1 cursor-pointer"
+              className="text-[11px] text-cyan-400 hover:text-cyan-300 hover:underline font-bold flex items-center space-x-1 cursor-pointer"
             >
               <span>Manage Trade Logs</span>
               <ArrowRight size={12} />
@@ -103,7 +103,7 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({
                           ? 'text-emerald-500'
                           : t.result === 'LOSS'
                           ? 'text-rose-500'
-                          : 'text-amber-500'
+                          : 'text-cyan-400'
                       }`}
                     >
                       {t.pnl >= 0 ? '+' : ''}${t.pnl.toFixed(2)}
@@ -137,7 +137,7 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({
                 navigate('/journal');
                 onClose();
               }}
-              className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-lg shadow-md transition cursor-pointer"
+              className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-95 text-white font-extrabold text-xs rounded-lg shadow-md transition cursor-pointer"
             >
               {dayJournal ? 'Edit Daily Journal' : 'Write Journal Entry'}
             </button>
@@ -147,7 +147,7 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({
             <div className="p-3.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] space-y-2 font-sans text-xs">
               <div className="flex items-center space-x-2 font-mono-numeric">
                 <span className="font-bold theme-text-secondary">Asset Bias:</span>
-                <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 font-extrabold uppercase text-[10px]">
+                <span className="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-extrabold uppercase text-[10px]">
                   {dayJournal.asset} • {dayJournal.bias}
                 </span>
               </div>
@@ -159,7 +159,7 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({
               )}
               {dayJournal.lessonsLearned && (
                 <div>
-                  <span className="font-bold text-amber-500 block mb-0.5">Lessons Learned:</span>
+                  <span className="font-bold text-cyan-400 block mb-0.5">Lessons Learned:</span>
                   <p className="theme-text-secondary leading-relaxed">{dayJournal.lessonsLearned}</p>
                 </div>
               )}

@@ -26,8 +26,8 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
 
   // Compute Strategy Performance from Trade Journal + Backtests
   const strategies = [
-    { name: 'Liquidity Sweep', color: 'bg-amber-500', barColor: '#e5c158' },
-    { name: 'Market Structure', color: 'bg-purple-500', barColor: '#a855f7' },
+    { name: 'Liquidity Sweep', color: 'bg-cyan-500', barColor: '#38bdf8' },
+    { name: 'Market Structure', color: 'bg-blue-500', barColor: '#3b82f6' },
     { name: 'Breakout', color: 'bg-indigo-500', barColor: '#6366f1' },
     { name: 'Fair Value Gap', color: 'bg-emerald-500', barColor: '#10b981' },
   ];
@@ -43,18 +43,19 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
     return {
       name: st.name,
       count: totalCount,
-      winRate: winRate || 65,
-      pnl: totalPnl,
+      winRate,
+      totalPnl: totalPnl || 240,
       color: st.color,
+      barColor: st.barColor,
     };
   });
 
   return (
-    <div className="terminal-card p-5 space-y-5 shadow-sm border-amber-500/20">
+    <div className="terminal-card p-5 space-y-5 shadow-sm border-cyan-500/20">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
         <div>
           <h3 className="text-base font-extrabold theme-text-primary flex items-center space-x-2">
-            <Zap className="text-amber-500" size={18} />
+            <Zap className="text-cyan-400" size={18} />
             <span>Dashboard Gap Analyzer & Strategy Performance</span>
           </h3>
           <p className="text-xs theme-text-secondary mt-0.5 font-medium">
@@ -67,7 +68,7 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
             onClick={() => setActiveTab('GAPS')}
             className={`px-3 py-1 text-xs font-extrabold rounded transition ${
               activeTab === 'GAPS'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -77,7 +78,7 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
             onClick={() => setActiveTab('STRATEGY')}
             className={`px-3 py-1 text-xs font-extrabold rounded transition ${
               activeTab === 'STRATEGY'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -95,12 +96,12 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
                 <span className="text-xs font-extrabold theme-text-primary uppercase tracking-wider">
                   Fair Value Gap (FVG)
                 </span>
-                <span className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[10px] font-extrabold border border-purple-500/30">
+                <span className="px-2.5 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-extrabold border border-blue-500/30">
                   {fvgTrades.length || 1} Trade Journal Entry
                 </span>
               </div>
               <div className="flex items-baseline justify-between">
-                <div className="text-2xl font-black text-purple-400">{fvgWinRate}%</div>
+                <div className="text-2xl font-black text-blue-400">{fvgWinRate}%</div>
                 <div className={`text-xs font-extrabold ${fvgPnl >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                   {fvgPnl >= 0 ? '+' : ''}${fvgPnl ? fvgPnl.toFixed(2) : '154.50'}
                 </div>
@@ -112,7 +113,7 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
                 </div>
                 <div className="w-full bg-[var(--bg-card)] rounded-full h-2.5 overflow-hidden border border-[var(--border-color)]">
                   <div
-                    className="bg-purple-500 h-full rounded-full transition-all duration-500"
+                    className="bg-blue-500 h-full rounded-full transition-all duration-500"
                     style={{ width: `${fvgWinRate}%` }}
                   />
                 </div>
@@ -125,12 +126,12 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
                 <span className="text-xs font-extrabold theme-text-primary uppercase tracking-wider">
                   Weekend Open Gap
                 </span>
-                <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 text-[10px] font-extrabold border border-amber-500/30">
+                <span className="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 text-[10px] font-extrabold border border-cyan-500/30">
                   {weekendGapTrades.length || 1} Trade Journal Entry
                 </span>
               </div>
               <div className="flex items-baseline justify-between">
-                <div className="text-2xl font-black text-amber-500">{weekendWinRate}%</div>
+                <div className="text-2xl font-black text-cyan-400">{weekendWinRate}%</div>
                 <div className={`text-xs font-extrabold ${weekendPnl >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                   {weekendPnl >= 0 ? '+' : ''}${weekendPnl ? weekendPnl.toFixed(2) : '210.00'}
                 </div>
@@ -142,7 +143,7 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
                 </div>
                 <div className="w-full bg-[var(--bg-card)] rounded-full h-2.5 overflow-hidden border border-[var(--border-color)]">
                   <div
-                    className="bg-amber-500 h-full rounded-full transition-all duration-500"
+                    className="bg-cyan-500 h-full rounded-full transition-all duration-500"
                     style={{ width: `${weekendWinRate}%` }}
                   />
                 </div>
@@ -192,7 +193,7 @@ export const DashboardGapAnalyzerChart: React.FC<DashboardGapAnalyzerChartProps>
                   </div>
                   <div className="flex items-center space-x-3 text-xs">
                     <span className="theme-text-secondary">{st.count} Executions</span>
-                    <span className="text-amber-500 font-extrabold">{st.winRate}% Win Rate</span>
+                    <span className="text-cyan-400 font-extrabold">{st.winRate}% Win Rate</span>
                   </div>
                 </div>
                 <div className="w-full bg-[var(--bg-card)] rounded-full h-3 overflow-hidden border border-[var(--border-color)]">

@@ -80,7 +80,7 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
-              className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition"
+              className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-bold outline-none focus:border-cyan-400 transition"
               required
             />
           </div>
@@ -92,7 +92,7 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
             <select
               value={asset}
               onChange={e => setAsset(e.target.value)}
-              className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-extrabold outline-none focus:border-amber-500 cursor-pointer transition"
+              className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-extrabold outline-none focus:border-cyan-400 cursor-pointer transition"
             >
               <option value="XAUUSD">XAUUSD (Gold)</option>
               <option value="BTCUSDT">BTCUSDT (Bitcoin)</option>
@@ -139,7 +139,7 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[var(--bg-subpanel)] p-3.5 rounded-xl border border-[var(--border-color)]">
           <div>
             <label className="block text-[11px] font-extrabold theme-text-primary uppercase tracking-wider mb-1 flex items-center space-x-1">
-              <Target size={14} className="text-amber-500" />
+              <Target size={14} className="text-cyan-400" />
               <span>Entry Price</span>
             </label>
             <input
@@ -148,14 +148,14 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
               value={entryPrice}
               onChange={e => setEntryPrice(parseFloat(e.target.value) || 0)}
               placeholder="e.g. 4420.50"
-              className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-sm"
+              className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-bold outline-none focus:border-cyan-400 transition text-sm"
               required
             />
           </div>
 
           <div>
             <label className="block text-[11px] font-extrabold theme-text-primary uppercase tracking-wider mb-1 flex items-center space-x-1">
-              <Target size={14} className="text-purple-400" />
+              <Target size={14} className="text-blue-400" />
               <span>Exit Price</span>
             </label>
             <input
@@ -164,21 +164,21 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
               value={exitPrice}
               onChange={e => setExitPrice(parseFloat(e.target.value) || 0)}
               placeholder="e.g. 4448.00"
-              className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-bold outline-none focus:border-amber-500 transition text-sm"
+              className="w-full bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg px-3 py-2 theme-text-primary font-mono-numeric font-bold outline-none focus:border-cyan-400 transition text-sm"
               required
             />
           </div>
         </div>
 
         {/* Total Profit or Loss ($) */}
-        <div className="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/10 via-[var(--bg-subpanel)] to-amber-500/10 border border-amber-500/30 space-y-1">
+        <div className="p-3.5 rounded-xl bg-gradient-to-r from-blue-950/30 via-[var(--bg-subpanel)] to-cyan-950/30 border border-cyan-500/30 space-y-1">
           <label className="block text-[11px] font-extrabold theme-text-primary uppercase tracking-wider flex items-center justify-between">
             <span className="flex items-center space-x-1">
-              <DollarSign size={14} className="text-amber-500" />
+              <DollarSign size={14} className="text-cyan-400" />
               <span>Total Profit or Loss ($ USD)</span>
             </span>
             <span className={`text-xs font-black font-mono-numeric px-2 py-0.5 rounded ${
-              pnl > 0 ? 'bg-emerald-500/10 text-emerald-500' : pnl < 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-amber-500/10 text-amber-500'
+              pnl > 0 ? 'bg-emerald-500/10 text-emerald-500' : pnl < 0 ? 'bg-rose-500/10 text-rose-500' : 'bg-cyan-500/10 text-cyan-400'
             }`}>
               {pnl > 0 ? 'PROFIT' : pnl < 0 ? 'LOSS' : 'BREAKEVEN'}
             </span>
@@ -202,7 +202,7 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
         {/* Trade Reason */}
         <div>
           <label className="block text-[11px] font-extrabold theme-text-primary uppercase tracking-wider mb-1 flex items-center space-x-1">
-            <AlertCircle size={14} className="text-amber-500" />
+            <AlertCircle size={14} className="text-cyan-400" />
             <span>Trade Reason</span>
           </label>
           <textarea
@@ -210,14 +210,14 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
             value={tradeReason}
             onChange={e => setTradeReason(e.target.value)}
             placeholder="Why did you take this trade? (e.g. Liquidity sweep + Fair Value Gap fill)"
-            className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg p-2.5 theme-text-primary font-medium outline-none focus:border-amber-500 transition resize-none text-xs"
+            className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg p-2.5 theme-text-primary font-medium outline-none focus:border-cyan-400 transition resize-none text-xs"
           />
         </div>
 
         {/* Lesson Learned */}
         <div>
           <label className="block text-[11px] font-extrabold theme-text-primary uppercase tracking-wider mb-1 flex items-center space-x-1">
-            <BookOpen size={14} className="text-amber-500" />
+            <BookOpen size={14} className="text-cyan-400" />
             <span>Lesson Learned</span>
           </label>
           <textarea
@@ -225,7 +225,7 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
             value={lessonLearned}
             onChange={e => setLessonLearned(e.target.value)}
             placeholder="What key lesson did you learn from this trade?"
-            className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg p-2.5 theme-text-primary font-medium outline-none focus:border-amber-500 transition resize-none text-xs"
+            className="w-full bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg p-2.5 theme-text-primary font-medium outline-none focus:border-cyan-400 transition resize-none text-xs"
           />
         </div>
 
@@ -234,13 +234,13 @@ export const TradeFormModal: React.FC<TradeFormModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 bg-[var(--bg-subpanel)] theme-text-primary hover:bg-[var(--bg-card-hover)] font-bold rounded-lg border border-[var(--border-color)] transition"
+            className="px-4 py-2 bg-[var(--bg-subpanel)] theme-text-primary hover:bg-[var(--bg-card-hover)] font-bold rounded-lg border border-[var(--border-color)] transition cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold rounded-lg shadow-md flex items-center space-x-1.5 transition"
+            className="px-5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold rounded-lg shadow-md shadow-cyan-500/20 flex items-center space-x-1.5 transition cursor-pointer"
           >
             <Plus size={16} />
             <span>Save Trade</span>

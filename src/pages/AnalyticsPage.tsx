@@ -72,7 +72,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ workspace }) => {
       <div className="border-b border-[var(--border-color)] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-extrabold theme-text-primary flex items-center space-x-2">
-            <LineChart className="text-amber-500" />
+            <LineChart className="text-cyan-400" />
             <span>Trade Journal Performance Analytics</span>
           </h1>
           <p className="text-xs theme-text-secondary mt-1">
@@ -81,13 +81,13 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ workspace }) => {
         </div>
 
         {/* Live Capital Badge */}
-        <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-amber-500/30 flex items-center space-x-3 font-mono-numeric">
-          <div className="p-2 rounded-md bg-amber-500/10 text-amber-500 font-extrabold">
+        <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-cyan-500/30 flex items-center space-x-3 font-mono-numeric">
+          <div className="p-2 rounded-md bg-cyan-500/10 text-cyan-400 font-extrabold">
             <DollarSign size={18} />
           </div>
           <div>
             <span className="text-[10px] theme-text-secondary uppercase font-bold block">Account Capital ($ USD)</span>
-            <span className="text-lg font-black text-amber-500">
+            <span className="text-lg font-black text-cyan-400">
               ${workspace.currentCapital?.toFixed(2) || '100.00'} USD
             </span>
           </div>
@@ -103,8 +103,8 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ workspace }) => {
           </div>
         </div>
         <div className="terminal-card p-3">
-          <span className="text-[10px] text-amber-500 uppercase font-bold">Win Rate</span>
-          <div className="text-base font-extrabold text-amber-500">{winRate.toFixed(1)}%</div>
+          <span className="text-[10px] text-cyan-400 uppercase font-bold">Win Rate</span>
+          <div className="text-base font-extrabold text-cyan-400">{winRate.toFixed(1)}%</div>
         </div>
         <div className="terminal-card p-3">
           <span className="text-[10px] text-emerald-500 uppercase font-bold">Profit Factor</span>
@@ -170,10 +170,10 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ workspace }) => {
                 <tr key={s.name} className="hover:bg-[var(--bg-card-hover)] transition">
                   <td className="p-3 font-bold theme-text-primary font-sans">{s.name}</td>
                   <td className="p-3 theme-text-secondary">{s.trades}</td>
-                  <td className="p-3 text-amber-500 font-bold">{s.winRate}%</td>
+                  <td className="p-3 text-cyan-400 font-bold">{s.winRate}%</td>
                   <td className="p-3 text-indigo-400 font-bold">+{s.avgR}R</td>
                   <td className="p-3 text-emerald-500 font-bold">{s.profitFactor}</td>
-                  <td className="p-3 text-right text-amber-500 font-extrabold">+{s.totalR}R</td>
+                  <td className="p-3 text-right text-cyan-400 font-extrabold">+{s.totalR}R</td>
                 </tr>
               ))}
             </tbody>

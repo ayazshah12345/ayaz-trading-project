@@ -39,18 +39,18 @@ export const MarketTable: React.FC<MarketTableProps> = ({ markets, onToggleFavor
               >
                 {/* Favorite Star */}
                 <td className="p-3 text-center" onClick={e => { e.stopPropagation(); onToggleFavorite(m.symbol); }}>
-                  <button className="theme-text-secondary hover:text-amber-500 transition">
+                  <button className="theme-text-secondary hover:text-cyan-400 transition cursor-pointer">
                     <Star
                       size={15}
-                      fill={m.isFavorite ? '#f59e0b' : 'none'}
-                      className={m.isFavorite ? 'text-amber-500' : ''}
+                      fill={m.isFavorite ? '#38bdf8' : 'none'}
+                      className={m.isFavorite ? 'text-cyan-400' : ''}
                     />
                   </button>
                 </td>
 
                 {/* Symbol & Name */}
                 <td className="p-3">
-                  <div className="font-bold theme-text-primary text-sm group-hover:text-blue-500 transition">
+                  <div className="font-bold theme-text-primary text-sm group-hover:text-cyan-400 transition">
                     {m.symbol}
                   </div>
                   <div className="text-[10px] theme-text-secondary font-sans font-medium">{m.name}</div>

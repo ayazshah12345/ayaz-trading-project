@@ -37,7 +37,7 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
       case 'Bearish':
         return 'bg-rose-500/10 text-rose-500 border-rose-500/30';
       default:
-        return 'bg-amber-500/10 text-amber-500 border-amber-500/30';
+        return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30';
     }
   };
 
@@ -47,13 +47,13 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
       <div className="terminal-card p-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center space-x-2 flex-1 min-w-[240px]">
           <div className="relative w-full">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400" />
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Search journals by date, asset (e.g. XAUUSD), plan, or keywords..."
-              className="w-full pl-9 pr-4 py-2 bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg text-xs theme-text-primary placeholder:theme-text-muted outline-none focus:border-purple-500 transition"
+              className="w-full pl-9 pr-4 py-2 bg-[var(--bg-subpanel)] border border-[var(--border-color)] rounded-lg text-xs theme-text-primary placeholder:theme-text-muted outline-none focus:border-cyan-500 transition"
             />
           </div>
         </div>
@@ -64,7 +64,7 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
           <select
             value={selectedBias}
             onChange={e => setSelectedBias(e.target.value)}
-            className="px-3 py-1.5 bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-primary rounded-lg text-xs outline-none focus:border-purple-500 transition font-medium"
+            className="px-3 py-1.5 bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-primary rounded-lg text-xs outline-none focus:border-cyan-500 transition font-medium"
           >
             <option value="ALL">All Biases</option>
             <option value="Bullish">Bullish 📈</option>
@@ -77,7 +77,7 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
       {/* Journal Cards List */}
       {filteredJournals.length === 0 ? (
         <div className="terminal-card p-12 text-center space-y-3">
-          <Calendar size={36} className="mx-auto text-purple-400 opacity-40" />
+          <Calendar size={36} className="mx-auto text-cyan-400 opacity-40" />
           <h4 className="text-base font-bold theme-text-primary">No Journal Entries Found</h4>
           <p className="text-xs theme-text-secondary max-w-sm mx-auto">
             No daily journals matched your current search filter. Save new daily journals to track your trading plans.
@@ -88,13 +88,13 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
           {filteredJournals.map(entry => (
             <div
               key={entry.id}
-              className="terminal-card p-5 space-y-4 flex flex-col justify-between hover:border-purple-500/50 transition group"
+              className="terminal-card p-5 space-y-4 flex flex-col justify-between hover:border-cyan-500/50 transition group"
             >
               <div className="space-y-3">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2 font-mono-numeric">
-                    <span className="p-1.5 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-500 font-bold text-xs">
+                    <span className="p-1.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold text-xs">
                       {entry.date}
                     </span>
                     <span className="font-extrabold text-sm theme-text-primary">{entry.asset}</span>
@@ -109,15 +109,15 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
                 <div className="flex items-center justify-between text-[11px] theme-text-secondary pt-1 border-t border-[var(--border-color)]">
                   <div className="flex items-center space-x-1">
                     <span>Mood:</span>
-                    <div className="flex text-amber-400">
+                    <div className="flex text-cyan-400">
                       {Array.from({ length: entry.moodRating }).map((_, i) => (
-                        <Star key={i} size={10} className="fill-amber-400 text-amber-400" />
+                        <Star key={i} size={10} className="fill-cyan-400 text-cyan-400" />
                       ))}
                     </div>
                   </div>
 
                   {entry.screenshots && entry.screenshots.length > 0 && (
-                    <div className="flex items-center space-x-1 text-purple-400 font-semibold">
+                    <div className="flex items-center space-x-1 text-cyan-400 font-semibold">
                       <ImageIcon size={12} />
                       <span>{entry.screenshots.length} Chart Pics</span>
                     </div>
@@ -130,23 +130,23 @@ export const JournalHistoryView: React.FC<JournalHistoryViewProps> = ({
                 </p>
               </div>
 
-                {/* Action Buttons Footer */}
-                <div className="pt-3 border-t border-[var(--border-color)] flex items-center justify-between gap-2">
-                  <button
-                    onClick={() => setInspectJournal(entry)}
-                    className="flex-1 flex items-center justify-center space-x-1 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 font-extrabold rounded-lg border border-amber-500/30 text-xs transition"
-                  >
-                    <Eye size={13} />
-                    <span>View Journal</span>
-                  </button>
+              {/* Action Buttons Footer */}
+              <div className="pt-3 border-t border-[var(--border-color)] flex items-center justify-between gap-2">
+                <button
+                  onClick={() => setInspectJournal(entry)}
+                  className="flex-1 flex items-center justify-center space-x-1 px-3 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 font-extrabold rounded-lg border border-cyan-500/30 text-xs transition"
+                >
+                  <Eye size={13} />
+                  <span>View Journal</span>
+                </button>
 
-                  <button
-                    onClick={() => onSelectJournalToEdit(entry)}
-                    className="p-1.5 text-amber-500 hover:text-amber-400 hover:bg-[var(--bg-card-hover)] rounded-lg transition"
-                    title="Edit Journal"
-                  >
-                    <Edit3 size={15} />
-                  </button>
+                <button
+                  onClick={() => onSelectJournalToEdit(entry)}
+                  className="p-1.5 text-cyan-400 hover:text-cyan-300 hover:bg-[var(--bg-card-hover)] rounded-lg transition"
+                  title="Edit Journal"
+                >
+                  <Edit3 size={15} />
+                </button>
 
                 <button
                   onClick={() => onDeleteJournal(entry.id)}

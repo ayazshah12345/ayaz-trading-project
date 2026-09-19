@@ -62,13 +62,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <img
                 src={logoImg}
                 alt="Black FX Logo"
-                className="w-9 h-9 rounded-lg border border-amber-500/50 object-cover shadow-md shrink-0"
+                className="w-9 h-9 rounded-lg border border-cyan-500/50 object-cover shadow-md shrink-0"
               />
               <div className="flex flex-col truncate">
                 <span className="text-xs font-black tracking-wide theme-text-primary uppercase font-mono-numeric truncate">
                   BLACK FX
                 </span>
-                <span className="text-[9px] uppercase tracking-wider text-amber-500 font-bold truncate">
+                <span className="text-[9px] uppercase tracking-wider text-cyan-400 font-bold truncate">
                   Backtesting &amp; Journal
                 </span>
               </div>
@@ -77,7 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <img
               src={logoImg}
               alt="Black FX Logo"
-              className="w-8 h-8 mx-auto rounded-lg border border-amber-500/50 object-cover shadow-md"
+              className="w-8 h-8 mx-auto rounded-lg border border-cyan-500/50 object-cover shadow-md"
             />
           )}
 
@@ -92,12 +92,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </button>
           )}
 
-          {/* Mobile Back / Close Button (Near AYAZ MARKETS) */}
+          {/* Mobile Back / Close Button */}
           {isMobile && onCloseMobile && (
             <button
               type="button"
               onClick={onCloseMobile}
-              className="px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-md transition flex items-center space-x-1 shrink-0 cursor-pointer"
+              className="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs shadow-md transition flex items-center space-x-1 shrink-0 cursor-pointer"
               title="Close Menu & Go Back to Page"
             >
               <ArrowLeft size={15} />
@@ -122,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={({ isActive }) =>
                   `flex items-center px-3 py-2.5 rounded-lg text-xs font-bold transition group ${
                     isActive
-                      ? 'bg-amber-500 text-slate-950 font-extrabold shadow-md shadow-amber-500/20'
+                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-extrabold shadow-md shadow-cyan-500/25'
                       : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
                   } ${collapsed && !isMobile ? 'justify-center' : 'space-x-3'}`
                 }
@@ -133,7 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <div className="flex items-center justify-between flex-1 overflow-hidden">
                     <span className="truncate">{item.label}</span>
                     {item.badge && (
-                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 shrink-0 ml-1.5">
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shrink-0 ml-1.5">
                         {item.badge}
                       </span>
                     )}
@@ -165,7 +165,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             collapsed && !isMobile ? 'justify-center' : 'space-x-3'
           } p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] shadow-xs`}
         >
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs shrink-0 shadow-sm">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm">
             {initialLetter}
           </div>
           {(!collapsed || isMobile) && (

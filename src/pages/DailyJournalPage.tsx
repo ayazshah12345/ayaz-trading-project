@@ -24,7 +24,7 @@ export const DailyJournalPage: React.FC<DailyJournalPageProps> = ({ workspace })
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
           <h1 className="text-xl font-bold theme-text-primary flex items-center space-x-2">
-            <BookOpen className="text-amber-500" size={22} />
+            <BookOpen className="text-cyan-400" size={22} />
             <span>Daily Market Journal & Pre-Market Playbook</span>
           </h1>
           <p className="text-xs theme-text-secondary mt-1">
@@ -35,9 +35,9 @@ export const DailyJournalPage: React.FC<DailyJournalPageProps> = ({ workspace })
         <div className="flex items-center space-x-2 bg-[var(--bg-subpanel)] p-1 rounded-lg border border-[var(--border-color)]">
           <button
             onClick={() => setActiveTab('EDITOR')}
-            className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-bold rounded-md transition ${
+            className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-bold rounded-md transition cursor-pointer ${
               activeTab === 'EDITOR'
-                ? 'bg-amber-500 text-slate-950 font-extrabold shadow-md'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-extrabold shadow-md shadow-cyan-500/20'
                 : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
             }`}
           >
@@ -47,9 +47,9 @@ export const DailyJournalPage: React.FC<DailyJournalPageProps> = ({ workspace })
 
           <button
             onClick={() => setActiveTab('HISTORY')}
-            className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-bold rounded-md transition ${
+            className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-bold rounded-md transition cursor-pointer ${
               activeTab === 'HISTORY'
-                ? 'bg-amber-500 text-slate-950 font-extrabold shadow-md'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-extrabold shadow-md shadow-cyan-500/20'
                 : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
             }`}
           >

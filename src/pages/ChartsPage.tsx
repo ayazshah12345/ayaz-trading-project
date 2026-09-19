@@ -13,7 +13,7 @@ export const ChartsPage: React.FC<ChartsPageProps> = ({ workspace }) => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
         <div>
           <h1 className="text-xl sm:text-2xl font-extrabold theme-text-primary flex items-center space-x-2">
-            <BarChart2 className="text-amber-500" />
+            <BarChart2 className="text-cyan-400" />
             <span>Charts Workspace</span>
           </h1>
           <p className="text-xs theme-text-secondary mt-1 font-medium">

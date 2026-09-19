@@ -231,7 +231,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {filteredBacktests.length > 0 && (
             <div>
               <div className="text-[11px] font-semibold theme-text-secondary uppercase tracking-wider mb-2 flex items-center space-x-1.5">
-                <FlaskConical size={13} className="text-amber-500" />
+                <FlaskConical size={13} className="text-cyan-400" />
                 <span>Backtest Campaigns</span>
               </div>
               <div className="space-y-1.5">
@@ -239,14 +239,14 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                   <button
                     key={b.id}
                     onClick={handleSelectBacktest}
-                    className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] hover:border-amber-500/50 hover:bg-[var(--bg-card-hover)] text-left transition"
+                    className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] hover:border-cyan-500/50 hover:bg-[var(--bg-card-hover)] text-left transition cursor-pointer"
                   >
                     <div>
                       <div className="font-semibold theme-text-primary">{b.title}</div>
                       <div className="text-[11px] theme-text-secondary">{b.asset} • {b.strategy}</div>
                     </div>
                     <div className="text-right font-mono-numeric text-xs">
-                      <div className="text-amber-500 font-bold">{b.winRate}% WR</div>
+                      <div className="text-cyan-400 font-bold">{b.winRate}% WR</div>
                       <div className="theme-text-secondary">{b.totalR} Total R</div>
                     </div>
                   </button>
@@ -259,22 +259,22 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {isNewsMatch && (
             <div>
               <div className="text-[11px] font-semibold theme-text-secondary uppercase tracking-wider mb-2 flex items-center space-x-1.5">
-                <Newspaper size={13} className="text-amber-500" />
+                <Newspaper size={13} className="text-cyan-400" />
                 <span>Market News & Forex Factory Calendar</span>
               </div>
               <button
                 onClick={handleSelectNews}
-                className="w-full p-3 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] hover:border-amber-500/50 hover:bg-[var(--bg-card-hover)] text-left transition flex items-center justify-between group"
+                className="w-full p-3 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] hover:border-cyan-500/50 hover:bg-[var(--bg-card-hover)] text-left transition flex items-center justify-between group cursor-pointer"
               >
                 <div>
-                  <div className="font-bold theme-text-primary group-hover:text-amber-400 transition">
+                  <div className="font-bold theme-text-primary group-hover:text-cyan-400 transition">
                     Forex Factory Economic Calendar & Daily News
                   </div>
                   <p className="theme-text-secondary text-xs mt-0.5">
                     View live high-impact economic releases, time countdowns, and real-time market feeds.
                   </p>
                 </div>
-                <ArrowRight size={16} className="text-amber-500 group-hover:translate-x-1 transition shrink-0 ml-2" />
+                <ArrowRight size={16} className="text-cyan-400 group-hover:translate-x-1 transition shrink-0 ml-2" />
               </button>
             </div>
           )}

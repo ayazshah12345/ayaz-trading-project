@@ -256,14 +256,14 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
           <div className="flex items-center space-x-2">
             <button
               onClick={handlePrevMonth}
-              className="p-2 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-secondary hover:theme-text-primary hover:border-amber-500/50 transition cursor-pointer"
+              className="p-2 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-secondary hover:theme-text-primary hover:border-cyan-500/50 transition cursor-pointer"
               title="Previous Month"
             >
               <ChevronLeft size={16} />
             </button>
 
             <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
-              <CalendarIcon size={16} className="text-amber-500" />
+              <CalendarIcon size={16} className="text-cyan-400" />
               <span className="text-sm font-black theme-text-primary font-mono-numeric uppercase tracking-wide">
                 {monthName}
               </span>
@@ -271,7 +271,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
 
             <button
               onClick={handleNextMonth}
-              className="p-2 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-secondary hover:theme-text-primary hover:border-amber-500/50 transition cursor-pointer"
+              className="p-2 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-secondary hover:theme-text-primary hover:border-cyan-500/50 transition cursor-pointer"
               title="Next Month"
             >
               <ChevronRight size={16} />
@@ -279,17 +279,17 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
 
             <button
               onClick={handleJumpToToday}
-              className="px-2.5 py-1.5 text-xs font-bold rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-secondary hover:text-amber-400 transition"
+              className="px-2.5 py-1.5 text-xs font-bold rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] theme-text-secondary hover:text-cyan-400 transition cursor-pointer"
             >
               Today
             </button>
 
             <button
               onClick={() => setShowMonthPickerGrid(!showMonthPickerGrid)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition flex items-center space-x-1.5 ${
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition flex items-center space-x-1.5 cursor-pointer ${
                 showMonthPickerGrid
-                  ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-sm'
-                  : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] text-amber-400 hover:border-amber-500/50'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-cyan-500 shadow-sm'
+                  : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] text-cyan-400 hover:border-cyan-500/50'
               }`}
             >
               <CalendarDays size={14} />
@@ -301,9 +301,9 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
           <div className="flex flex-wrap items-center gap-1.5 bg-[var(--bg-subpanel)] p-1 rounded-lg border border-[var(--border-color)]">
             <button
               onClick={() => setViewScope('TODAY')}
-              className={`px-3 py-1.5 rounded text-xs font-bold transition ${
+              className={`px-3 py-1.5 rounded text-xs font-bold transition cursor-pointer ${
                 viewScope === 'TODAY'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                   : 'theme-text-secondary hover:theme-text-primary'
               }`}
             >
@@ -311,9 +311,9 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
             </button>
             <button
               onClick={() => setViewScope('TOMORROW')}
-              className={`px-3 py-1.5 rounded text-xs font-bold transition ${
+              className={`px-3 py-1.5 rounded text-xs font-bold transition cursor-pointer ${
                 viewScope === 'TOMORROW'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                   : 'theme-text-secondary hover:theme-text-primary'
               }`}
             >
@@ -321,9 +321,9 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
             </button>
             <button
               onClick={() => setViewScope('WEEK')}
-              className={`px-3 py-1.5 rounded text-xs font-bold transition ${
+              className={`px-3 py-1.5 rounded text-xs font-bold transition cursor-pointer ${
                 viewScope === 'WEEK'
-                  ? 'bg-amber-500 text-slate-950 shadow-xs'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                   : 'theme-text-secondary hover:theme-text-primary'
               }`}
             >
@@ -331,10 +331,10 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
             </button>
             <button
               onClick={() => setViewScope('MONTH')}
-              className={`px-3.5 py-1.5 rounded text-xs font-black transition flex items-center space-x-1 ${
+              className={`px-3.5 py-1.5 rounded text-xs font-black transition flex items-center space-x-1 cursor-pointer ${
                 viewScope === 'MONTH'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'text-amber-400 hover:text-amber-300'
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md'
+                  : 'text-cyan-400 hover:text-cyan-300'
               }`}
             >
               <CalendarDays size={13} />
@@ -348,21 +348,21 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
           <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-3 animate-in fade-in duration-150">
             <div className="flex items-center justify-between text-xs">
               <span className="font-bold theme-text-primary flex items-center space-x-1.5">
-                <CalendarDays size={14} className="text-amber-500" />
+                <CalendarDays size={14} className="text-cyan-400" />
                 <span>Click any day to inspect that day's news schedule:</span>
               </span>
               <div className="flex items-center space-x-3 text-[11px] font-mono">
                 <span className="flex items-center space-x-1">
                   <span className="w-2 h-2 rounded-full bg-rose-500" />
-                  <span className="text-rose-400">High</span>
+                  <span className="theme-text-secondary">High</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="w-2 h-2 rounded-full bg-orange-500" />
-                  <span className="text-orange-400">Medium</span>
+                  <span className="theme-text-secondary">Med</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span className="text-emerald-400">Low</span>
+                  <span className="theme-text-secondary">Low</span>
                 </span>
               </div>
             </div>
@@ -399,16 +399,16 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
                     }}
                     className={`h-14 p-1.5 rounded-lg border transition flex flex-col justify-between text-left cursor-pointer ${
                       isSelected
-                        ? 'bg-amber-500 text-slate-950 border-amber-500 font-bold shadow-md'
+                        ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-cyan-400 font-bold shadow-md'
                         : isToday
-                        ? 'bg-amber-500/15 border-amber-500/60 theme-text-primary'
-                        : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-amber-500/50 hover:bg-[var(--bg-card-hover)] theme-text-primary'
+                        ? 'bg-cyan-500/15 border-cyan-500/60 theme-text-primary'
+                        : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-cyan-500/50 hover:bg-[var(--bg-card-hover)] theme-text-primary'
                     }`}
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono font-bold">
                       <span>{dayNum}</span>
                       {isToday && (
-                        <span className="text-[9px] px-1 py-0.2 rounded bg-amber-500 text-slate-950">
+                        <span className="text-[9px] px-1 py-0.2 rounded bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
                           TODAY
                         </span>
                       )}
@@ -461,7 +461,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Search month news (e.g. CPI, NFP, Powell, Rate, Unemployment)..."
-              className="w-full pl-9 pr-4 py-2 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] text-xs theme-text-primary placeholder:text-[var(--text-muted)] focus:outline-none focus:border-amber-500 transition"
+              className="w-full pl-9 pr-4 py-2 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] text-xs theme-text-primary placeholder:text-[var(--text-muted)] focus:outline-none focus:border-cyan-400 transition"
             />
             {searchQuery && (
               <button
@@ -535,9 +535,9 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               <button
                 key={curr}
                 onClick={() => setSelectedCurrency(curr)}
-                className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition border shrink-0 flex items-center space-x-1 ${
+                className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition border shrink-0 flex items-center space-x-1 cursor-pointer ${
                   isSelected
-                    ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-xs'
+                    ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-cyan-400 shadow-xs'
                     : 'bg-[var(--bg-subpanel)] border-[var(--border-color)] theme-text-secondary hover:theme-text-primary'
                 }`}
               >
@@ -571,7 +571,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
       {/* Events Results List */}
       {groupedEvents.length === 0 ? (
         <div className="p-12 text-center rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] space-y-3">
-          <div className="w-12 h-12 rounded-full bg-slate-800/50 flex items-center justify-center mx-auto text-amber-500">
+          <div className="w-12 h-12 rounded-full bg-slate-800/50 flex items-center justify-center mx-auto text-cyan-400">
             <Info size={24} />
           </div>
           <div className="text-sm font-bold theme-text-primary">No Economic Events Found</div>
@@ -586,7 +586,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               setSelectedCurrency('ALL');
               setViewScope('MONTH');
             }}
-            className="px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black text-xs hover:bg-amber-600 transition cursor-pointer"
+            className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs transition cursor-pointer"
           >
             Show All Month News
           </button>
@@ -600,7 +600,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
             {/* Group Header */}
             <div className="px-4 py-2.5 bg-[var(--bg-subpanel)] border-b border-[var(--border-color)] flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <span className="w-2 h-2 rounded-full bg-amber-500" />
+                <span className="w-2 h-2 rounded-full bg-cyan-400" />
                 <h3 className="text-xs font-black uppercase tracking-wide theme-text-primary">
                   {group.label}
                 </h3>
@@ -656,13 +656,13 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
 
                     {/* Middle: Event Title */}
                     <div className="flex-1 min-w-0 sm:px-2">
-                      <div className="text-xs sm:text-sm font-semibold theme-text-primary group-hover:text-amber-400 transition truncate">
+                      <div className="text-xs sm:text-sm font-semibold theme-text-primary group-hover:text-cyan-400 transition truncate">
                         {event.title}
                       </div>
                       <div className="text-[10px] theme-text-secondary font-mono flex items-center space-x-2 mt-0.5">
                         <span>Forex Factory Calendar Feed</span>
                         {CURRENCY_AFFECTED_ASSETS[event.country] && (
-                          <span className="hidden md:inline text-amber-500/80">
+                          <span className="hidden md:inline text-cyan-400/80">
                             Affects: {CURRENCY_AFFECTED_ASSETS[event.country].slice(0, 3).join(', ')}
                           </span>
                         )}
@@ -688,7 +688,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
 
                       <ChevronRight
                         size={16}
-                        className="theme-text-secondary group-hover:text-amber-400 group-hover:translate-x-0.5 transition hidden sm:block"
+                        className="theme-text-secondary group-hover:text-cyan-400 group-hover:translate-x-0.5 transition hidden sm:block"
                       />
                     </div>
                   </div>
@@ -711,7 +711,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="font-mono font-black text-sm text-amber-500">
+                    <span className="font-mono font-black text-sm text-cyan-400">
                       {activeModalEvent.country}
                     </span>
                     {renderImpactBadge(activeModalEvent.impact)}
@@ -757,10 +757,10 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
 
                 <div>
                   <div className="text-[10px] uppercase font-bold text-slate-400 flex items-center">
-                    <Sparkles size={12} className="mr-1 text-amber-500" />
+                    <Sparkles size={12} className="mr-1 text-cyan-400" />
                     Status / Countdown
                   </div>
-                  <div className="text-sm font-bold text-amber-400 font-mono mt-0.5">
+                  <div className="text-sm font-bold text-cyan-400 font-mono mt-0.5">
                     {formatEventCountdown(activeModalEvent.date).label}
                   </div>
                   <div className="text-[11px] text-slate-400 mt-0.5">Forex Factory Release</div>
@@ -777,7 +777,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
                 </div>
                 <div className="p-2 rounded bg-[var(--bg-card)] border border-[var(--border-color)]">
                   <div className="text-[10px] uppercase font-bold text-slate-400">Forecast</div>
-                  <div className="text-sm font-bold text-amber-400 font-mono mt-1">
+                  <div className="text-sm font-bold text-cyan-400 font-mono mt-1">
                     {activeModalEvent.forecast || '—'}
                   </div>
                 </div>
@@ -793,14 +793,14 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               {CURRENCY_AFFECTED_ASSETS[activeModalEvent.country] && (
                 <div className="space-y-1.5">
                   <div className="text-[11px] font-bold uppercase tracking-wider theme-text-secondary flex items-center">
-                    <TrendingUp size={13} className="mr-1 text-amber-500" />
+                    <TrendingUp size={13} className="mr-1 text-cyan-400" />
                     High Volatility Affected Pairs:
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {CURRENCY_AFFECTED_ASSETS[activeModalEvent.country].map(pair => (
                       <span
                         key={pair}
-                        className="px-2.5 py-1 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] font-mono font-bold text-amber-400 text-[11px]"
+                        className="px-2.5 py-1 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)] font-mono font-bold text-cyan-400 text-[11px]"
                       >
                         {pair}
                       </span>
@@ -810,8 +810,8 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
               )}
 
               {/* Trading Rule Advisory */}
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300/90 space-y-1">
-                <div className="font-bold flex items-center space-x-1.5 text-amber-400">
+              <div className="p-3 rounded-xl bg-blue-950/30 border border-cyan-500/30 text-cyan-200/90 space-y-1">
+                <div className="font-bold flex items-center space-x-1.5 text-cyan-400">
                   <ShieldAlert size={14} />
                   <span>Execution Risk Checklist</span>
                 </div>
@@ -829,7 +829,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
                 href="https://www.forexfactory.com/calendar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 text-xs text-amber-400 hover:text-amber-300 font-bold transition"
+                className="inline-flex items-center space-x-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-bold transition"
               >
                 <span>Open on ForexFactory.com</span>
                 <ExternalLink size={14} />
@@ -837,7 +837,7 @@ export const ForexFactoryCalendar: React.FC<ForexFactoryCalendarProps> = ({ even
 
               <button
                 onClick={() => setActiveModalEvent(null)}
-                className="px-4 py-2 rounded-lg bg-amber-500 text-slate-950 font-black text-xs hover:bg-amber-600 transition cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs transition cursor-pointer"
               >
                 Close Inspector
               </button>

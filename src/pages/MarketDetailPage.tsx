@@ -32,7 +32,7 @@ export const MarketDetailPage: React.FC<MarketDetailPageProps> = ({ workspace })
         <div className="flex items-center space-x-3">
           <button
             onClick={() => navigate('/markets')}
-            className="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-lg shadow-md transition flex items-center space-x-1.5 cursor-pointer shrink-0"
+            className="px-3 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs rounded-lg shadow-md shadow-cyan-500/20 transition flex items-center space-x-1.5 cursor-pointer shrink-0"
             title="Back to Markets"
           >
             <ArrowLeft size={16} />
@@ -59,9 +59,9 @@ export const MarketDetailPage: React.FC<MarketDetailPageProps> = ({ workspace })
 
           <button
             onClick={() => workspace.toggleFavoriteMarket(market.symbol)}
-            className="p-2 rounded border border-[#2a2e39] hover:bg-[#131722] transition"
+            className="p-2 rounded border border-[#2a2e39] hover:bg-[#131722] transition cursor-pointer"
           >
-            <Star size={18} fill={market.isFavorite ? '#f59e0b' : 'none'} className={market.isFavorite ? 'text-amber-400' : 'text-slate-400'} />
+            <Star size={18} fill={market.isFavorite ? '#38bdf8' : 'none'} className={market.isFavorite ? 'text-cyan-400' : 'text-slate-400'} />
           </button>
         </div>
       </div>

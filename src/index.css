@@ -27,26 +27,26 @@
   }
 
   html[data-theme="dark"] {
-    --bg-main: #0a0e1a;
-    --bg-sidebar: #101626;
-    --bg-header: #101626;
-    --bg-card: #141c2e;
-    --bg-card-hover: #1d2840;
-    --bg-subpanel: #0d1220;
-    --bg-input: #1b263b;
+    --bg-main: #060813;
+    --bg-sidebar: #080b18;
+    --bg-header: #080b18;
+    --bg-card: #0c1224;
+    --bg-card-hover: #111833;
+    --bg-subpanel: #090d1c;
+    --bg-input: #0b0e1b;
     
-    --border-color: #27344d;
-    --border-hover: #3d4f73;
+    --border-color: #1a233b;
+    --border-hover: #26365a;
     
     --text-primary: #f8fafc;
-    --text-secondary: #a0aec0;
+    --text-secondary: #94a3b8;
     --text-muted: #64748b;
 
-    --profit-green: #00e676;
-    --loss-red: #ff5252;
-    --accent-gold: #e5c158;
+    --profit-green: #10b981;
+    --loss-red: #ef4444;
+    --accent-gold: #38bdf8;
     --accent-blue: #3b82f6;
-    --accent-amber: #f59e0b;
+    --accent-amber: #0ea5e9;
     --accent-indigo: #6366f1;
   }
 
@@ -162,13 +162,13 @@ html[data-theme="dark"] .terminal-card {
   animation-play-state: paused;
 }
 
-/* Gold Radial Glow & Shield Pulse */
+/* Sapphire/Cyan Radial Glow & Shield Pulse */
 @keyframes gold-pulse {
   0%, 100% {
-    box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.45), 0 0 55px -10px rgba(217, 119, 6, 0.25);
+    box-shadow: 0 0 25px -5px rgba(14, 165, 233, 0.45), 0 0 55px -10px rgba(37, 99, 235, 0.25);
   }
   50% {
-    box-shadow: 0 0 45px 5px rgba(245, 158, 11, 0.75), 0 0 85px 15px rgba(217, 119, 6, 0.4);
+    box-shadow: 0 0 45px 5px rgba(14, 165, 233, 0.75), 0 0 85px 15px rgba(37, 99, 235, 0.4);
   }
 }
 
@@ -176,9 +176,9 @@ html[data-theme="dark"] .terminal-card {
   animation: gold-pulse 3.5s ease-in-out infinite;
 }
 
-/* Metallic gold gradient text */
+/* Metallic cyan/blue gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #fff2a3 0%, #f59e0b 50%, #d97706 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #2563eb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

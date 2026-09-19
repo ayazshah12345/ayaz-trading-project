@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Mail,
@@ -16,7 +16,12 @@ import {
   LineChart,
   RefreshCw,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  Download,
+  Smartphone,
+  Laptop,
+  X,
+  Share2
 } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 import founderImg from '../assets/founder.png';
@@ -39,6 +44,56 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [isFetchError, setIsFetchError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  // Default Install Option State
+  const [installPrompt, setInstallPrompt] = useState<any>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [showInstallGuide, setShowInstallGuide] = useState(false);
+
+  useEffect(() => {
+    // Check if running in standalone mode
+    if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true) {
+      setIsInstalled(true);
+    }
+
+    const handleInstallable = (e: Event) => {
+      const customE = e as CustomEvent<{ prompt: any }>;
+      setInstallPrompt(customE.detail?.prompt || (window as any).deferredInstallPrompt);
+    };
+
+    const handleAppInstalled = () => {
+      setIsInstalled(true);
+      setInstallPrompt(null);
+    };
+
+    window.addEventListener('pwa-installable', handleInstallable);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    if ((window as any).deferredInstallPrompt) {
+      setInstallPrompt((window as any).deferredInstallPrompt);
+    }
+
+    return () => {
+      window.removeEventListener('pwa-installable', handleInstallable);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (installPrompt) {
+      try {
+        await installPrompt.prompt();
+        const choiceResult = await installPrompt.userChoice;
+        if (choiceResult?.outcome === 'accepted') {
+          setIsInstalled(true);
+        }
+      } catch (e) {
+        setShowInstallGuide(true);
+      }
+    } else {
+      setShowInstallGuide(true);
+    }
+  };
 
   const isNetworkFailure = (err: any): boolean => {
     if (!err) return false;
@@ -197,24 +252,37 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <div className="space-y-8 max-w-2xl">
             
             {/* Free-Floating Brand & Standalone Logo */}
-            <div className="flex items-center space-x-4 sm:space-x-5">
-              <div className="relative group">
-                <div className="absolute -inset-2 rounded-full bg-cyan-500/25 blur-xl opacity-75 group-hover:opacity-100 transition duration-700" />
-                <img
-                  src={logoImg}
-                  alt="Black FX Logo"
-                  className="relative w-16 h-16 sm:w-20 sm:h-20 object-contain filter drop-shadow-[0_8px_24px_rgba(14,165,233,0.4)] transform group-hover:scale-105 transition duration-300"
-                />
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center space-x-4 sm:space-x-5">
+                <div className="relative group">
+                  <div className="absolute -inset-2 rounded-full bg-cyan-500/25 blur-xl opacity-75 group-hover:opacity-100 transition duration-700" />
+                  <img
+                    src={logoImg}
+                    alt="Black FX Logo"
+                    className="relative w-16 h-16 sm:w-20 sm:h-20 object-contain filter drop-shadow-[0_8px_24px_rgba(14,165,233,0.4)] transform group-hover:scale-105 transition duration-300"
+                  />
+                </div>
+
+                <div>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white font-mono-numeric">
+                    BLACK <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">FX</span>
+                  </h1>
+                  <p className="text-xs sm:text-sm font-semibold tracking-wider text-slate-400 uppercase mt-1">
+                    The Traders Backtesting and Journal Platform
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white font-mono-numeric">
-                  BLACK <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">FX</span>
-                </h1>
-                <p className="text-xs sm:text-sm font-semibold tracking-wider text-slate-400 uppercase mt-1">
-                  The Traders Backtesting and Journal Platform
-                </p>
-              </div>
+              {/* Quick Install Pill */}
+              <button
+                type="button"
+                onClick={handleInstallClick}
+                className="px-3.5 py-1.5 rounded-full bg-blue-950/60 hover:bg-blue-900/60 border border-cyan-500/40 text-cyan-300 text-xs font-bold transition flex items-center space-x-1.5 shadow-sm hover:shadow-cyan-500/20 cursor-pointer"
+                title="Install Black FX App"
+              >
+                <Download size={13} className="text-cyan-400" />
+                <span>{isInstalled ? 'App Installed' : 'Install App'}</span>
+              </button>
             </div>
 
             {/* Hero Catchphrase (FundingPips-Inspired Modern Typographic Impact) */}
@@ -624,9 +692,149 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               )}
             </div>
 
+            {/* ================= DEFAULT INSTALL OPTION (ADAPTS TO LOGIN BACKGROUND) ================= */}
+            <div className="pt-4 border-t border-slate-800/80">
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-[#0c1328]/90 via-[#070b1a]/95 to-[#060813] border border-cyan-500/30 shadow-[0_8px_32px_rgba(6,8,19,0.7)] backdrop-blur-xl relative overflow-hidden group">
+                
+                {/* Subtle crystal background glow */}
+                <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-cyan-500/10 blur-xl pointer-events-none group-hover:bg-cyan-500/20 transition duration-500" />
+                <div className="absolute -bottom-10 -left-10 w-28 h-28 rounded-full bg-blue-600/10 blur-xl pointer-events-none" />
+
+                <div className="relative z-10 space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center space-x-3 min-w-0">
+                      <div className="w-10 h-10 rounded-xl p-1 bg-[#090d1c] border border-cyan-400/40 flex items-center justify-center shrink-0 shadow-md">
+                        <img
+                          src={logoImg}
+                          alt="Black FX App Icon"
+                          className="w-7 h-7 object-contain filter drop-shadow-[0_2px_8px_rgba(56,189,248,0.5)]"
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center space-x-1.5">
+                          <span className="text-xs font-black text-white tracking-wide uppercase">
+                            Download Black FX App
+                          </span>
+                          <span className="text-[9px] font-bold text-cyan-300 bg-cyan-500/20 px-1.5 py-0.5 rounded-full border border-cyan-500/40 font-mono-numeric">
+                            Native PWA
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-slate-400 truncate">
+                          Install on your device for instant offline & zero latency
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={handleInstallClick}
+                      className="flex-1 py-2.5 px-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs rounded-xl shadow-md shadow-cyan-500/20 transition-all flex items-center justify-center space-x-2 cursor-pointer border border-cyan-300/30"
+                    >
+                      <Download size={14} className="shrink-0 animate-bounce" />
+                      <span>{isInstalled ? 'App Installed ✓' : 'Install / Download App'}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowInstallGuide(true)}
+                      className="py-2.5 px-3 rounded-xl bg-[#090d1c] hover:bg-[#0f172a] text-slate-300 hover:text-cyan-300 border border-slate-800 text-xs font-bold transition-all cursor-pointer flex items-center space-x-1"
+                      title="Installation instructions for iOS & Android"
+                    >
+                      <Smartphone size={14} />
+                      <span className="hidden sm:inline">Guide</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
+
+      {/* ================= INSTALL GUIDE MODAL (ADAPTS TO LOGIN BACKGROUND) ================= */}
+      {showInstallGuide && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-2xl bg-[#080b18] border border-cyan-500/30 p-6 shadow-2xl space-y-5 text-slate-200 relative overflow-hidden">
+            
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600" />
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2.5">
+                <div className="w-8 h-8 rounded-lg bg-[#0c1224] border border-cyan-400/40 flex items-center justify-center">
+                  <img src={logoImg} alt="Black FX" className="w-6 h-6 object-contain" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black text-white uppercase tracking-wider">
+                    Install Black FX App
+                  </h3>
+                  <p className="text-[11px] text-slate-400">Step-by-step device instructions</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowInstallGuide(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="space-y-3 text-xs">
+              {/* iOS Safari */}
+              <div className="p-3 rounded-xl bg-[#0c1224] border border-slate-800/80 space-y-1">
+                <div className="flex items-center space-x-2 font-bold text-cyan-300">
+                  <Smartphone size={14} />
+                  <span>iPhone / iPad (Safari)</span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  1. Tap the <strong>Share</strong> button (box with upward arrow <Share2 size={11} className="inline mx-0.5" />) in Safari toolbar.<br />
+                  2. Scroll down and select <strong>"Add to Home Screen"</strong> ➕.<br />
+                  3. Tap <strong>"Add"</strong> in top right. Black FX is now ready on your home screen!
+                </p>
+              </div>
+
+              {/* Android Chrome */}
+              <div className="p-3 rounded-xl bg-[#0c1224] border border-slate-800/80 space-y-1">
+                <div className="flex items-center space-x-2 font-bold text-blue-300">
+                  <Smartphone size={14} />
+                  <span>Android (Chrome / Edge)</span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  1. Tap the three dots menu (<strong>⋮</strong>) in the top right corner.<br />
+                  2. Select <strong>"Install App"</strong> or <strong>"Add to Home screen"</strong>.<br />
+                  3. Confirm <strong>"Install"</strong> to add the standalone app.
+                </p>
+              </div>
+
+              {/* Desktop Windows / Mac */}
+              <div className="p-3 rounded-xl bg-[#0c1224] border border-slate-800/80 space-y-1">
+                <div className="flex items-center space-x-2 font-bold text-emerald-300">
+                  <Laptop size={14} />
+                  <span>PC / Mac (Chrome / Edge / Brave)</span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  1. Look for the <strong>Install</strong> icon in the address bar (right side of URL).<br />
+                  2. Or click browser menu (<strong>⋮</strong>) &rarr; <strong>"Install Black FX..."</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setShowInstallGuide(false)}
+                className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs rounded-xl shadow-md transition cursor-pointer"
+              >
+                Got It, Continue
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 };

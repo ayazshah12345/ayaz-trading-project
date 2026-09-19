@@ -109,12 +109,12 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
       ];
 
   return (
-    <div className="terminal-card p-5 space-y-5 shadow-sm border-amber-500/20">
+    <div className="terminal-card p-5 space-y-5 shadow-sm border-cyan-500/20">
       {/* Header & Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
         <div>
           <h3 className="text-base font-extrabold theme-text-primary flex items-center space-x-2">
-            <BarChart2 className="text-amber-500" size={20} />
+            <BarChart2 className="text-cyan-400" size={20} />
             <span>Journal Performance & Win/Loss Analytics</span>
           </h3>
           <p className="text-xs theme-text-secondary mt-0.5 font-medium">
@@ -128,7 +128,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('WINLOSS')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'WINLOSS'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -140,7 +140,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('GROWTH')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'GROWTH'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -152,7 +152,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('ASSET')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'ASSET'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -164,7 +164,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('STRATEGY')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'STRATEGY'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -180,9 +180,9 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
           {/* Top KPI Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Trade Journal Win/Loss Card */}
-            <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-amber-500/30 space-y-3 font-mono-numeric">
+            <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-cyan-500/30 space-y-3 font-mono-numeric">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold text-amber-500 uppercase tracking-wider">
+                <span className="text-xs font-extrabold text-cyan-400 uppercase tracking-wider">
                   Trade Journal Win/Loss Ratio
                 </span>
                 <span className="px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-black border border-emerald-500/30">
@@ -254,7 +254,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
                   <Legend />
                   <Bar dataKey="Wins" fill="#10b981" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="Losses" fill="#f43f5e" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="Breakevens" fill="#e5c158" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Breakevens" fill="#38bdf8" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -269,7 +269,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             <h4 className="text-xs font-extrabold theme-text-primary uppercase tracking-wider">
               Cumulative Growth Curve (Trade Journal vs Backtest)
             </h4>
-            <span className="text-xs text-amber-500 font-bold">Realized P&L ($) Growth</span>
+            <span className="text-xs text-cyan-400 font-bold">Realized P&L ($) Growth</span>
           </div>
 
           <div className="w-full h-72">
@@ -277,8 +277,8 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
               <AreaChart data={growthCurveData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="tradePnlGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#e5c158" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#e5c158" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#38bdf8" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="backtestPnlGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#6366f1" stopOpacity={0.4} />

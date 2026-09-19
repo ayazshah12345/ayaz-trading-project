@@ -37,7 +37,7 @@ export const GapAnalyzerAnalytics: React.FC<GapAnalyzerAnalyticsProps> = ({ trad
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color)] pb-3">
         <div>
           <h3 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider flex items-center space-x-2">
-            <Zap className="text-amber-500" size={18} />
+            <Zap className="text-cyan-400" size={18} />
             <span>Trade Journal Gap Analyzer Analytics</span>
           </h3>
           <p className="text-xs theme-text-secondary mt-0.5">
@@ -45,7 +45,7 @@ export const GapAnalyzerAnalytics: React.FC<GapAnalyzerAnalyticsProps> = ({ trad
           </p>
         </div>
 
-        <span className="px-3 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/30 rounded-full font-mono-numeric font-extrabold text-xs">
+        <span className="px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full font-mono-numeric font-extrabold text-xs">
           {totalGapTrades} Gap Trades Analyzed
         </span>
       </div>
@@ -54,7 +54,7 @@ export const GapAnalyzerAnalytics: React.FC<GapAnalyzerAnalyticsProps> = ({ trad
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono-numeric">
         <div className="p-3.5 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
           <span className="text-[10px] theme-text-secondary uppercase font-bold">Gap Win Rate</span>
-          <div className="text-lg font-extrabold text-amber-500">{gapWinRate}%</div>
+          <div className="text-lg font-extrabold text-cyan-400">{gapWinRate}%</div>
         </div>
 
         <div className="p-3.5 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
@@ -114,11 +114,11 @@ export const GapAnalyzerAnalytics: React.FC<GapAnalyzerAnalyticsProps> = ({ trad
         <div className="p-4 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-2 font-mono-numeric">
           <div className="flex items-center justify-between text-xs font-bold">
             <span className="theme-text-primary">Liquidity Voids</span>
-            <span className="text-amber-400">{liquidityVoidTrades.length} Trades</span>
+            <span className="text-cyan-400">{liquidityVoidTrades.length} Trades</span>
           </div>
           <div className="w-full bg-[var(--bg-card)] rounded-full h-2 overflow-hidden border border-[var(--border-color)]">
             <div
-              className="bg-amber-500 h-full rounded-full transition-all"
+              className="bg-cyan-500 h-full rounded-full transition-all"
               style={{ width: `${trades.length ? (liquidityVoidTrades.length / trades.length) * 100 : 0}%` }}
             />
           </div>

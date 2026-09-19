@@ -36,7 +36,7 @@ export const BacktestingPage: React.FC<BacktestingPageProps> = ({ workspace }) =
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-extrabold theme-text-primary flex items-center space-x-2">
-            <FlaskConical className="text-amber-500" />
+            <FlaskConical className="text-cyan-400" />
             <span>Backtesting Lab</span>
           </h1>
           <p className="text-xs theme-text-secondary mt-1 font-medium">
@@ -46,7 +46,7 @@ export const BacktestingPage: React.FC<BacktestingPageProps> = ({ workspace }) =
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center space-x-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-extrabold rounded-lg shadow-md transition self-start sm:self-auto"
+          className="flex items-center space-x-1.5 px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-extrabold rounded-lg shadow-md shadow-cyan-500/20 transition self-start sm:self-auto cursor-pointer"
         >
           <Plus size={16} />
           <span>New Backtest Campaign</span>
@@ -55,10 +55,10 @@ export const BacktestingPage: React.FC<BacktestingPageProps> = ({ workspace }) =
 
       {/* Primary Campaign Highlight Metrics */}
       {primaryCampaign && (
-        <div className="terminal-card p-5 space-y-4">
+        <div className="terminal-card p-5 space-y-4 border-cyan-500/30">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
             <div>
-              <span className="text-[10px] uppercase font-mono-numeric font-extrabold text-amber-500">Featured Campaign</span>
+              <span className="text-[10px] uppercase font-mono-numeric font-extrabold text-cyan-400">Featured Campaign</span>
               <h3 className="text-base font-extrabold theme-text-primary">{primaryCampaign.title}</h3>
             </div>
             <span className="text-xs font-mono-numeric theme-text-secondary font-medium">
@@ -80,8 +80,8 @@ export const BacktestingPage: React.FC<BacktestingPageProps> = ({ workspace }) =
               <div className="text-lg font-extrabold text-emerald-500">{primaryCampaign.profitFactor}</div>
             </div>
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
-              <span className="text-amber-500 text-[10px] uppercase font-extrabold">Max Drawdown</span>
-              <div className="text-lg font-extrabold text-amber-500">{primaryCampaign.maxDrawdown}%</div>
+              <span className="text-cyan-400 text-[10px] uppercase font-extrabold">Max Drawdown</span>
+              <div className="text-lg font-extrabold text-cyan-400">{primaryCampaign.maxDrawdown}%</div>
             </div>
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
               <span className="text-blue-600 dark:text-blue-400 text-[10px] uppercase font-extrabold">Avg R / Trade</span>

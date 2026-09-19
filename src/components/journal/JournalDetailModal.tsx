@@ -27,7 +27,7 @@ export const JournalDetailModal: React.FC<JournalDetailModalProps> = ({
       case 'Bearish':
         return 'bg-rose-500/10 text-rose-500 border-rose-500/30';
       default:
-        return 'bg-amber-500/10 text-amber-500 border-amber-500/30';
+        return 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30';
     }
   };
 
@@ -44,7 +44,7 @@ export const JournalDetailModal: React.FC<JournalDetailModalProps> = ({
           {/* Header Summary Bar */}
           <div className="p-4 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center space-x-3">
-              <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-500 font-bold flex items-center space-x-1 font-mono-numeric">
+              <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold flex items-center space-x-1 font-mono-numeric">
                 <Calendar size={16} />
                 <span>{journal.date}</span>
               </div>
@@ -61,12 +61,12 @@ export const JournalDetailModal: React.FC<JournalDetailModalProps> = ({
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1">
                 <span className="theme-text-secondary font-medium">Mood:</span>
-                <div className="flex text-amber-400">
+                <div className="flex text-cyan-400">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
                       size={13}
-                      className={i < journal.moodRating ? 'fill-amber-400 text-amber-400' : 'text-slate-400 opacity-30'}
+                      className={i < journal.moodRating ? 'fill-cyan-400 text-cyan-400' : 'text-slate-400 opacity-30'}
                     />
                   ))}
                 </div>
@@ -74,12 +74,12 @@ export const JournalDetailModal: React.FC<JournalDetailModalProps> = ({
 
               <div className="flex items-center space-x-1">
                 <span className="theme-text-secondary font-medium">Discipline:</span>
-                <div className="flex text-amber-500">
+                <div className="flex text-cyan-400">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
                       size={13}
-                      className={i < journal.disciplineRating ? 'fill-amber-500 text-amber-500' : 'text-slate-400 opacity-30'}
+                      className={i < journal.disciplineRating ? 'fill-cyan-400 text-cyan-400' : 'text-slate-400 opacity-30'}
                     />
                   ))}
                 </div>
@@ -91,7 +91,7 @@ export const JournalDetailModal: React.FC<JournalDetailModalProps> = ({
                     onEdit(journal);
                     onClose();
                   }}
-                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold rounded-lg transition shadow-sm"
+                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold rounded-lg transition shadow-sm cursor-pointer"
                 >
                   <Edit3 size={14} />
                   <span>Edit Entry</span>
@@ -166,7 +166,7 @@ export const JournalDetailModal: React.FC<JournalDetailModalProps> = ({
 
           {/* Post-Market Review */}
           <div className="p-4 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-3">
-            <div className="font-bold text-amber-500 uppercase tracking-wider text-[11px] flex items-center space-x-2">
+            <div className="font-bold text-cyan-400 uppercase tracking-wider text-[11px] flex items-center space-x-2">
               <Sparkles size={14} />
               <span>Post-Market Review & Lessons</span>
             </div>

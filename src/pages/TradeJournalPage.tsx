@@ -51,7 +51,7 @@ export const TradeJournalPage: React.FC<TradeJournalPageProps> = ({ workspace })
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-extrabold theme-text-primary flex items-center space-x-2">
-            <BookMarked className="text-amber-500" />
+            <BookMarked className="text-cyan-400" />
             <span>Trade Journal</span>
           </h1>
           <p className="text-xs theme-text-secondary mt-1 font-medium">
@@ -63,7 +63,7 @@ export const TradeJournalPage: React.FC<TradeJournalPageProps> = ({ workspace })
           {trades.length > 0 && (
             <button
               onClick={() => setIsDeleteAllModalOpen(true)}
-              className="flex items-center space-x-1.5 px-3.5 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 text-xs font-extrabold rounded-lg transition shadow-xs"
+              className="flex items-center space-x-1.5 px-3.5 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 text-xs font-extrabold rounded-lg transition shadow-xs cursor-pointer"
               title="Delete All Trades"
             >
               <Trash2 size={15} />
@@ -73,7 +73,7 @@ export const TradeJournalPage: React.FC<TradeJournalPageProps> = ({ workspace })
 
           <button
             onClick={handleExportCSV}
-            className="flex items-center space-x-1.5 px-3.5 py-2 bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] theme-text-primary text-xs font-bold rounded-lg border border-[var(--border-color)] transition shadow-xs"
+            className="flex items-center space-x-1.5 px-3.5 py-2 bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] theme-text-primary text-xs font-bold rounded-lg border border-[var(--border-color)] transition shadow-xs cursor-pointer"
           >
             <Download size={15} />
             <span>Export CSV</span>
@@ -81,7 +81,7 @@ export const TradeJournalPage: React.FC<TradeJournalPageProps> = ({ workspace })
 
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center space-x-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-extrabold rounded-lg shadow-md transition"
+            className="flex items-center space-x-1.5 px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-extrabold rounded-lg shadow-md shadow-cyan-500/20 transition cursor-pointer"
           >
             <Plus size={16} />
             <span>Add Trade</span>
@@ -90,17 +90,17 @@ export const TradeJournalPage: React.FC<TradeJournalPageProps> = ({ workspace })
       </div>
 
       {/* Dynamic Account Capital Banner */}
-      <div className="terminal-card p-5 bg-gradient-to-r from-amber-500/10 via-[var(--bg-card)] to-amber-500/10 border-amber-500/30">
+      <div className="terminal-card p-5 bg-gradient-to-r from-blue-950/30 via-[var(--bg-card)] to-cyan-950/30 border-cyan-500/30">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 text-amber-500 font-extrabold text-[11px] uppercase tracking-wider border border-amber-500/30">
+              <span className="px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 font-extrabold text-[11px] uppercase tracking-wider border border-cyan-500/30">
                 Account Equity & Capital
               </span>
               <span className="text-xs theme-text-secondary">Auto-calculated from Trade Journal P&L</span>
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold theme-text-primary font-mono-numeric flex items-center space-x-3">
-              <span className="text-amber-500 font-black">${workspace.currentCapital?.toFixed(2) || '100.00'} USD</span>
+              <span className="text-cyan-400 font-black">${workspace.currentCapital?.toFixed(2) || '100.00'} USD</span>
               <span className={`text-sm px-2.5 py-0.5 rounded-full font-bold font-mono-numeric ${
                 netPnl >= 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30' : 'bg-rose-500/10 text-rose-500 border border-rose-500/30'
               }`}>
@@ -119,7 +119,7 @@ export const TradeJournalPage: React.FC<TradeJournalPageProps> = ({ workspace })
                   step="any"
                   value={workspace.initialCapital}
                   onChange={e => workspace.setInitialCapital(parseFloat(e.target.value) || 0)}
-                  className="w-24 bg-[var(--bg-card)] border border-[var(--border-color)] rounded px-2 py-1 text-xs font-extrabold theme-text-primary outline-none focus:border-amber-500 font-mono-numeric text-right transition"
+                  className="w-24 bg-[var(--bg-card)] border border-[var(--border-color)] rounded px-2 py-1 text-xs font-extrabold theme-text-primary outline-none focus:border-cyan-400 font-mono-numeric text-right transition"
                 />
               </div>
             </div>

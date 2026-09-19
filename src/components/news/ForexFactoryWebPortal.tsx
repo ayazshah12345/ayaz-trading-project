@@ -69,16 +69,16 @@ export const ForexFactoryWebPortal: React.FC = () => {
               onClick={() => setActiveShortcut(item.id)}
               className={`p-3.5 rounded-xl border transition cursor-pointer flex flex-col justify-between ${
                 isActive
-                  ? 'bg-amber-500/10 border-amber-500 shadow-sm'
-                  : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-amber-500/50 hover:bg-[var(--bg-card-hover)]'
+                  ? 'bg-cyan-500/10 border-cyan-400 shadow-sm'
+                  : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-cyan-500/50 hover:bg-[var(--bg-card-hover)]'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <div className="p-2 rounded-lg bg-[var(--bg-subpanel)] text-amber-400 border border-[var(--border-color)]">
+                  <div className="p-2 rounded-lg bg-[var(--bg-subpanel)] text-cyan-400 border border-[var(--border-color)]">
                     <Icon size={16} />
                   </div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">
                     {item.badge}
                   </span>
                 </div>
@@ -95,7 +95,7 @@ export const ForexFactoryWebPortal: React.FC = () => {
                     e.stopPropagation();
                     handleOpenExternal(item.url);
                   }}
-                  className="inline-flex items-center space-x-1 text-amber-400 hover:text-amber-300 font-bold"
+                  className="inline-flex items-center space-x-1 text-cyan-400 hover:text-cyan-300 font-bold cursor-pointer"
                 >
                   <span>Launch Official</span>
                   <ExternalLink size={12} />
@@ -108,14 +108,14 @@ export const ForexFactoryWebPortal: React.FC = () => {
       </div>
 
       {/* Official Forex Factory Quick-Launch Hero Banner */}
-      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-slate-900/90 to-amber-950/40 border border-amber-500/50 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/40 via-slate-900/90 to-cyan-950/40 border border-cyan-500/50 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-start sm:items-center space-x-3.5">
-          <div className="p-3 rounded-xl bg-amber-500 text-slate-950 font-black shrink-0 shadow-lg">
+          <div className="p-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black shrink-0 shadow-lg">
             <Zap size={22} />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-black uppercase tracking-wider text-amber-400 font-mono">
+              <span className="text-xs font-black uppercase tracking-wider text-cyan-400 font-mono">
                 OFFICIAL PORTAL
               </span>
               <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
@@ -135,7 +135,7 @@ export const ForexFactoryWebPortal: React.FC = () => {
 
         <button
           onClick={() => handleOpenExternal(selectedItem.url)}
-          className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-lg transition flex items-center space-x-2 shrink-0 self-start sm:self-auto cursor-pointer"
+          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs shadow-lg shadow-cyan-500/20 transition flex items-center space-x-2 shrink-0 self-start sm:self-auto cursor-pointer"
         >
           <span>Launch {selectedItem.badge} Now</span>
           <ExternalLink size={15} />
@@ -146,7 +146,7 @@ export const ForexFactoryWebPortal: React.FC = () => {
       <div className="rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-card)] shadow-md">
         <div className="px-4 py-2.5 bg-[var(--bg-subpanel)] border-b border-[var(--border-color)] flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Globe size={15} className="text-amber-500" />
+            <Globe size={15} className="text-cyan-400" />
             <span className="text-xs font-mono font-bold theme-text-primary">
               Live Financial Market Feed & Breaking News
             </span>

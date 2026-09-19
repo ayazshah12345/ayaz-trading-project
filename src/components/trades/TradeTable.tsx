@@ -32,7 +32,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, onSelectTrade, o
           <select
             value={assetFilter}
             onChange={e => setAssetFilter(e.target.value)}
-            className="bg-[var(--bg-subpanel)] theme-text-primary border border-[var(--border-color)] rounded px-2.5 py-1.5 outline-none focus:border-amber-500 font-mono-numeric font-bold"
+            className="bg-[var(--bg-subpanel)] theme-text-primary border border-[var(--border-color)] rounded px-2.5 py-1.5 outline-none focus:border-cyan-400 font-mono-numeric font-bold"
           >
             {assets.map(a => (
               <option key={a} value={a}>
@@ -45,7 +45,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, onSelectTrade, o
           <select
             value={directionFilter}
             onChange={e => setDirectionFilter(e.target.value)}
-            className="bg-[var(--bg-subpanel)] theme-text-primary border border-[var(--border-color)] rounded px-2.5 py-1.5 outline-none focus:border-amber-500 font-mono-numeric font-bold"
+            className="bg-[var(--bg-subpanel)] theme-text-primary border border-[var(--border-color)] rounded px-2.5 py-1.5 outline-none focus:border-cyan-400 font-mono-numeric font-bold"
           >
             <option value="ALL">Direction: All</option>
             <option value="LONG">LONG</option>
@@ -56,7 +56,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, onSelectTrade, o
           <select
             value={resultFilter}
             onChange={e => setResultFilter(e.target.value)}
-            className="bg-[var(--bg-subpanel)] theme-text-primary border border-[var(--border-color)] rounded px-2.5 py-1.5 outline-none focus:border-amber-500 font-mono-numeric font-bold"
+            className="bg-[var(--bg-subpanel)] theme-text-primary border border-[var(--border-color)] rounded px-2.5 py-1.5 outline-none focus:border-cyan-400 font-mono-numeric font-bold"
           >
             <option value="ALL">Result: All</option>
             <option value="WIN">WIN</option>
@@ -102,9 +102,9 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, onSelectTrade, o
                   onClick={() => onSelectTrade(t)}
                   className="hover:bg-[var(--bg-card-hover)] transition cursor-pointer group"
                 >
-                  <td className="p-3 font-bold theme-text-primary group-hover:text-amber-500">{t.id}</td>
+                  <td className="p-3 font-bold theme-text-primary group-hover:text-cyan-400">{t.id}</td>
                   <td className="p-3 theme-text-secondary font-semibold">{t.date}</td>
-                  <td className="p-3 font-bold text-amber-500">{t.asset}</td>
+                  <td className="p-3 font-bold text-cyan-400">{t.asset}</td>
                   <td className="p-3">
                     <span
                       className={`inline-flex items-center space-x-1 px-2 py-0.5 rounded font-bold text-[10px] ${
@@ -129,7 +129,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, onSelectTrade, o
                           ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
                           : isLoss
                           ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20'
-                          : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                          : 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20'
                       }`}
                     >
                       {t.result}
@@ -147,7 +147,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({ trades, onSelectTrade, o
                     <div className="flex items-center justify-end space-x-1" onClick={e => e.stopPropagation()}>
                       <button
                         onClick={() => onSelectTrade(t)}
-                        className="p-1.5 theme-text-secondary hover:text-amber-500 hover:bg-[var(--bg-card-hover)] rounded transition"
+                        className="p-1.5 theme-text-secondary hover:text-cyan-400 hover:bg-[var(--bg-card-hover)] rounded transition cursor-pointer"
                         title="Inspect Trade"
                       >
                         <Eye size={15} />

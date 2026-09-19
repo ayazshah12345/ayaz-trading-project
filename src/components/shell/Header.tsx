@@ -75,10 +75,10 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Forex Factory News Shortcut */}
         <Link
           to="/news"
-          className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold transition shadow-xs"
+          className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-md text-xs font-bold transition shadow-xs"
           title="Open Forex Factory Economic News Calendar"
         >
-          <Newspaper size={14} className="text-amber-400" />
+          <Newspaper size={14} className="text-cyan-400" />
           <span>Forex Factory News</span>
         </Link>
       </div>
@@ -104,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({
           title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
           {isDarkMode ? (
-            <Sun size={17} className="text-amber-400" />
+            <Sun size={17} className="text-cyan-400" />
           ) : (
             <Moon size={17} className="text-indigo-500" />
           )}
@@ -147,12 +147,12 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Dynamic User Profile Initials Badge & Logout */}
         <div className="flex items-center space-x-2 pl-2 border-l border-[var(--border-color)]">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xs shadow-md border border-amber-500/40">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-black text-xs shadow-md border border-cyan-500/40">
             {initialLetter}
           </div>
           <div className="hidden xl:block text-left">
             <div className="text-xs font-bold theme-text-primary truncate max-w-[140px]">{userEmail || displayName}</div>
-            <div className="text-[10px] text-amber-500 font-mono-numeric font-semibold">Trader Account</div>
+            <div className="text-[10px] text-cyan-400 font-mono-numeric font-semibold">Trader Account</div>
           </div>
           {onLogout && (
             <button

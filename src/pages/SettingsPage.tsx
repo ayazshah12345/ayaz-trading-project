@@ -181,7 +181,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ workspace }) => {
         {/* Data Import / Export Section */}
         <div className="terminal-card p-5 space-y-4">
           <h3 className="text-xs font-bold theme-text-primary uppercase tracking-wider flex items-center space-x-2 border-b border-[var(--border-color)] pb-2">
-            <Database size={15} className="text-amber-500" />
+            <Database size={15} className="text-cyan-400" />
             <span>Workspace Data Management</span>
           </h3>
 
@@ -190,10 +190,10 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ workspace }) => {
           </p>
 
           <div className="flex space-x-3 pt-2">
-            <button className="px-4 py-2 bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] theme-text-primary rounded border border-[var(--border-color)] font-mono-numeric transition">
+            <button className="px-4 py-2 bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] theme-text-primary rounded border border-[var(--border-color)] font-mono-numeric transition cursor-pointer">
               Export Full Workspace Data
             </button>
-            <button className="px-4 py-2 bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] theme-text-primary rounded border border-[var(--border-color)] font-mono-numeric transition">
+            <button className="px-4 py-2 bg-[var(--bg-subpanel)] hover:bg-[var(--bg-card-hover)] theme-text-primary rounded border border-[var(--border-color)] font-mono-numeric transition cursor-pointer">
               Import Backup File
             </button>
           </div>
@@ -202,18 +202,18 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ workspace }) => {
         {/* Account & Profile */}
         <div className="terminal-card p-5 space-y-4">
           <h3 className="text-xs font-bold theme-text-primary uppercase tracking-wider flex items-center space-x-2 border-b border-[var(--border-color)] pb-2">
-            <User size={15} className="text-indigo-400" />
+            <User size={15} className="text-blue-400" />
             <span>Profile & Account</span>
           </h3>
 
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-lg shadow-md border border-amber-500/40">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-black text-lg shadow-md border border-cyan-500/40">
               {initialLetter}
             </div>
             <div>
               <div className="font-bold text-slate-100 text-sm font-sans">{userEmail || displayName}</div>
               <div className="text-slate-400 text-xs font-mono-numeric">{userEmail || 'trader@terminal'}</div>
-              <div className="text-[10px] text-amber-400 font-semibold font-mono-numeric">Active Trader</div>
+              <div className="text-[10px] text-cyan-400 font-semibold font-mono-numeric">Active Trader</div>
             </div>
           </div>
         </div>

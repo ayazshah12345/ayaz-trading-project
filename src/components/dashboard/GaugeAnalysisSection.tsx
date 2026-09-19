@@ -113,7 +113,7 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h3 className="text-base font-extrabold theme-text-primary flex items-center space-x-2">
-            <Compass className="text-amber-500" size={20} />
+            <Compass className="text-cyan-400" size={20} />
             <span>Dynamic Trade Gauges & Performance Radar</span>
           </h3>
           <p className="text-xs theme-text-secondary mt-0.5 font-medium">
@@ -126,7 +126,7 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
             onClick={() => setMode('TRADE')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition ${
               mode === 'TRADE'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -137,7 +137,7 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
             onClick={() => setMode('BACKTEST')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition ${
               mode === 'BACKTEST'
-                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -316,10 +316,10 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
         <div className="terminal-card p-5 space-y-3 shadow-sm border border-[var(--border-color)] bg-[var(--bg-card)]">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
             <h4 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider flex items-center space-x-2">
-              <Activity size={16} className="text-amber-500" />
+              <Activity size={16} className="text-cyan-400" />
               <span>4-Axis Trading Performance Radar</span>
             </h4>
-            <span className="text-[10px] text-amber-500 font-extrabold uppercase font-mono-numeric px-2.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30">
+            <span className="text-[10px] text-cyan-400 font-extrabold uppercase font-mono-numeric px-2.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30">
               Dynamic Evaluation
             </span>
           </div>
@@ -336,11 +336,11 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
                 <Radar
                   name="Trader Score"
                   dataKey="value"
-                  stroke="#fbbf24"
-                  fill="#fbbf24"
-                  fillOpacity={0.15}
+                  stroke="#38bdf8"
+                  fill="#38bdf8"
+                  fillOpacity={0.2}
                   strokeWidth={3.5}
-                  dot={{ r: 5, fill: '#fbbf24', stroke: '#ffffff', strokeWidth: 2 }}
+                  dot={{ r: 5, fill: '#38bdf8', stroke: '#ffffff', strokeWidth: 2 }}
                 />
               </RadarChart>
             </ResponsiveContainer>
@@ -349,7 +349,7 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
           <div className="grid grid-cols-4 gap-2 text-center text-xs font-mono-numeric pt-2 border-t border-[var(--border-color)]">
             <div className="p-2 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
               <div className="text-[10px] theme-text-secondary uppercase font-extrabold">Consistency</div>
-              <div className="font-extrabold text-amber-500">{consistencyScore}%</div>
+              <div className="font-extrabold text-cyan-400">{consistencyScore}%</div>
             </div>
             <div className="p-2 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
               <div className="text-[10px] theme-text-secondary uppercase font-extrabold">SL Usage</div>
@@ -357,11 +357,11 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
             </div>
             <div className="p-2 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
               <div className="text-[10px] theme-text-secondary uppercase font-extrabold">WR</div>
-              <div className="font-extrabold text-purple-400">{wrScore}%</div>
+              <div className="font-extrabold text-blue-400">{wrScore}%</div>
             </div>
             <div className="p-2 rounded bg-[var(--bg-subpanel)] border border-[var(--border-color)]">
               <div className="text-[10px] theme-text-secondary uppercase font-extrabold">RR</div>
-              <div className="font-extrabold text-amber-500">{avgR.toFixed(2)}R</div>
+              <div className="font-extrabold text-cyan-400">{avgR.toFixed(2)}R</div>
             </div>
           </div>
         </div>
@@ -370,7 +370,7 @@ export const GaugeAnalysisSection: React.FC<GaugeAnalysisSectionProps> = ({
         <div className="terminal-card p-5 space-y-3 shadow-sm font-mono-numeric flex flex-col justify-between">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
             <div className="flex items-center space-x-2">
-              <Clock className="text-amber-500" size={18} />
+              <Clock className="text-cyan-400" size={18} />
               <h4 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider">
                 PnL Distribution by Trade Duration
               </h4>

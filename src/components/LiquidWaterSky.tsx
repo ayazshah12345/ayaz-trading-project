@@ -26,6 +26,7 @@ export const LiquidWaterSky: React.FC = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       initStars();
+      initAshClouds();
     };
 
     window.addEventListener('resize', handleResize);
@@ -60,6 +61,49 @@ export const LiquidWaterSky: React.FC = () => {
       }
     };
     initStars();
+
+    // ================= LIGHT ASH CLOUDS THAT FLOAT AND PASS AWAY =================
+    interface AshPuff {
+      offsetX: number;
+      offsetY: number;
+      radius: number;
+    }
+
+    interface AshCloud {
+      x: number;
+      y: number;
+      speedX: number;
+      scale: number;
+      alpha: number;
+      puffs: AshPuff[];
+    }
+
+    let ashClouds: AshCloud[] = [];
+    const initAshClouds = () => {
+      ashClouds = [];
+      const cloudCount = 5;
+      for (let i = 0; i < cloudCount; i++) {
+        const puffs: AshPuff[] = [];
+        const puffCount = Math.floor(Math.random() * 5) + 8; // 8 to 12 overlapping cloud puffs
+        const baseRadius = Math.random() * 35 + 60;
+        for (let p = 0; p < puffCount; p++) {
+          puffs.push({
+            offsetX: (Math.random() - 0.5) * baseRadius * 3.2,
+            offsetY: (Math.random() - 0.5) * baseRadius * 0.85,
+            radius: Math.random() * baseRadius * 0.6 + baseRadius * 0.65,
+          });
+        }
+        ashClouds.push({
+          x: (i * (width / cloudCount)) + Math.random() * 80 - 120,
+          y: Math.random() * (height * 0.42) + 40, // Floating gracefully across upper and mid sky
+          speedX: Math.random() * 0.22 + 0.16, // Continuous gentle floating velocity
+          scale: Math.random() * 0.45 + 0.85,
+          alpha: Math.random() * 0.06 + 0.18, // Light ash transparency
+          puffs,
+        });
+      }
+    };
+    initAshClouds();
 
     // ================= BIOLUMINESCENT WATER BUBBLES / CAUSTIC PARTICLES =================
     interface Droplet {
@@ -109,6 +153,44 @@ export const LiquidWaterSky: React.FC = () => {
       }
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 1.0;
+
+      // 1.5 RENDER LIGHT ASH CLOUDS THAT FLOAT AND PASS AWAY ACROSS THE SKY
+      for (let i = 0; i < ashClouds.length; i++) {
+        const c = ashClouds[i];
+        c.x += c.speedX;
+
+        // When cloud passes away off the right edge, wrap smoothly to the far left
+        if (c.x - 300 > width) {
+          c.x = -350;
+          c.y = Math.random() * (height * 0.42) + 40;
+          c.speedX = Math.random() * 0.22 + 0.16;
+          c.alpha = Math.random() * 0.06 + 0.18;
+        }
+
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.scale(c.scale, c.scale);
+
+        for (let p = 0; p < c.puffs.length; p++) {
+          const puff = c.puffs[p];
+          const px = puff.offsetX;
+          const py = puff.offsetY;
+          const pr = puff.radius;
+
+          const cloudGrad = ctx.createRadialGradient(px, py, 0, px, py, pr);
+          // Light Ash & Silver Slate Tones that apt the #060813 background
+          cloudGrad.addColorStop(0, `rgba(203, 213, 225, ${c.alpha * 1.35})`); // soft light ash core
+          cloudGrad.addColorStop(0.35, `rgba(148, 163, 184, ${c.alpha * 0.9})`); // soft ash slate
+          cloudGrad.addColorStop(0.7, `rgba(100, 116, 139, ${c.alpha * 0.35})`); // misty translucent rim
+          cloudGrad.addColorStop(1, 'rgba(6, 8, 19, 0)'); // seamlessly blends into obsidian
+
+          ctx.beginPath();
+          ctx.arc(px, py, pr, 0, Math.PI * 2);
+          ctx.fillStyle = cloudGrad;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
 
       // 2. RENDER LIVELY LIQUID WATER WAVES (Bottom half of viewport)
       const waterBaseY = height * 0.62; // Starts slightly below middle, rolls to bottom
@@ -241,6 +323,13 @@ export const LiquidWaterSky: React.FC = () => {
 
       {/* Aurora Borealis Shimmer Veil across Upper Sky */}
       <div className="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-cyan-500/10 via-blue-600/5 to-transparent blur-3xl animate-sky-shimmer" />
+
+      {/* ================= LIGHT ASH CLOUDS (FLOAT AND PASS AWAY) ================= */}
+      {/* Upper Altitude Light Ash Cloud Passing Away */}
+      <div className="absolute top-10 left-[-20%] w-[680px] h-[220px] rounded-full bg-gradient-to-r from-slate-400/16 via-slate-300/22 to-transparent blur-[60px] animate-ash-cloud-1" />
+      
+      {/* Mid Altitude Light Ash Cloud Drifting Across */}
+      <div className="absolute top-36 left-[-30%] w-[780px] h-[260px] rounded-full bg-gradient-to-r from-transparent via-slate-400/18 to-slate-500/14 blur-[75px] animate-ash-cloud-2" />
 
       {/* Deep Ocean Bottom Fade to blend seamlessly with footer */}
       <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#060813] via-[#060813]/60 to-transparent" />

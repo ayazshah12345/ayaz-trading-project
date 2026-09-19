@@ -341,7 +341,7 @@ exit
       </div>
 
       {/* ================= SLEEK TOP NAVIGATION BAR (LIKE FUNDINGPIPS) ================= */}
-      <header className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-5 flex items-center justify-between relative z-30">
+      <header className="w-full max-w-[1720px] mx-auto px-6 sm:px-10 py-3 sm:py-4 flex items-center justify-between relative z-30">
         
         {/* Brand Logo & Name */}
         <div className="flex items-center space-x-3.5">
@@ -411,23 +411,23 @@ exit
         </div>
       </header>
 
-      {/* ================= MAIN HERO SECTION (FREE-STYLE, OPEN COMPOSITION) ================= */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-6 sm:px-10 pt-4 pb-12 flex flex-col justify-center relative z-20">
+      {/* ================= MAIN HERO SECTION (FULL OCCUPATION, BALANCED HORIZONTAL GRID) ================= */}
+      <main className="flex-1 w-full max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 py-3 sm:py-6 flex flex-col justify-center relative z-20">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
           {/* ================= LEFT HERO COLUMN: FOUNDER EDITORIAL & BOLD HEADLINE ================= */}
-          <div className="lg:col-span-6 space-y-7">
+          <div className="lg:col-span-5 xl:col-span-5 space-y-4 xl:space-y-5">
             
             {/* ================= FOUNDER CREDENTIAL (PRESENT BELOW THE COMPANY LOGO) ================= */}
-            <div className="space-y-3.5 pb-1">
+            <div className="space-y-3 pb-1">
               <div className="flex items-center space-x-4">
                 <div className="relative shrink-0 group">
                   <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-cyan-400 via-blue-500 to-emerald-400 blur-sm opacity-80 group-hover:opacity-100 transition duration-500" />
                   <img
                     src={founderImg}
                     alt="Syed Ayaz Shah - Founder of Black FX"
-                    className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full object-cover border-2 border-[#060813] shadow-xl"
+                    className="relative w-15 h-15 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-[#060813] shadow-xl"
                   />
                 </div>
 
@@ -447,65 +447,65 @@ exit
               </div>
 
               {/* Verified Editorial Narrative */}
-              <div className="pl-4 border-l-2 border-cyan-400/80 space-y-1.5 py-1">
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+              <div className="pl-4 border-l-2 border-cyan-400/80 space-y-1 py-0.5">
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed italic">
                   "I am <strong className="text-white font-bold not-italic">Syed Ayaz Shah</strong>, an experienced Forex trader with over 3 years of hands-on market execution. Black FX was built from the ground up to empower traders with institutional clarity — created specifically to document daily trading journals, preserve comprehensive backtesting records, and analyze real-time live charts with disciplined precision."
                 </p>
               </div>
             </div>
 
             {/* Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-950/70 to-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-950/70 to-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
               <Sparkles size={13} className="text-cyan-400" />
               <span>Institutional Quantitative Execution</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
             </div>
 
             {/* Grand Typography (Institutional High-Impact Headline) */}
-            <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
+            <div className="space-y-2.5">
+              <h1 className="text-3xl sm:text-4xl xl:text-5xl font-black tracking-tight text-white leading-[1.1]">
                 Master your edge with{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
                   institutional precision
                 </span>
               </h1>
               
-              <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed max-w-xl">
                 The institutional-grade platform engineered to journal daily executions, stress-test historical setups, and track live price analytics with statistical mastery.
               </p>
             </div>
 
             {/* Quick Action Pill Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <BookOpen size={14} className="text-cyan-400 shrink-0" />
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
+              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
+                <BookOpen size={13} className="text-cyan-400 shrink-0" />
                 <span>Daily Trade Log</span>
               </div>
-              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <FlaskConical size={14} className="text-blue-400 shrink-0" />
+              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
+                <FlaskConical size={13} className="text-blue-400 shrink-0" />
                 <span>Historical Backtesting</span>
               </div>
-              <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <LineChart size={14} className="text-emerald-400 shrink-0" />
+              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
+                <LineChart size={13} className="text-emerald-400 shrink-0" />
                 <span>TradingView Charts</span>
               </div>
             </div>
 
           </div>
 
-          {/* ================= RIGHT HERO COLUMN: FREE-STYLE 3D CRYSTAL CANDLESTICKS & FLOATING AUTH ================= */}
-          <div className="lg:col-span-6 relative flex flex-col items-center justify-center">
+          {/* ================= RIGHT HERO COLUMN: 3D CRYSTAL CANDLESTICKS & AUTH TERMINAL SIDE-BY-SIDE ================= */}
+          <div className="lg:col-span-7 xl:col-span-7 relative flex flex-col lg:flex-row items-center justify-center lg:justify-end gap-6 xl:gap-8">
             
-            {/* ================= FREE-STYLE 3D CRYSTAL CANDLESTICK SCULPTURE (NO BOX CONTAINER) ================= */}
-            <div className="relative w-full h-[460px] sm:h-[520px] flex items-center justify-center overflow-visible pointer-events-none select-none">
+            {/* ================= FREE-STYLE 3D CRYSTAL CANDLESTICKS ================= */}
+            <div className="relative w-full max-w-[300px] xl:max-w-[330px] h-[360px] xl:h-[400px] flex items-center justify-center overflow-visible pointer-events-none select-none shrink-0">
               
               {/* Giant Luminous Radial Atmosphere Glow behind candles */}
-              <div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-cyan-500/25 via-blue-600/20 to-transparent blur-[120px] pointer-events-none" />
+              <div className="absolute w-[340px] h-[340px] rounded-full bg-gradient-to-tr from-cyan-500/25 via-blue-600/20 to-transparent blur-[90px] pointer-events-none" />
 
               {/* Dynamic Curved Free-Style Uptrend Wave Line */}
               <svg
                 className="absolute inset-0 w-full h-full overflow-visible z-10"
-                viewBox="0 0 500 400"
+                viewBox="0 0 400 350"
                 preserveAspectRatio="none"
               >
                 <defs>
@@ -519,120 +519,127 @@ exit
 
                   {/* Soft Background Fill */}
                   <linearGradient id="freeStyleArea" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.18" />
-                    <stop offset="60%" stopColor="#1e40af" stopOpacity="0.06" />
+                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.15" />
+                    <stop offset="60%" stopColor="#1e40af" stopOpacity="0.05" />
                     <stop offset="100%" stopColor="#060813" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
 
                 {/* Background Wave Area Fill */}
                 <path
-                  d="M 0 350 C 90 340, 160 300, 240 240 C 310 180, 390 190, 460 110 C 480 85, 495 70, 500 60 L 500 400 L 0 400 Z"
+                  d="M 0 300 C 70 290, 130 250, 190 200 C 250 150, 310 160, 370 90 C 385 70, 395 55, 400 45 L 400 350 L 0 350 Z"
                   fill="url(#freeStyleArea)"
                 />
 
                 {/* Radiant Neon Uptrend Trajectory Wave */}
                 <path
-                  d="M 0 350 C 90 340, 160 300, 240 240 C 310 180, 390 190, 460 110 C 480 85, 495 70, 500 60"
+                  d="M 0 300 C 70 290, 130 250, 190 200 C 250 150, 310 160, 370 90 C 385 70, 395 55, 400 45"
                   fill="none"
                   stroke="url(#freeStyleWave)"
-                  strokeWidth="4"
+                  strokeWidth="3.5"
                   strokeLinecap="round"
-                  filter="drop-shadow(0 0 14px rgba(14,165,233,0.9))"
+                  filter="drop-shadow(0 0 12px rgba(14,165,233,0.9))"
                 />
 
                 {/* Milestone Nodes */}
-                <circle cx="240" cy="240" r="5" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)" />
-                <circle cx="460" cy="110" r="6" fill="#0ea5e9" filter="drop-shadow(0 0 10px #0ea5e9)" />
-                <circle cx="500" cy="60" r="7" fill="#34d399" filter="drop-shadow(0 0 14px #34d399)" />
+                <circle cx="190" cy="200" r="4.5" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)" />
+                <circle cx="370" cy="90" r="5.5" fill="#0ea5e9" filter="drop-shadow(0 0 10px #0ea5e9)" />
+                <circle cx="400" cy="45" r="6" fill="#34d399" filter="drop-shadow(0 0 14px #34d399)" />
               </svg>
 
               {/* ================= 3D TRANSLUCENT GLASS CRYSTAL CANDLESTICKS ================= */}
-              <div className="relative z-20 flex items-center justify-center gap-8 sm:gap-12 w-full max-w-md">
+              <div className="relative z-20 flex items-center justify-center gap-6 sm:gap-8 w-full">
                 
                 {/* CANDLESTICK 1 (Left / Intermediate, Levitating) */}
                 <div className="animate-float-slow flex flex-col items-center">
                   
                   {/* Upper Transparent Glass Wick */}
                   <div
-                    className="w-3 sm:w-3.5 h-20 sm:h-24 rounded-full"
+                    className="w-2.5 sm:w-3 h-16 sm:h-20 rounded-full"
                     style={{
                       background: 'linear-gradient(to right, rgba(255,255,255,0.4), rgba(186,230,253,0.85), rgba(255,255,255,0.3))',
-                      boxShadow: '0 0 12px rgba(56,189,248,0.7), inset 1px 1px 2px rgba(255,255,255,0.9)',
+                      boxShadow: '0 0 10px rgba(56,189,248,0.7), inset 1px 1px 2px rgba(255,255,255,0.9)',
                     }}
                   />
 
                   {/* 3D Glass Beveled Body */}
                   <div
-                    className="w-24 sm:w-28 h-40 sm:h-48 rounded-[26px] relative overflow-hidden"
+                    className="w-20 sm:w-24 h-32 sm:h-40 rounded-[22px] relative overflow-hidden"
                     style={{
                       background: 'linear-gradient(135deg, rgba(56,189,248,0.32) 0%, rgba(37,99,235,0.22) 50%, rgba(14,165,233,0.38) 100%)',
                       backdropFilter: 'blur(16px)',
                       WebkitBackdropFilter: 'blur(16px)',
                       border: '1.5px solid rgba(224,242,254,0.6)',
-                      boxShadow: 'inset 0 0 30px rgba(56,189,248,0.35), inset 2.5px 2.5px 5px rgba(255,255,255,0.85), inset -3px -3px 8px rgba(10,15,30,0.7), 0 20px 50px rgba(14,165,233,0.35)',
+                      boxShadow: 'inset 0 0 25px rgba(56,189,248,0.35), inset 2px 2px 4px rgba(255,255,255,0.85), inset -2px -2px 6px rgba(10,15,30,0.7), 0 15px 40px rgba(14,165,233,0.35)',
                     }}
                   >
                     {/* Interior Specular Reflection Streak */}
-                    <div className="absolute top-0 bottom-0 left-2 w-3 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-80" />
+                    <div className="absolute top-0 bottom-0 left-1.5 w-2.5 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-80" />
                     
                     {/* Top Rim Specular Glare */}
-                    <div className="absolute top-1 left-2 right-2 h-2.5 rounded-full bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[0.5px]" />
+                    <div className="absolute top-1 left-2 right-2 h-2 rounded-full bg-gradient-to-r from-transparent via-white/50 to-transparent blur-[0.5px]" />
                     
                     {/* Liquid Refractive Core */}
-                    <div className="absolute inset-4 rounded-xl bg-gradient-to-tr from-blue-600/30 via-cyan-400/20 to-transparent opacity-60" />
+                    <div className="absolute inset-3 rounded-xl bg-gradient-to-tr from-blue-600/30 via-cyan-400/20 to-transparent opacity-60" />
                   </div>
 
                   {/* Lower Transparent Glass Wick */}
                   <div
-                    className="w-3 sm:w-3.5 h-16 sm:h-20 rounded-full"
+                    className="w-2.5 sm:w-3 h-14 sm:h-16 rounded-full"
                     style={{
                       background: 'linear-gradient(to right, rgba(255,255,255,0.4), rgba(186,230,253,0.85), rgba(255,255,255,0.3))',
-                      boxShadow: '0 0 12px rgba(56,189,248,0.7), inset 1px 1px 2px rgba(255,255,255,0.9)',
+                      boxShadow: '0 0 10px rgba(56,189,248,0.7), inset 1px 1px 2px rgba(255,255,255,0.9)',
                     }}
                   />
 
                 </div>
 
                 {/* CANDLESTICK 2 (Right / Taller, Ascending Grandeur - Exactly like FundingPips) */}
-                <div className="animate-float-reverse flex flex-col items-center -mt-10 sm:-mt-14">
+                <div className="animate-float-reverse flex flex-col items-center -mt-8 sm:-mt-10">
                   
                   {/* Upper Transparent Glass Wick (Tall) */}
                   <div
-                    className="w-3.5 sm:w-4 h-24 sm:h-32 rounded-full"
+                    className="w-3 sm:w-3.5 h-20 sm:h-24 rounded-full"
                     style={{
                       background: 'linear-gradient(to right, rgba(255,255,255,0.45), rgba(186,230,253,0.9), rgba(255,255,255,0.35))',
-                      boxShadow: '0 0 16px rgba(56,189,248,0.85), inset 1px 1px 2px rgba(255,255,255,0.95)',
+                      boxShadow: '0 0 14px rgba(56,189,248,0.85), inset 1px 1px 2px rgba(255,255,255,0.95)',
                     }}
                   />
 
-                  {/* 3D Glass Beveled Body (Taller, Majestic) */}
+                  {/* 3D Glass Beveled Body (Tall Master Candlestick) */}
                   <div
-                    className="w-28 sm:w-36 h-52 sm:h-64 rounded-[32px] relative overflow-hidden"
+                    className="w-24 sm:w-28 h-44 sm:h-52 rounded-[26px] relative overflow-hidden"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(56,189,248,0.4) 0%, rgba(37,99,235,0.3) 45%, rgba(14,165,233,0.45) 100%)',
+                      background: 'linear-gradient(135deg, rgba(56,189,248,0.40) 0%, rgba(30,64,175,0.28) 45%, rgba(14,165,233,0.42) 100%)',
                       backdropFilter: 'blur(20px)',
                       WebkitBackdropFilter: 'blur(20px)',
-                      border: '1.8px solid rgba(224,242,254,0.75)',
-                      boxShadow: 'inset 0 0 45px rgba(56,189,248,0.45), inset 3px 3px 6px rgba(255,255,255,0.9), inset -4px -4px 10px rgba(10,15,30,0.8), 0 25px 65px rgba(14,165,233,0.45)',
+                      border: '1.5px solid rgba(224,242,254,0.7)',
+                      boxShadow: 'inset 0 0 35px rgba(56,189,248,0.45), inset 3px 3px 6px rgba(255,255,255,0.9), inset -3px -3px 8px rgba(10,15,30,0.8), 0 25px 60px rgba(14,165,233,0.45)',
                     }}
                   >
                     {/* Interior Specular Reflection Streak */}
-                    <div className="absolute top-0 bottom-0 left-3 w-4 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-85" />
+                    <div className="absolute top-0 bottom-0 left-2 w-3.5 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-90" />
                     
                     {/* Top Rim Specular Glare */}
-                    <div className="absolute top-1.5 left-3 right-3 h-3 rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent blur-[0.5px]" />
+                    <div className="absolute top-1 left-2 right-2 h-3 rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent blur-[0.5px]" />
                     
-                    {/* Radiant Blue Center Refraction */}
-                    <div className="absolute inset-5 rounded-2xl bg-gradient-to-tr from-blue-700/40 via-cyan-400/25 to-transparent opacity-70" />
+                    {/* Liquid Refractive Core */}
+                    <div className="absolute inset-4 rounded-xl bg-gradient-to-tr from-blue-600/40 via-cyan-400/30 to-emerald-400/20 opacity-70" />
+                    
+                    {/* Inner Institutional Watermark */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+                      <span className="text-[9px] font-black tracking-widest text-cyan-200 font-mono-numeric uppercase">
+                        ALPHA
+                      </span>
+                    </div>
                   </div>
 
                   {/* Lower Transparent Glass Wick */}
                   <div
-                    className="w-3.5 sm:w-4 h-20 sm:h-28 rounded-full"
+                    className="w-3 sm:w-3.5 h-16 sm:h-20 rounded-full"
                     style={{
                       background: 'linear-gradient(to right, rgba(255,255,255,0.45), rgba(186,230,253,0.9), rgba(255,255,255,0.35))',
-                      boxShadow: '0 0 16px rgba(56,189,248,0.85), inset 1px 1px 2px rgba(255,255,255,0.95)',
+                      boxShadow: '0 0 14px rgba(56,189,248,0.85), inset 1px 1px 2px rgba(255,255,255,0.95)',
                     }}
                   />
 
@@ -641,8 +648,8 @@ exit
               </div>
 
               {/* Floating Aesthetic HUD Badges (Free-floating, no boxed container) */}
-              <div className="absolute bottom-4 left-6 sm:left-12 flex items-center space-x-2 text-[11px] text-slate-200 font-mono-numeric bg-[#080d20]/80 px-3 py-1.5 rounded-full border border-cyan-500/30 backdrop-blur-md shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              <div className="absolute bottom-2 left-2 sm:left-4 flex items-center space-x-1.5 text-[10px] text-slate-200 font-mono-numeric bg-[#080d20]/85 px-2.5 py-1 rounded-full border border-cyan-500/30 backdrop-blur-md shadow-lg">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
                 <span className="font-bold text-cyan-300">Algorithmic Equilibrium</span>
                 <span className="text-emerald-400 font-extrabold">+384.8% Alpha</span>
               </div>
@@ -650,9 +657,9 @@ exit
             </div>
 
             {/* ================= FLOATING LUXURY GLASS AUTHENTICATION TERMINAL ================= */}
-            <div className="w-full max-w-md mt-6 relative z-30 pointer-events-auto">
+            <div className="w-full max-w-[380px] xl:max-w-[400px] relative z-30 pointer-events-auto shrink-0">
               
-              <div className="p-6 sm:p-7 rounded-3xl bg-[#090e21]/80 border border-cyan-500/30 shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-2xl space-y-5 relative overflow-hidden">
+              <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#090e21]/85 border border-cyan-500/30 shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-2xl space-y-4 relative overflow-hidden">
                 
                 {/* Subtle crystal glow top accent */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-400" />
@@ -715,23 +722,23 @@ exit
                 )}
 
                 {/* Form Inputs */}
-                <form onSubmit={handleSubmit} className="space-y-3.5">
+                <form onSubmit={handleSubmit} className="space-y-3">
                   
                   {/* Email Input */}
                   <div className="space-y-1">
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-300">
                       Email Address
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-                        <Mail size={15} />
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                        <Mail size={14} />
                       </div>
                       <input
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         placeholder="trader@blackfx.com"
-                        className="w-full bg-[#070b18] border border-slate-800 rounded-xl pl-10 pr-3 py-2.5 text-white placeholder-slate-600 font-mono-numeric font-medium outline-none focus:border-cyan-400 transition text-xs"
+                        className="w-full bg-[#070b18] border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-white placeholder-slate-600 font-mono-numeric font-medium outline-none focus:border-cyan-400 transition text-xs"
                         required
                       />
                     </div>
@@ -739,27 +746,27 @@ exit
 
                   {/* Password Input */}
                   <div className="space-y-1">
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-300">
                       Password
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-                        <Lock size={15} />
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                        <Lock size={14} />
                       </div>
                       <input
                         type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         placeholder={mode === 'signup' ? 'Minimum 6 characters' : 'Enter password'}
-                        className="w-full bg-[#070b18] border border-slate-800 rounded-xl pl-10 pr-10 py-2.5 text-white placeholder-slate-600 font-mono-numeric font-medium outline-none focus:border-cyan-400 transition text-xs"
+                        className="w-full bg-[#070b18] border border-slate-800 rounded-xl pl-9 pr-9 py-2 text-white placeholder-slate-600 font-mono-numeric font-medium outline-none focus:border-cyan-400 transition text-xs"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-cyan-400 cursor-pointer transition"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-cyan-400 cursor-pointer transition"
                       >
-                        {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                        {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
                       </button>
                     </div>
                   </div>
@@ -767,19 +774,19 @@ exit
                   {/* Confirm Password (Sign Up Only) */}
                   {mode === 'signup' && (
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-300">
                         Confirm Password
                       </label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-                          <Lock size={15} />
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                          <Lock size={14} />
                         </div>
                         <input
                           type={showPassword ? 'text' : 'password'}
                           value={confirmPassword}
                           onChange={e => setConfirmPassword(e.target.value)}
                           placeholder="Re-enter password to confirm"
-                          className={`w-full bg-[#070b18] border rounded-xl pl-10 pr-10 py-2.5 text-white placeholder-slate-600 font-mono-numeric font-medium outline-none transition text-xs ${
+                          className={`w-full bg-[#070b18] border rounded-xl pl-9 pr-9 py-2 text-white placeholder-slate-600 font-mono-numeric font-medium outline-none transition text-xs ${
                             confirmPassword && confirmPassword !== password
                               ? 'border-rose-500 focus:border-rose-500'
                               : 'border-slate-800 focus:border-cyan-400'
@@ -794,14 +801,14 @@ exit
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black rounded-xl shadow-[0_4px_20px_rgba(14,165,233,0.35)] transition-all flex items-center justify-center space-x-2 text-xs uppercase tracking-wider cursor-pointer mt-3"
+                    className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black rounded-xl shadow-[0_4px_20px_rgba(14,165,233,0.35)] transition-all flex items-center justify-center space-x-2 text-xs uppercase tracking-wider cursor-pointer mt-2"
                   >
                     {isLoading ? (
                       <span>Authenticating...</span>
                     ) : (
                       <>
                         <span>{mode === 'signin' ? 'Sign In to Terminal' : 'Create Trader Account'}</span>
-                        <ArrowRight size={15} />
+                        <ArrowRight size={14} />
                       </>
                     )}
                   </button>
@@ -827,7 +834,7 @@ exit
                 </div>
 
                 {/* Quick Windows Install Link */}
-                <div className="pt-1 flex items-center justify-between text-[11px] text-slate-400">
+                <div className="pt-0.5 flex items-center justify-between text-[11px] text-slate-400">
                   <span className="flex items-center space-x-1.5">
                     <Laptop size={13} className="text-cyan-400" />
                     <span>Windows Desktop &amp; Mobile App</span>
@@ -852,8 +859,8 @@ exit
       </main>
 
       {/* ================= SOCIAL PROOF / METRICS STRIP (LIKE FUNDINGPIPS) ================= */}
-      <footer className="w-full border-t border-cyan-500/20 bg-[#060919]/60 backdrop-blur-md py-6 relative z-30">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+      <footer className="w-full border-t border-cyan-500/20 bg-[#060919]/70 backdrop-blur-md py-4 sm:py-5 relative z-30">
+        <div className="w-full max-w-[1720px] mx-auto px-6 sm:px-10">
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
             

@@ -51,7 +51,16 @@ export function PWAInstallBanner() {
     setInstallPrompt(null)
   }
 
-  if (installed || dismissed || !installPrompt) return null
+  // Hide on login page as it has dedicated header install button and modal
+  if (
+    installed ||
+    dismissed ||
+    !installPrompt ||
+    window.location.pathname === '/login' ||
+    window.location.pathname === '/'
+  ) {
+    return null
+  }
 
   return (
     <div

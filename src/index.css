@@ -2,30 +2,6 @@
 
 @layer base {
   :root,
-  html[data-theme="light"] {
-    --bg-main: #f8faf9;
-    --bg-sidebar: #ffffff;
-    --bg-header: #ffffff;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f1f5f9;
-    --bg-subpanel: #f4f6f8;
-    --bg-input: #ffffff;
-    
-    --border-color: #e2e8f0;
-    --border-hover: #cbd5e1;
-    
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-
-    --profit-green: #10b981;
-    --loss-red: #ef4444;
-    --accent-gold: #b8860b;
-    --accent-blue: #2563eb;
-    --accent-amber: #d97706;
-    --accent-indigo: #4f46e5;
-  }
-
   html[data-theme="dark"] {
     --bg-main: #060813;
     --bg-sidebar: #080b18;
@@ -50,12 +26,48 @@
     --accent-indigo: #6366f1;
   }
 
+  html[data-theme="light"] {
+    --bg-main: #f8faf9;
+    --bg-sidebar: #ffffff;
+    --bg-header: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f5f9;
+    --bg-subpanel: #f4f6f8;
+    --bg-input: #ffffff;
+    
+    --border-color: #e2e8f0;
+    --border-hover: #cbd5e1;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+
+    --profit-green: #10b981;
+    --loss-red: #ef4444;
+    --accent-gold: #b8860b;
+    --accent-blue: #2563eb;
+    --accent-amber: #d97706;
+    --accent-indigo: #4f46e5;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #060813 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
   body {
-    background-color: var(--bg-main);
+    background-color: #060813 !important;
     color: var(--text-primary);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -66,8 +78,10 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    margin: 0;
-    border: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background-color: #060813 !important;
   }
 
   /* Sleek custom scrollbars */

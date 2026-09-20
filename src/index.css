@@ -21,11 +21,11 @@
 
     --profit-green: #10b981;
     --loss-red: #ef4444;
-    --accent-gold: #0066ff;
-    --accent-blue: #0066ff;
-    --accent-cyan: #0099ff;
-    --accent-amber: #f59e0b;
-    --accent-indigo: #4f46e5;
+    --accent-gold: #1e3a8a;
+    --accent-blue: #1e3a8a;
+    --accent-cyan: #1e40af;
+    --accent-amber: #b45309;
+    --accent-indigo: #1e3a8a;
   }
 
   *, *::before, *::after {

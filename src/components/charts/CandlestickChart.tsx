@@ -103,7 +103,7 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
       <div className="flex items-center justify-between mb-3 text-xs font-mono-numeric border-b border-[var(--border-color)] pb-2 flex-wrap gap-2">
         <div className="flex items-center space-x-3">
           <span className="font-bold theme-text-primary text-sm">{symbol}</span>
-          <span className="text-[#0066ff] bg-blue-50 px-2 py-0.5 rounded border border-blue-200 text-[11px] font-bold">
+          <span className="text-[#1e3a8a] bg-blue-900/10 px-2 py-0.5 rounded border border-blue-800/20 text-[11px] font-bold">
             {timeframe}
           </span>
           <span className="theme-text-muted">Time: <span className="theme-text-secondary">{activeCandle.time}</span></span>
@@ -115,7 +115,7 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
           <span>C: <span className={activeCandle.close >= activeCandle.open ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}>
             {activeCandle.close.toFixed(2)}
           </span></span>
-          <span>Vol: <span className="text-[#0066ff]">{activeCandle.volume}</span></span>
+          <span>Vol: <span className="text-[#1e3a8a]">{activeCandle.volume}</span></span>
         </div>
       </div>
 
@@ -219,7 +219,7 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
       {/* TradingView Phase 2 Badge Notice */}
       <div className="mt-2 pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-[11px] theme-text-secondary font-mono-numeric">
         <span className="flex items-center space-x-1">
-          <span className="w-2 h-2 rounded-full bg-[#0066ff]"></span>
+          <span className="w-2 h-2 rounded-full bg-[#1e3a8a]"></span>
           <span>Chart Container: Interactive Canvas Mode</span>
         </span>
         <span className="theme-text-muted bg-[var(--bg-subpanel)] px-2 py-0.5 rounded border border-[var(--border-color)]">

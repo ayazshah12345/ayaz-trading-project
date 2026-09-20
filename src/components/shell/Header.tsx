@@ -75,37 +75,26 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Forex Factory News Shortcut */}
         <Link
           to="/news"
-          className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-md text-xs font-bold transition shadow-xs"
+          className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-blue-900/10 hover:bg-blue-900/15 text-[#1e3a8a] border border-blue-900/20 rounded-md text-xs font-bold transition shadow-xs"
           title="Open Forex Factory Economic News Calendar"
         >
-          <Newspaper size={14} className="text-cyan-400" />
+          <Newspaper size={14} className="text-[#1e3a8a]" />
           <span>Forex Factory News</span>
         </Link>
       </div>
 
-      {/* Header Right Items: Clock, Status, Theme Toggle, Notifications, User */}
+      {/* Header Right Items: Clock, Status, Notifications, User */}
       <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
         {/* Date & Time */}
         <div className="hidden lg:flex items-center space-x-2 text-xs theme-text-secondary font-mono-numeric bg-[var(--bg-card)] px-3 py-1.5 rounded border border-[var(--border-color)] shadow-sm">
-          <Clock size={13} className="text-blue-500" />
+          <Clock size={13} className="text-[#1e3a8a]" />
           <span>{currentDateTime}</span>
         </div>
 
         {/* Market Status Indicator */}
-        <div className="hidden sm:flex items-center space-x-1.5 text-[11px] font-mono-numeric px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold">
+        <div className="hidden sm:flex items-center space-x-1.5 text-[11px] font-mono-numeric px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 font-bold">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
           <span className="uppercase tracking-wider">Markets Live</span>
-        </div>
-
-        {/* Active Light Mode Indicator */}
-        <div
-          className="px-2.5 py-1.5 theme-text-secondary rounded-lg flex items-center space-x-1.5 border border-[var(--border-color)] bg-[var(--bg-card)] shadow-xs"
-          title="Light Theme Active"
-        >
-          <Sun size={15} className="text-[#0066ff]" />
-          <span className="text-[11px] font-mono-numeric font-bold hidden md:inline text-slate-700">
-            Light
-          </span>
         </div>
 
         {/* Notifications Icon with Dropdown */}

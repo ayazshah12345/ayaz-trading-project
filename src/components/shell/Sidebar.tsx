@@ -122,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={({ isActive }) =>
                   `flex items-center px-3 py-2.5 rounded-lg text-xs font-bold transition group ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-extrabold shadow-md shadow-cyan-500/25'
+                      ? 'bg-gradient-to-r from-[#172554] to-[#1e3a8a] text-white font-extrabold shadow-md shadow-blue-950/20'
                       : 'theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)]'
                   } ${collapsed && !isMobile ? 'justify-center' : 'space-x-3'}`
                 }
@@ -133,7 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <div className="flex items-center justify-between flex-1 overflow-hidden">
                     <span className="truncate">{item.label}</span>
                     {item.badge && (
-                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shrink-0 ml-1.5">
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-900/15 text-[#1e3a8a] border border-blue-800/30 shrink-0 ml-1.5">
                         {item.badge}
                       </span>
                     )}
@@ -154,7 +154,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span className="font-bold">Terminal Online</span>
             </span>
             <span className="flex items-center font-bold">
-              <ShieldCheck size={13} className="mr-1 text-blue-600 dark:text-blue-400" />
+              <ShieldCheck size={13} className="mr-1 text-[#1e3a8a]" />
               <span>Phase 1</span>
             </span>
           </div>
@@ -165,7 +165,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             collapsed && !isMobile ? 'justify-center' : 'space-x-3'
           } p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] shadow-xs`}
         >
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#172554] to-[#1e3a8a] flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm">
             {initialLetter}
           </div>
           {(!collapsed || isMobile) && (

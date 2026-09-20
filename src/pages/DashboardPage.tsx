@@ -72,7 +72,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => navigate('/trades')}
-            className="flex items-center space-x-1.5 px-3.5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-extrabold rounded-lg shadow-md shadow-cyan-500/20 transition cursor-pointer"
+            className="flex items-center space-x-1.5 px-3.5 py-2 bg-[#1e3a8a] hover:bg-[#172554] text-white text-xs font-extrabold rounded-lg shadow-md shadow-blue-950/20 transition cursor-pointer"
           >
             <BookMarked size={15} />
             <span>Open Trade Journal</span>
@@ -89,14 +89,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
       </div>
 
       {/* Forex Factory Live News & Calendar Banner */}
-      <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-blue-950/40 via-[var(--bg-card)] to-cyan-950/30 border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+      <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-blue-900/10 via-[var(--bg-card)] to-blue-900/5 border border-blue-900/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
         <div className="flex items-center space-x-3">
-          <div className="p-2.5 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 shrink-0">
+          <div className="p-2.5 rounded-xl bg-blue-900/10 text-[#1e3a8a] border border-blue-900/20 shrink-0">
             <Newspaper size={20} />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-black uppercase tracking-wider text-cyan-400">
+              <span className="text-xs font-black uppercase tracking-wider text-[#1e3a8a]">
                 Forex Factory Calendar & Daily News
               </span>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
@@ -109,7 +109,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
 
         <button
           onClick={() => navigate('/news')}
-          className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-xs shadow-md shadow-cyan-500/20 transition flex items-center space-x-1.5 self-start sm:self-auto cursor-pointer shrink-0"
+          className="px-4 py-2 rounded-lg bg-[#1e3a8a] hover:bg-[#172554] text-white font-black text-xs shadow-md shadow-blue-950/20 transition flex items-center space-x-1.5 self-start sm:self-auto cursor-pointer shrink-0"
         >
           <span>Open Forex Factory News</span>
           <ArrowRight size={14} />
@@ -119,15 +119,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
       {/* Top 2 Metric Groups: Trade Journal Summary & Backtesting Summary */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Trade Journal Summary Card */}
-        <div className="terminal-card p-5 space-y-4 border-cyan-500/30 bg-gradient-to-br from-[var(--bg-card)] to-cyan-500/5 shadow-xs">
+        <div className="terminal-card p-5 space-y-4 border-blue-900/20 bg-gradient-to-br from-[var(--bg-card)] to-blue-900/5 shadow-xs">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
             <div className="flex items-center space-x-2">
-              <BookMarked className="text-cyan-400" size={18} />
+              <BookMarked className="text-[#1e3a8a]" size={18} />
               <h3 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider">
                 Trade Journal Overview
               </h3>
             </div>
-            <span className="text-xs font-mono-numeric font-bold text-cyan-400 px-2.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">
+            <span className="text-xs font-mono-numeric font-bold text-[#1e3a8a] px-2.5 py-0.5 rounded bg-blue-900/10 border border-blue-900/20">
               {trades.length} Recorded Trades
             </span>
           </div>
@@ -135,7 +135,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono-numeric">
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
               <span className="text-[10px] theme-text-secondary uppercase font-bold">Account Equity</span>
-              <div className="text-base font-extrabold text-cyan-400">${workspace.currentCapital?.toFixed(2)}</div>
+              <div className="text-base font-extrabold text-[#1e3a8a]">${workspace.currentCapital?.toFixed(2)}</div>
             </div>
 
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
@@ -147,7 +147,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
 
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
               <span className="text-[10px] theme-text-secondary uppercase font-bold">Win Rate</span>
-              <div className="text-base font-extrabold text-purple-400">{winRate}%</div>
+              <div className="text-base font-extrabold text-[#1e3a8a]">{winRate}%</div>
             </div>
 
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
@@ -158,15 +158,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
         </div>
 
         {/* Backtesting Summary Card */}
-        <div className="terminal-card p-5 space-y-4 border-indigo-500/30 bg-gradient-to-br from-[var(--bg-card)] to-indigo-500/5 shadow-xs">
+        <div className="terminal-card p-5 space-y-4 border-blue-900/20 bg-gradient-to-br from-[var(--bg-card)] to-blue-900/5 shadow-xs">
           <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2.5">
             <div className="flex items-center space-x-2">
-              <FlaskConical className="text-indigo-400" size={18} />
+              <FlaskConical className="text-[#1e3a8a]" size={18} />
               <h3 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider">
                 Backtesting Summary
               </h3>
             </div>
-            <span className="text-xs font-mono-numeric font-bold text-indigo-400 px-2.5 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20">
+            <span className="text-xs font-mono-numeric font-bold text-[#1e3a8a] px-2.5 py-0.5 rounded bg-blue-900/10 border border-blue-900/20">
               {backtests.length} Saved Campaigns
             </span>
           </div>
@@ -179,7 +179,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
 
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
               <span className="text-[10px] theme-text-secondary uppercase font-bold">Backtest Trades</span>
-              <div className="text-base font-extrabold text-indigo-400">{totalBacktestTrades}</div>
+              <div className="text-base font-extrabold text-[#1e3a8a]">{totalBacktestTrades}</div>
             </div>
 
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
@@ -189,7 +189,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
 
             <div className="p-3 rounded-lg bg-[var(--bg-subpanel)] border border-[var(--border-color)] space-y-1">
               <span className="text-[10px] theme-text-secondary uppercase font-bold">Total R Return</span>
-              <div className="text-base font-extrabold text-blue-400">+{totalBacktestR}R</div>
+              <div className="text-base font-extrabold text-[#1e3a8a]">+{totalBacktestR}R</div>
             </div>
           </div>
         </div>
@@ -205,7 +205,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <BookMarked className="text-cyan-400" size={16} />
+            <BookMarked className="text-[#1e3a8a]" size={16} />
             <h3 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider">
               Trade Journal Records ({trades.length})
             </h3>
@@ -213,7 +213,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
 
           <button
             onClick={() => navigate('/trades')}
-            className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center space-x-1 font-mono-numeric cursor-pointer"
+            className="text-xs font-bold text-[#1e3a8a] hover:text-[#172554] flex items-center space-x-1 font-mono-numeric cursor-pointer"
           >
             <span>View All Trades</span>
             <ArrowRight size={14} />
@@ -231,7 +231,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
       <div className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <FlaskConical className="text-cyan-400" size={16} />
+            <FlaskConical className="text-[#1e3a8a]" size={16} />
             <h3 className="text-sm font-extrabold theme-text-primary uppercase tracking-wider">
               Backtesting Campaigns ({backtests.length})
             </h3>
@@ -239,7 +239,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ workspace }) => {
 
           <button
             onClick={() => navigate('/backtesting')}
-            className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center space-x-1 font-mono-numeric cursor-pointer"
+            className="text-xs font-bold text-[#1e3a8a] hover:text-[#172554] flex items-center space-x-1 font-mono-numeric cursor-pointer"
           >
             <span>View All Backtests</span>
             <ArrowRight size={14} />

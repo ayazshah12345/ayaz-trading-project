@@ -128,7 +128,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('WINLOSS')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'WINLOSS'
-                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
+                ? 'bg-[#1e3a8a] text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -140,7 +140,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('GROWTH')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'GROWTH'
-                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
+                ? 'bg-[#1e3a8a] text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -152,7 +152,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('ASSET')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'ASSET'
-                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
+                ? 'bg-[#1e3a8a] text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -164,7 +164,7 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             onClick={() => setActiveTab('STRATEGY')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-md transition flex items-center space-x-1.5 ${
               activeTab === 'STRATEGY'
-                ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xs'
+                ? 'bg-[#1e3a8a] text-white shadow-xs'
                 : 'theme-text-secondary hover:theme-text-primary'
             }`}
           >
@@ -180,22 +180,22 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
           {/* Top KPI Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Trade Journal Win/Loss Card */}
-            <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-cyan-500/30 space-y-3 font-mono-numeric">
+            <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-blue-900/20 space-y-3 font-mono-numeric">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold text-cyan-400 uppercase tracking-wider">
+                <span className="text-xs font-extrabold text-[#1e3a8a] uppercase tracking-wider">
                   Trade Journal Win/Loss Ratio
                 </span>
-                <span className="px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-black border border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-xs font-black border border-emerald-500/30">
                   {journalWinRate}% Win Rate
                 </span>
               </div>
               <div className="grid grid-cols-3 gap-2 text-center pt-1">
                 <div className="p-2 bg-[var(--bg-card)] rounded-lg border border-[var(--border-color)]">
-                  <div className="text-lg font-extrabold text-emerald-400">{journalWins}</div>
+                  <div className="text-lg font-extrabold text-emerald-600">{journalWins}</div>
                   <div className="text-[10px] theme-text-secondary uppercase font-bold">Wins</div>
                 </div>
                 <div className="p-2 bg-[var(--bg-card)] rounded-lg border border-[var(--border-color)]">
-                  <div className="text-lg font-extrabold text-rose-400">{journalLosses}</div>
+                  <div className="text-lg font-extrabold text-rose-600">{journalLosses}</div>
                   <div className="text-[10px] theme-text-secondary uppercase font-bold">Losses</div>
                 </div>
                 <div className="p-2 bg-[var(--bg-card)] rounded-lg border border-[var(--border-color)]">
@@ -206,12 +206,12 @@ export const DashboardAnalyticsVisualizer: React.FC<DashboardAnalyticsVisualizer
             </div>
 
             {/* Backtesting Journal Win/Loss Card */}
-            <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-indigo-500/30 space-y-3 font-mono-numeric">
+            <div className="p-4 rounded-xl bg-[var(--bg-subpanel)] border border-blue-900/20 space-y-3 font-mono-numeric">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-wider">
+                <span className="text-xs font-extrabold text-[#1e3a8a] uppercase tracking-wider">
                   Backtesting Journal Win/Loss Ratio
                 </span>
-                <span className="px-2.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-xs font-black border border-indigo-500/30">
+                <span className="px-2.5 py-0.5 rounded bg-blue-900/10 text-[#1e3a8a] text-xs font-black border border-blue-900/20">
                   {backtestWinRate}% Win Rate
                 </span>
               </div>

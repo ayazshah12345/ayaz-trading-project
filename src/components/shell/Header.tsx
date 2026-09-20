@@ -97,21 +97,16 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="uppercase tracking-wider">Markets Live</span>
         </div>
 
-        {/* Dark / Light Mode Toggle Button */}
-        <button
-          onClick={onToggleDarkMode}
-          className="p-2 theme-text-secondary hover:theme-text-primary hover:bg-[var(--bg-card-hover)] rounded transition flex items-center space-x-1 border border-[var(--border-color)] bg-[var(--bg-card)] shadow-sm"
-          title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        {/* Active Light Mode Indicator */}
+        <div
+          className="px-2.5 py-1.5 theme-text-secondary rounded-lg flex items-center space-x-1.5 border border-[var(--border-color)] bg-[var(--bg-card)] shadow-xs"
+          title="Light Theme Active"
         >
-          {isDarkMode ? (
-            <Sun size={17} className="text-cyan-400" />
-          ) : (
-            <Moon size={17} className="text-indigo-500" />
-          )}
-          <span className="text-[10px] font-mono-numeric font-bold hidden md:inline uppercase ml-1">
-            {isDarkMode ? 'Dark' : 'Light'}
+          <Sun size={15} className="text-[#0066ff]" />
+          <span className="text-[11px] font-mono-numeric font-bold hidden md:inline text-slate-700">
+            Light
           </span>
-        </button>
+        </div>
 
         {/* Notifications Icon with Dropdown */}
         <div className="relative">

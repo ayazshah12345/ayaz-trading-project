@@ -57,7 +57,7 @@ export function useTradingWorkspace() {
   const [activityTimeline, setActivityTimeline] = useState<ActivityTimelineItem[]>([]);
   const [userSettings, setUserSettings] = useState<UserSettings>(mockUserSettings);
   const [accountSummary] = useState(mockAccountPerformance);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   
   // Instant initial auth check from localStorage on refresh
   const storedEmail = localStorage.getItem(AUTH_STORAGE_KEY_EMAIL);
@@ -160,13 +160,15 @@ export function useTradingWorkspace() {
   const totalTradeNetPnl = trades.reduce((acc, t) => acc + (t.pnl || 0), 0);
   const currentCapital = Number((initialCapital + totalTradeNetPnl).toFixed(2));
 
-  // Apply theme attribute to root HTML tag whenever isDarkMode changes
+  // Apply light theme attribute to root HTML tag
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', 'light');
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(prev => !prev);
+    // Keep locked to light theme as requested
+    setIsDarkMode(false);
+    document.documentElement.setAttribute('data-theme', 'light');
   };
 
   const login = (email: string, uId?: string) => {

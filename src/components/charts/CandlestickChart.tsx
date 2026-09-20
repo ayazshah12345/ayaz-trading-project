@@ -98,24 +98,24 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
   ];
 
   return (
-    <div className="relative w-full bg-[#060813] border border-[#1a233b] rounded-md overflow-hidden p-4 select-none">
+    <div className="relative w-full bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl overflow-hidden p-4 select-none shadow-xs">
       {/* Top Candle OHLC Header */}
-      <div className="flex items-center justify-between mb-3 text-xs font-mono-numeric border-b border-[#1a233b] pb-2 flex-wrap gap-2">
+      <div className="flex items-center justify-between mb-3 text-xs font-mono-numeric border-b border-[var(--border-color)] pb-2 flex-wrap gap-2">
         <div className="flex items-center space-x-3">
-          <span className="font-bold text-slate-100 text-sm">{symbol}</span>
-          <span className="text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 text-[11px]">
+          <span className="font-bold theme-text-primary text-sm">{symbol}</span>
+          <span className="text-[#0066ff] bg-blue-50 px-2 py-0.5 rounded border border-blue-200 text-[11px] font-bold">
             {timeframe}
           </span>
-          <span className="text-slate-400">Time: <span className="text-slate-200">{activeCandle.time}</span></span>
+          <span className="theme-text-muted">Time: <span className="theme-text-secondary">{activeCandle.time}</span></span>
         </div>
-        <div className="flex items-center space-x-3">
-          <span>O: <span className="text-slate-200">{activeCandle.open.toFixed(2)}</span></span>
-          <span>H: <span className="text-emerald-400">{activeCandle.high.toFixed(2)}</span></span>
-          <span>L: <span className="text-rose-400">{activeCandle.low.toFixed(2)}</span></span>
-          <span>C: <span className={activeCandle.close >= activeCandle.open ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold'}>
+        <div className="flex items-center space-x-3 font-semibold">
+          <span>O: <span className="theme-text-secondary">{activeCandle.open.toFixed(2)}</span></span>
+          <span>H: <span className="text-emerald-600">{activeCandle.high.toFixed(2)}</span></span>
+          <span>L: <span className="text-rose-600">{activeCandle.low.toFixed(2)}</span></span>
+          <span>C: <span className={activeCandle.close >= activeCandle.open ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}>
             {activeCandle.close.toFixed(2)}
           </span></span>
-          <span>Vol: <span className="text-cyan-400">{activeCandle.volume}</span></span>
+          <span>Vol: <span className="text-[#0066ff]">{activeCandle.volume}</span></span>
         </div>
       </div>
 
@@ -198,14 +198,14 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
 
           {/* Y-Axis Price Label Sidebar */}
           <g transform="translate(740, 0)">
-            <rect x="0" y="0" width="60" height={chartHeight} fill="#060813" />
-            <line x1="0" y1="0" x2="0" y2={chartHeight} stroke="#1a233b" strokeWidth="1" />
+            <rect x="0" y="0" width="60" height={chartHeight} fill="var(--bg-card)" />
+            <line x1="0" y1="0" x2="0" y2={chartHeight} stroke="var(--border-color)" strokeWidth="1" />
             {priceTicks.map((price, i) => (
               <text
                 key={i}
                 x="6"
                 y={getY(price) + 4}
-                fill="#94a3b8"
+                fill="#64748b"
                 fontSize="10"
                 fontFamily="JetBrains Mono"
               >
@@ -217,13 +217,13 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
       </div>
 
       {/* TradingView Phase 2 Badge Notice */}
-      <div className="mt-2 pt-2 border-t border-[#1a233b] flex items-center justify-between text-[11px] text-slate-400 font-mono-numeric">
+      <div className="mt-2 pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-[11px] theme-text-secondary font-mono-numeric">
         <span className="flex items-center space-x-1">
-          <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+          <span className="w-2 h-2 rounded-full bg-[#0066ff]"></span>
           <span>Chart Container: Interactive Canvas Mode</span>
         </span>
-        <span className="text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">
-          TradingView Widget Integration Ready (Phase 2)
+        <span className="theme-text-muted bg-[var(--bg-subpanel)] px-2 py-0.5 rounded border border-[var(--border-color)]">
+          TradingView Widget Integration Active
         </span>
       </div>
     </div>

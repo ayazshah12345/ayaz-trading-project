@@ -25,7 +25,7 @@ export const AppRoutes: React.FC<AppRoutesProps> = ({ workspace }) => {
   // If session is resolving on page refresh, render sleek loading screen to prevent login redirect
   if (workspace.isAuthLoading) {
     return (
-      <div className="min-h-screen bg-[#070b14] flex items-center justify-center p-6 text-white">
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center p-6 text-slate-900">
         <LoadingState message="Restoring trading workspace session..." />
       </div>
     );

@@ -51,13 +51,17 @@ export function PWAInstallBanner() {
     setInstallPrompt(null)
   }
 
-  // Hide on login page as it has dedicated header install button and modal
+  const isMobile =
+    typeof navigator !== 'undefined' &&
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+  // On desktop login page, keep full-bleed view uncluttered.
+  // On mobile devices, allow banner so users get 1-tap direct install onto their device profile.
   if (
     installed ||
     dismissed ||
     !installPrompt ||
-    window.location.pathname === '/login' ||
-    window.location.pathname === '/'
+    (!isMobile && (window.location.pathname === '/login' || window.location.pathname === '/'))
   ) {
     return null
   }

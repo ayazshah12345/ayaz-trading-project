@@ -95,11 +95,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     // 1. Check if already installed
     if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true) {
       setIsInstalled(true);
-      setSuccessMessage('Black FX is already installed and running as a standalone Windows app! You can find it in your Start Menu.');
+      setSuccessMessage('Black FX is already installed on your device! You can open it directly from your apps.');
       return;
     }
 
-    // 2. Trigger native Windows / Chrome / Edge PWA install prompt
+    const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isIOS = typeof navigator !== 'undefined' && (/iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+    const isWindows = typeof navigator !== 'undefined' && /Windows/i.test(navigator.userAgent);
+
+    // 2. Trigger native Android / Chrome / Edge PWA install prompt
     const promptToUse = installPrompt || (window as any).deferredInstallPrompt;
     if (promptToUse) {
       try {
@@ -107,7 +111,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         const choiceResult = await promptToUse.userChoice;
         if (choiceResult?.outcome === 'accepted') {
           setIsInstalled(true);
-          setSuccessMessage('Black FX installed successfully! Check your Windows Desktop and Start Menu.');
+          setSuccessMessage('Black FX installed successfully! The app is now added directly to your device.');
           return;
         } else {
           setErrorMessage('Installation was cancelled. You can click Install again anytime.');
@@ -118,10 +122,22 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       }
     }
 
-    // 3. Automated 1-Click Windows App Installer (.cmd)
-    try {
-      const currentOrigin = window.location.origin;
-      const cmdContent = `@echo off
+    // 3. Mobile Device Fallback (IMPORTANT: Never download script or code files on phones!)
+    if (isMobile) {
+      setShowInstallGuide(true);
+      if (isIOS) {
+        setSuccessMessage('To install Black FX on iPhone: Tap the Share button at the bottom of Safari, then tap "Add to Home Screen" ➕');
+      } else {
+        setSuccessMessage('To install Black FX: Tap the 3 dots menu (⋮) at the top-right of your Chrome browser, then select "Install app" or "Add to Home screen" to add it directly to your phone.');
+      }
+      return;
+    }
+
+    // 4. Windows PC Desktop ONLY (When native browser prompt was not captured)
+    if (isWindows) {
+      try {
+        const currentOrigin = window.location.origin;
+        const cmdContent = `@echo off
 title Installing Black FX Desktop App...
 echo ========================================================
 echo         BLACK FX - AUTOMATIC WINDOWS INSTALLER
@@ -179,19 +195,22 @@ start "" "%BROWSER_EXE%" --app="%APP_URL%"
 timeout /t 2 >nul
 exit
 `;
-      const blob = new Blob([cmdContent], { type: 'text/plain' });
-      const downloadUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = 'Install-Black-FX.cmd';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(downloadUrl);
+        const blob = new Blob([cmdContent], { type: 'text/plain' });
+        const downloadUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = 'Install-Black-FX.cmd';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(downloadUrl);
 
-      setSuccessMessage('Installer downloaded! Click "Install-Black-FX.cmd" to automatically install Black FX onto your Windows Desktop & Start Menu, or click the Install icon (🖥️ ⬇️) in your browser address bar.');
-    } catch (err) {
-      console.error('Install error', err);
+        setSuccessMessage('Installer downloaded for Windows! Or click the Install icon (🖥️ ⬇️) in your browser address bar.');
+      } catch (err) {
+        console.error('Install error', err);
+      }
+    } else {
+      setShowInstallGuide(true);
     }
   };
 

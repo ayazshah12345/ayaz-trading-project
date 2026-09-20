@@ -21,12 +21,14 @@ import {
   Smartphone,
   Laptop,
   X,
-  Share2
+  Share2,
+  Crown,
+  Award
 } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 import founderImg from '../assets/founder.png';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { LiquidWaterSky } from '../components/LiquidWaterSky';
+import { RoyalAmbiance } from '../components/RoyalAmbiance';
 
 interface LoginPageProps {
   onLogin?: (email: string, userId?: string) => void;
@@ -312,8 +314,8 @@ exit
   return (
     <div className="min-h-screen w-full bg-[#060813] text-slate-100 flex flex-col font-sans overflow-x-hidden selection:bg-cyan-500 selection:text-black relative">
       
-      {/* ================= LIVELY LIQUID WATER & FLOATING CELESTIAL SKY SIMULATION ================= */}
-      <LiquidWaterSky />
+      {/* ================= ROYAL INSTITUTIONAL AMBIANCE (NO WATER, NO SHIP, NO STARS) ================= */}
+      <RoyalAmbiance />
 
       {/* ================= TOP CONTINUOUS MOVING TICKER ================= */}
       <div className="w-full bg-[#070a17]/90 border-b border-cyan-500/15 py-2 overflow-hidden whitespace-nowrap shadow-sm z-30 select-none backdrop-blur-md">
@@ -321,8 +323,8 @@ exit
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex items-center space-x-6 shrink-0">
               <span className="flex items-center space-x-1.5 text-[11px] font-black tracking-widest text-cyan-400">
-                <Zap size={12} className="text-cyan-400 fill-cyan-400" />
-                <span>BLACK FX • INSTITUTIONAL BACKTESTING &amp; TRADING JOURNAL PLATFORM</span>
+                <Crown size={12} className="text-cyan-400" />
+                <span>BLACK FX • ROYAL INSTITUTIONAL BACKTESTING &amp; TRADING JOURNAL PLATFORM</span>
               </span>
               <span className="text-slate-700">•</span>
               {tickerItems.map((item, idx) => (
@@ -359,7 +361,7 @@ exit
                 BLACK <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">FX</span>
               </span>
               <span className="hidden sm:inline-block text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-mono-numeric">
-                PRO PLATFORM
+                ROYAL PRO PLATFORM
               </span>
             </div>
             <p className="text-[10px] font-medium text-slate-400 uppercase tracking-wider hidden sm:block">
@@ -416,79 +418,72 @@ exit
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* ================= LEFT HERO COLUMN: FOUNDER EDITORIAL & BOLD HEADLINE ================= */}
+          {/* ================= LEFT HERO COLUMN: ROYAL FOUNDER EXECUTIVE CHAMBER ================= */}
           <div className="lg:col-span-5 xl:col-span-5 space-y-4 xl:space-y-5">
             
-            {/* ================= FOUNDER CREDENTIAL (PRESENT BELOW THE COMPANY LOGO) ================= */}
-            <div className="space-y-3 pb-1">
-              <div className="flex items-center space-x-4">
+            {/* Royal Obsidian Glass Card for Founder & Institutional Identity */}
+            <div className="p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#080d20]/85 border border-cyan-400/30 shadow-[0_16px_48px_rgba(0,0,0,0.6)] backdrop-blur-2xl space-y-5 relative overflow-hidden">
+              
+              {/* Top Royal Accent Line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-400" />
+
+              {/* Founder Header */}
+              <div className="flex items-center space-x-4 pt-1">
                 <div className="relative shrink-0 group">
                   <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-cyan-400 via-blue-500 to-emerald-400 blur-sm opacity-80 group-hover:opacity-100 transition duration-500" />
                   <img
                     src={founderImg}
                     alt="Syed Ayaz Shah - Founder of Black FX"
-                    className="relative w-15 h-15 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-[#060813] shadow-xl"
+                    className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full object-cover border-2 border-[#060813] shadow-xl"
                   />
                 </div>
 
-                <div className="space-y-0.5">
+                <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-lg font-black text-white tracking-wide">
+                    <span className="text-xl sm:text-2xl font-black text-white tracking-wide font-mono-numeric">
                       SYED AYAZ SHAH S
                     </span>
-                    <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/35 font-mono-numeric">
-                      Founder &amp; Quantitative Trader
-                    </span>
                   </div>
-                  <p className="text-xs font-semibold text-slate-400">
-                    Experienced Forex Trader with 3+ Years of Market Mastery
+                  <div className="inline-flex items-center space-x-1.5 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/40 font-mono-numeric">
+                    <Crown size={12} className="text-cyan-300" />
+                    <span>Royal Founder &amp; Quantitative Trader</span>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-400 pt-0.5">
+                    Experienced Forex Trader with 3+ Years of Sovereign Mastery
                   </p>
                 </div>
               </div>
 
               {/* Verified Editorial Narrative */}
-              <div className="pl-4 border-l-2 border-cyan-400/80 space-y-1 py-0.5">
-                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed italic">
+              <div className="pl-4 border-l-2 border-cyan-400/80 space-y-2 py-1 bg-gradient-to-r from-cyan-500/5 to-transparent rounded-r-xl">
+                <p className="text-xs sm:text-[13px] text-slate-200 leading-relaxed italic">
                   "I am <strong className="text-white font-bold not-italic">Syed Ayaz Shah</strong>, an experienced Forex trader with over 3 years of hands-on market execution. Black FX was built from the ground up to empower traders with institutional clarity — created specifically to document daily trading journals, preserve comprehensive backtesting records, and analyze real-time live charts with disciplined precision."
                 </p>
               </div>
-            </div>
 
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-950/70 to-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-md">
-              <Sparkles size={13} className="text-cyan-400" />
-              <span>Institutional Quantitative Execution</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            </div>
+              {/* Royal Sovereign Accreditation Pillars */}
+              <div className="pt-2 border-t border-slate-800/80 grid grid-cols-2 gap-2.5 text-xs">
+                <div className="flex items-center space-x-2 p-2.5 rounded-xl bg-[#060919]/70 border border-cyan-500/20 text-slate-300">
+                  <ShieldCheck size={14} className="text-cyan-400 shrink-0" />
+                  <span className="text-[11px] font-bold">Royal Protocol</span>
+                </div>
+                <div className="flex items-center space-x-2 p-2.5 rounded-xl bg-[#060919]/70 border border-cyan-500/20 text-slate-300">
+                  <Award size={14} className="text-emerald-400 shrink-0" />
+                  <span className="text-[11px] font-bold">Tier-1 Vault</span>
+                </div>
+              </div>
 
-            {/* Grand Typography (Institutional High-Impact Headline) */}
-            <div className="space-y-2.5">
-              <h1 className="text-3xl sm:text-4xl xl:text-5xl font-black tracking-tight text-white leading-[1.1]">
-                Master your edge with{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
-                  institutional precision
+              {/* Royal Status Ribbon */}
+              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                <span className="flex items-center space-x-1.5 font-mono-numeric">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="text-cyan-300 font-bold">PRIVATE VIP TERMINAL ACTIVE</span>
                 </span>
-              </h1>
-              
-              <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed max-w-xl">
-                The institutional-grade platform engineered to journal daily executions, stress-test historical setups, and track live price analytics with statistical mastery.
-              </p>
-            </div>
+                <span className="text-[10px] text-slate-500 font-mono-numeric uppercase tracking-wider">
+                  256-Bit Encrypted
+                </span>
+              </div>
 
-            {/* Quick Action Pill Row */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <BookOpen size={13} className="text-cyan-400 shrink-0" />
-                <span>Daily Trade Log</span>
-              </div>
-              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <FlaskConical size={13} className="text-blue-400 shrink-0" />
-                <span>Historical Backtesting</span>
-              </div>
-              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#090e21]/80 border border-blue-500/20 text-xs font-semibold text-slate-200">
-                <LineChart size={13} className="text-emerald-400 shrink-0" />
-                <span>TradingView Charts</span>
-              </div>
             </div>
 
           </div>
@@ -629,7 +624,7 @@ exit
                     {/* Inner Institutional Watermark */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
                       <span className="text-[9px] font-black tracking-widest text-cyan-200 font-mono-numeric uppercase">
-                        ALPHA
+                        ROYAL ALPHA
                       </span>
                     </div>
                   </div>
@@ -659,10 +654,22 @@ exit
             {/* ================= FLOATING LUXURY GLASS AUTHENTICATION TERMINAL ================= */}
             <div className="w-full max-w-[380px] xl:max-w-[400px] relative z-30 pointer-events-auto shrink-0">
               
-              <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#090e21]/85 border border-cyan-500/30 shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-2xl space-y-4 relative overflow-hidden">
+              <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#080d20]/90 border border-cyan-400/35 shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-2xl space-y-4 relative overflow-hidden">
                 
                 {/* Subtle crystal glow top accent */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-400" />
+
+                {/* Royal Access Badge */}
+                <div className="flex items-center justify-between pb-1">
+                  <div className="flex items-center space-x-2 text-xs font-bold text-cyan-300 uppercase tracking-wider">
+                    <Crown size={14} className="text-cyan-400" />
+                    <span>Royal Terminal Access</span>
+                  </div>
+                  <span className="text-[9px] font-mono-numeric font-black uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                    VIP PRO
+                  </span>
+                </div>
+                
 
                 {/* Minimal Tab Switcher */}
                 <div className="flex border-b border-slate-800 pb-2">
